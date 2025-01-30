@@ -3,13 +3,13 @@ import StudentSidebarProfile from "../../Components/StudentSidebarProfile/Studen
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import StudentHeaderProfile from "../../Components/StudentHeaderProfile/StudentHeaderProfile";
-import StudentProfileOverview from "../../Components/StudentProfileOverview/StudentProfileOverview";
+import StudentProfileForm from "../../Components/StudentProfileForm/StudentProfileForm";
 
 const StudentProfilePage = () => {
   
     return (
        
-            <StudentProfileOverview/>
+            <StudentProfileForm/>
                
     );
 };
