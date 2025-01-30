@@ -1,6 +1,7 @@
 import CourseContent from "../../Components/CourseContent";
 import CourseDetailsHero from "../../Components/CourseDetailsHero";
 import CourseFeatures from "../../Components/CourseFeatures";
+import InstructorInfo from "../../Components/InstructorInfo";
 import Requirements from "../../Components/Requirements";
 import WhatYouLearn from "../../Components/WhatYouLearn";
 
@@ -23,9 +24,13 @@ function CourseDetails() {
                             <div className="md:col-span-1">
                                 <CourseFeatures />
                             </div>
+
+                        
                         </div>
+                        <InstructorInfo />
                     </div>
                 </section>
+
             </main>
         </>
     );
