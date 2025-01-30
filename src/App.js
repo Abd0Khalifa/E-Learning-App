@@ -11,7 +11,6 @@ function App() {
       <NavBar />
       <Home />
       <Footer />
-      <CourseDetails />
     </>
   );
 }
