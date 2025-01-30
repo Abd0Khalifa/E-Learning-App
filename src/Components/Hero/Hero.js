@@ -67,8 +67,6 @@ const Hero = () => {
               Learn More
             </button>
           </div>
-
-          {/* Stats Bar */}
           <div className="stats-bar mt-16 p-8 flex flex-wrap justify-center gap-8 mx-4">
             {[
               { label: "Active Courses", value: 500 },
