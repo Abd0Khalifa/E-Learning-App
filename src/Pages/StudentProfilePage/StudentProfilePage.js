@@ -3,14 +3,15 @@ import StudentSidebarProfile from "../../Components/StudentSidebarProfile/Studen
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import StudentHeaderProfile from "../../Components/StudentHeaderProfile/StudentHeaderProfile";
+import StudentProfileOverview from "../../Components/StudentProfileOverview/StudentProfileOverview";
 
-const ProfilePage = () => {
+const StudentProfilePage = () => {
   
     return (
        
-            <StudentHeaderProfile/>
+            <StudentProfileOverview/>
                
     );
 };
 
-export default ProfilePage;
+export default StudentProfilePage;
