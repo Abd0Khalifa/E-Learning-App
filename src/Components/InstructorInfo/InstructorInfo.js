@@ -8,7 +8,7 @@ function InstructorInfo() {
                 <div className="glass-card p-8 animate-on-scroll">
                     <h2 className="text-2xl font-bold mb-8">Your Instructor</h2>
                     <div className="flex items-start gap-8">
-                        <div className="w-24 h-24 rounded-full bg-main-color/20 flex items-center justify-center flex-shrink-0">
+                        <div className="w-24 h-24 rounded-full bg-main-color/20 items-center justify-center flex-shrink-0 hidden md:flex">
                             <FontAwesomeIcon icon={faUser} className="text-3xl text-main-color" />
                         </div>
                         <div>

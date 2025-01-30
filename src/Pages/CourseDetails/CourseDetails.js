@@ -1,9 +1,9 @@
-import CourseContent from "../../Components/CourseContent";
-import CourseDetailsHero from "../../Components/CourseDetailsHero";
-import CourseFeatures from "../../Components/CourseFeatures";
-import InstructorInfo from "../../Components/InstructorInfo";
-import Requirements from "../../Components/Requirements";
-import WhatYouLearn from "../../Components/WhatYouLearn";
+import CourseContent from "../../Components/CourseContent/CourseContent";
+import CourseDetailsHero from "../../Components/CourseDetailsHero/CourseDetailsHero";
+import CourseFeatures from "../../Components/CourseFeatures/CourseFeatures";
+import InstructorInfo from "../../Components/InstructorInfo/InstructorInfo";
+import Requirements from "../../Components/Requirements/Requirements";
+import WhatYouLearn from "../../Components/WhatYouLearn/WhatYouLearn";
 
 
 function CourseDetails() {
@@ -27,9 +27,10 @@ function CourseDetails() {
 
                         
                         </div>
-                        <InstructorInfo />
+                        
                     </div>
                 </section>
+                <InstructorInfo />
 
             </main>
         </>

@@ -1,7 +1,7 @@
 import { faBook, faCode } from "@fortawesome/free-solid-svg-icons";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
 
-import CourseModule from './CourseModule';
+import CourseModule from '../CourseModule/CourseModule';
 
 function CourseContent() {
     return (

@@ -1,4 +1,4 @@
-import RequirementItem from './RequirementItem';
+import RequirementItem from '../RequirementItem/RequirementItem';
 
 function Requirements() {
     return (

@@ -1,5 +1,5 @@
 import { faCertificate, faClock, faPuzzlePiece, faShoppingCart, faVideo } from '@fortawesome/free-solid-svg-icons';
-import CourseFeatureItem from './CourseFeatureItem'; 
+import CourseFeatureItem from '../CourseFeatureItem/CourseFeatureItem'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function CourseFeatures() {
