@@ -1,3 +1,4 @@
+import CourseContent from "../../Components/CourseContent";
 import CourseDetailsHero from "../../Components/CourseDetailsHero";
 import WhatYouLearn from "../../Components/WhatYouLearn";
 
@@ -12,6 +13,7 @@ function CourseDetails() {
                         <div class="grid md:grid-cols-3 gap-12">
                             <div class="md:col-span-2">
                                 <WhatYouLearn skill1={"gjkdhks"} skill2={"jdhksjdh"} skill3={"djshfs"} skill4={"ksjdfadjfgaj"}/>
+                                <CourseContent />
                             </div>
                         </div>
                     </div>
