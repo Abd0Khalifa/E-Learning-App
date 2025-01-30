@@ -3,7 +3,7 @@ import React from "react";
 const NavBar = () => {
   return (
     <header
-      className="fixed w-full z-50 transition-all duration-300"
+      className=""
       id="mainHeader"
     >
       <div className="bg-card-dark/80 backdrop-blur-xl border-b border-main-color/10">
