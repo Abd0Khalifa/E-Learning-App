@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl py-12">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold text-main-color mb-4">EduFlow</h3>
+            <h3 className="text-xl font-bold text-main-color mb-4">SkillStack</h3>
             <p className="text-gray-400">
               Empowering learners worldwide with quality education.
             </p>
@@ -82,7 +82,7 @@ const Footer = () => {
         </div>
         <div className="footer-glow mt-8"></div>
         <p className="text-center text-gray-400">
-          &copy; 2023 EduFlow. All rights reserved.
+          &copy; 2025 SkillStack. All rights reserved.
         </p>
       </div>
     </footer>
