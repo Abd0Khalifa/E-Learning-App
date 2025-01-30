@@ -14,7 +14,7 @@ const Whyus = () => {
             <span className="gradient-text">Learning Made Simple</span>
           </h2>
           <p className="text-gray-400">
-            Discover why thousands of students choose EduFlow for their learning
+            Discover why thousands of students choose SkillStack for their learning
             journey
           </p>
         </div>

@@ -8,7 +8,7 @@ const Ready = () => {
           <div className="card-glow"></div>
           <h2 className="text-4xl font-bold mb-6">Ready to Start Learning?</h2>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Join thousands of students already learning on EduFlow. Start your
+            Join thousands of students already learning on SkillStack. Start your
             journey today!
           </p>
           <button className="gradient-button mx-auto">
