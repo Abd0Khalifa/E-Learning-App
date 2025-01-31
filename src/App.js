@@ -9,7 +9,6 @@ import StudentProfilePage from "./Pages/StudentProfilePage/StudentProfilePage.js
 import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
 import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
 
-
 function App() {
   return (
     <>
