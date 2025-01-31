@@ -16,11 +16,12 @@ import MyCourses from "./Pages/MyCourses/MyCourses.js";
 import AddCourse from "./Pages/AddCourse/AddCourse.js";
 import Register from "./Pages/Register/Register.js";
 import ManageCourses from "./Pages/ManageCourses/ManageCourses.js";
+import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 
 function App() {
   return (
     <>
-      <ManageCourses />
+      <StudentProgress />
     </>
   );
 }
