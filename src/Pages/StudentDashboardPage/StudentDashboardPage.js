@@ -1,5 +1,9 @@
+import InstractorDashboardCoursePerformance from "../../Components/InstractorDashboardCoursePerformance/InstractorDashboardCoursePerformance";
+import StudentDashboardAchievement from "../../Components/StudentDashboardAchievement/StudentDashboardAchievement";
+import StudentDashboardCurrentCourses from "../../Components/StudentDashboardCurrentCourses/StudentDashboardCurrentCourses";
 import StudentDashboardHeader from "../../Components/StudentDashboardHeader/StudentDashboardHeader";
 import StudentDashboardStatsOverview from "../../Components/StudentDashboardStatsOverview/StudentDashboardStatsOverview";
+import StudentDashboardUpcomingSchedule from "../../Components/StudentDashboardUpcomingSchedule/StudentDashboardUpcomingSchedule";
 import StudentDashboardWelcomeSection from "../../Components/StudentDashboardWelcomeSection/StudentDashboardWelcomeSection";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
 
@@ -12,14 +16,13 @@ const StudentDashboardPage = () => {
                 <br/>
                 <StudentDashboardWelcomeSection />
                 <StudentDashboardStatsOverview />
+                <StudentDashboardCurrentCourses />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
-                    {/* <InstractorDashboardRecentActivity />
-                    <InstractorDashboardStudentFeedback /> */}
+                    <StudentDashboardUpcomingSchedule />
                     </div>
                     <div className="space-y-8">
-                    {/* <InstractorDashboardCoursePerformance />
-                    <InstractorDashboardMonthlyEarnings />  */}
+                    <StudentDashboardAchievement />
                     </div>
                 </div>
             </main>
