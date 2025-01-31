@@ -13,11 +13,12 @@ import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardP
 import Login from "./Pages/Login/Login.jsx";
 import BrowseCourses from "./Pages/BrowseCourses/BrowseCourses.js";
 import MyCourses from "./Pages/MyCourses/MyCourses.js";
+import AddCourse from "./Pages/AddCourse/AddCourse.js";
 
 function App() {
   return (
     <>
-      <MyCourses />
+      <AddCourse />
     </>
   );
 }
