@@ -1,4 +1,3 @@
-import InstractorDashboardCoursePerformance from "../../Components/InstractorDashboardCoursePerformance/InstractorDashboardCoursePerformance";
 import StudentDashboardAchievement from "../../Components/StudentDashboardAchievement/StudentDashboardAchievement";
 import StudentDashboardCurrentCourses from "../../Components/StudentDashboardCurrentCourses/StudentDashboardCurrentCourses";
 import StudentDashboardHeader from "../../Components/StudentDashboardHeader/StudentDashboardHeader";
@@ -8,26 +7,26 @@ import StudentDashboardWelcomeSection from "../../Components/StudentDashboardWel
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
 
 const StudentDashboardPage = () => {
-    return (
-        <div className="min-h-screen flex bg-custom-dark">
-            <StudentSidebarProfile />
-            <main className="flex-1 md:ml-64 p-6 text-white">
-                <StudentDashboardHeader />
-                <br/>
-                <StudentDashboardWelcomeSection />
-                <StudentDashboardStatsOverview />
-                <StudentDashboardCurrentCourses />
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2 space-y-8">
-                    <StudentDashboardUpcomingSchedule />
-                    </div>
-                    <div className="space-y-8">
-                    <StudentDashboardAchievement />
-                    </div>
-                </div>
-            </main>
+  return (
+    <div className="min-h-screen flex bg-custom-dark">
+      <StudentSidebarProfile />
+      <main className="flex-1 md:ml-64 p-6 text-white">
+        <StudentDashboardHeader />
+        <br />
+        <StudentDashboardWelcomeSection />
+        <StudentDashboardStatsOverview />
+        <StudentDashboardCurrentCourses />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-8">
+            <StudentDashboardUpcomingSchedule />
+          </div>
+          <div className="space-y-8">
+            <StudentDashboardAchievement />
+          </div>
         </div>
-    );
+      </main>
+    </div>
+  );
 };
 
 export default StudentDashboardPage;
