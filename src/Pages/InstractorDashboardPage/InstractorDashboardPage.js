@@ -1,12 +1,7 @@
 import { useState } from "react";
-import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
-import InstractorProfileForm from "../../Components/InstractorProfileForm/InstractorProfileForm";
-import InstractorProfileOverview from "../../Components/InstractorProfileOverview/InstractorProfileOverview";
+
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorProfileAccountSettings from "../../Components/InstractorProfileAccountSettings/InstractorProfileAccountSettings";
-import InsatractorProfessionalLinks from "../../Components/InsatractorProfessionalLinks/InsatractorProfessionalLinks";
-import InstractorVerificationStatus from "../../Components/InstractorVerificationStatus/InstractorVerificationStatus";
-import InstractorStatistics from "../../Components/InstractorStatistics/InstractorStatistics";
+
 import InstractorDashboardHeader from "../../Components/InstractorDashboardHeader/InstractorDashboardHeader";
 import InstractorDashboardWelcomeSection from "../../Components/InstractorDashboardWelcomeSection/InstractorDashboardWelcomeSection";
 import InstractorDashboardStatsOverview from "../../Components/InstractorDashboardStatsOverview/InstractorDashboardStatsOverview";
