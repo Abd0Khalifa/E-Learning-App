@@ -1,44 +1,57 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faSave} from "@fortawesome/free-solid-svg-icons";
 
 const StudentProfileForm = () => {
     return (
-        <div className="bg-gray-800 p-6 rounded-lg">
-            <h3 className="text-xl font-bold text-white mb-6">Personal Information</h3>
-            <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label className="block text-sm font-medium text-white mb-2">First Name</label>
-                        <input type="text" className="bg-gray-700 text-white p-2 rounded w-full" value="John" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-white mb-2">Last Name</label>
-                        <input type="text" className="bg-gray-700 text-white p-2 rounded w-full" value="Doe" />
-                    </div>
+        <div className="glass-card p-6 md:p-8 mb-8">
+            <h2 className="text-2xl font-bold mb-6">Edit Profile</h2>
+            <form action="#" method="POST" className="space-y-6">
+                {/* Full Name */}
+                <div className="space-y-2">
+                    <label htmlFor="full-name" className="text-sm font-medium">Full Name</label>
+                    <input
+                        type="text"
+                        id="full-name"
+                        name="full-name"
+                        placeholder="Enter your full name"
+                        className="w-full p-3 rounded-lg bg-card-dark border border-main-color/20 text-white focus:outline-none focus:ring-2 focus:ring-main-color"
+                    />
                 </div>
-                <div>
-                    <label className="block text-sm font-medium text-white mb-2">Email</label>
-                    <input type="email" className="bg-gray-700 text-white p-2 rounded w-full" value="john.doe@example.com" />
+
+                {/* Email */}
+                <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        className="w-full p-3 rounded-lg bg-card-dark border border-main-color/20 text-white focus:outline-none focus:ring-2 focus:ring-main-color"
+                    />
                 </div>
-                <div>
-                    <label className="block text-sm font-medium text-white mb-2">Bio</label>
-                    <textarea className="bg-gray-700 text-white p-2 rounded w-full" rows="4">
-                        Passionate about web development and creating interactive user experiences. Currently learning React and Node.js.
-                    </textarea>
+
+                {/* Bio */}
+                <div className="space-y-2">
+                    <label htmlFor="bio" className="text-sm font-medium">Bio</label>
+                    <textarea
+                        id="bio"
+                        name="bio"
+                        rows="4"
+                        placeholder="Tell us about yourself"
+                        className="w-full p-3 rounded-lg bg-card-dark border border-main-color/20 text-white focus:outline-none focus:ring-2 focus:ring-main-color"
+                    ></textarea>
                 </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label className="block text-sm font-medium text-white mb-2">Location</label>
-                        <input type="text" className="bg-gray-700 text-white p-2 rounded w-full" value="New York, USA" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-white mb-2">Website</label>
-                        <input type="url" className="bg-gray-700 text-white p-2 rounded w-full" value="https://johndoe.dev" />
-                    </div>
+
+               
+                {/* Submit Button */}
+                <div className="space-y-4">
+                    <button
+                        type="submit"
+                        className="gradient-button w-full py-3 text-xl text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-main-color"
+                    >
+                    <FontAwesomeIcon icon={faSave} />    Save Changes
+                    </button>
                 </div>
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2">
-                    <FontAwesomeIcon icon={faSave} /> Save Changes
-                </button>
             </form>
         </div>
     );

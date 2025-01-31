@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock, faBell, faGlobe, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faBell, faGlobe, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const StudentProfileAccountSettings = () => {
     return (

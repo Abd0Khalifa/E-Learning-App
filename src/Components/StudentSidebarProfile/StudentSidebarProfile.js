@@ -1,29 +1,64 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTachometerAlt, faBook, faCalendar, faChartLine, faCertificate, faComments, faUser, faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faThLarge, faBook, faCalendar, faChartLine, faCertificate, faCommentAlt, faUser, faCog, faBars } from "@fortawesome/free-solid-svg-icons";
 
-const StudentSidebarProfile = ({ isOpen, toggleSidebar }) => {
+const StudentSidebarProfile = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    // Toggle the sidebar open/close
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
     return (
         <>
-            {isOpen && <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden" onClick={toggleSidebar}></div>}
+            {/* Button to toggle the sidebar on mobile */}
+            <button
+                onClick={toggleSidebar}
+                className="md:hidden absolute top-12 left-6 z-50 text-white"
+            >
+                <FontAwesomeIcon icon={faBars} size="lg" />
+            </button>
 
-            <aside className={`fixed h-full w-64 bg-gray-800 border-r border-gray-700 transition-transform duration-300 
-                ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
-                
-                <button className="absolute top-4 right-4 md:hidden text-white text-2xl" onClick={toggleSidebar}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </button>
-
+            {/* Sidebar */}
+            <aside
+                className={`transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 w-64 bg-card-dark border-r border-main-color/10 fixed h-full transition-transform duration-300 z-40`}
+            >
                 <div className="p-6">
-                    <h2 className="text-2xl font-black gradient-text mb-8">EduFlow</h2>
+                    <div className="text-2xl font-black gradient-text mb-8">EduFlow</div>
                     <nav className="space-y-4">
-                        <a href="dashboard.html" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</a>
-                        <a href="my-courses.html" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faBook} /> My Courses</a>
-                        <a href="#" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faCalendar} /> Schedule</a>
-                        <a href="#" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faChartLine} /> Progress</a>
-                        <a href="#" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faCertificate} /> Certificates</a>
-                        <a href="#" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faComments} /> Messages</a>
-                        <a href="#" className="flex items-center gap-3 text-blue-400"><FontAwesomeIcon icon={faUser} /> Profile</a>
-                        <a href="#" className="flex items-center gap-3 text-white"><FontAwesomeIcon icon={faCog} /> Settings</a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faThLarge} />
+                            Dashboard
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faBook} />
+                            My Courses
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faCalendar} />
+                            Schedule
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faChartLine} />
+                            Progress
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faCertificate} />
+                            Certificates
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faCommentAlt} />
+                            Messages
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3 text-main-color">
+                            <FontAwesomeIcon icon={faUser} />
+                            Profile
+                        </a>
+                        <a href="#" className="nav-link flex items-center gap-3">
+                            <FontAwesomeIcon icon={faCog} />
+                            Settings
+                        </a>
                     </nav>
                 </div>
             </aside>
