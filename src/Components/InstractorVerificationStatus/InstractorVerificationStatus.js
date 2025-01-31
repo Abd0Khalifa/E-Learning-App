@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
-const VerificationStatus = () => {
+const InstractorVerificationStatus  = () => {
     return (
         <div className="glass-card p-6">
             <h3 className="text-xl font-bold mb-6">Verification Status</h3>
@@ -30,4 +30,4 @@ const VerificationStatus = () => {
     );
 };
 
-export default VerificationStatus;
+export default InstractorVerificationStatus ;
