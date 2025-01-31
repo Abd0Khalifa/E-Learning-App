@@ -8,12 +8,10 @@ import StudentSidebarProfile from "./Components/StudentSidebarProfile/StudentSid
 import StudentProfilePage from "./Pages/StudentProfilePage/StudentProfilePage.js";
 import InstractorProfilePage from "./Pages/InstractorProfilePage/InstractorProfilePage.js";
 
-
 function App() {
   return (
     <>
       <InstractorProfilePage />
-      
     </>
   );
 }
