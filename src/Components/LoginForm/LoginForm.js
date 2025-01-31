@@ -1,55 +1,66 @@
-import React, { useState } from "react";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import CheckboxInput from "../CheckboxInput/CheckboxInput";
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .required("Email is required")
+      .email("Invalid email format"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters")
+      .max(12, "Password must not exceed 12 characters"),
+    rememberMe: Yup.boolean(),
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Form Data:", formData);
-    // Add your login logic here
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      console.log("Login Form Data:", values);
+    },
+  });
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form className="space-y-4" onSubmit={formik.handleSubmit}>
       <TextInput
         label="Email Address"
         type="email"
         placeholder="Enter your email"
         name="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
       />
+      {formik.touched.email && formik.errors.email && (
+        <div className="text-red-500 text-sm">{formik.errors.email}</div>
+      )}
 
       <PasswordInput
         label="Password"
         placeholder="Enter your password"
         name="password"
-        value={formData.password}
-        onChange={handleChange}
-        required
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
       />
+      {formik.touched.password && formik.errors.password && (
+        <div className="text-red-500 text-sm">{formik.errors.password}</div>
+      )}
 
       <CheckboxInput
         label="Remember me"
         name="rememberMe"
-        checked={formData.rememberMe}
-        onChange={handleChange}
+        checked={formik.values.rememberMe}
+        onChange={formik.handleChange}
       />
 
       <button
