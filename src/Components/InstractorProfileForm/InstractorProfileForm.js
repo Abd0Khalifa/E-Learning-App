@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave} from "@fortawesome/free-solid-svg-icons";
 
-const StudentProfileForm = () => {
+const InstractorProfileForm = () => {
     return (
         <div className="glass-card p-6 md:p-8 mb-8">
             <h2 className="text-2xl font-bold mb-6">Personal Information
@@ -31,6 +31,18 @@ const StudentProfileForm = () => {
                     />
                 </div>
 
+                <div className="space-y-2">
+                    <label htmlFor="full-name" className="text-sm font-medium">Professional Title</label>
+                    <input
+                        type="text"
+                        id="full-name"
+                        name="full-name"
+                        placeholder="Enter your Position"
+                        className="w-full p-3 rounded-lg bg-card-dark border border-main-color/20 text-white focus:outline-none focus:ring-2 focus:ring-main-color"
+                    />
+                </div>
+
+
                 {/* Bio */}
                 <div className="space-y-2">
                     <label htmlFor="bio" className="text-sm font-medium">Bio</label>
@@ -58,4 +70,4 @@ const StudentProfileForm = () => {
     );
 };
 
-export default StudentProfileForm;
+export default InstractorProfileForm;
