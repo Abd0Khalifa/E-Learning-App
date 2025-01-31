@@ -1,8 +1,8 @@
-import { faBook, faDollarSign, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faCertificate, faClock, faStar, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const InstractorDashboardStatsOverview = () => {
+const StudentDashboardStatsOverview = () => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
             <div className="glass-card p-6">
@@ -19,11 +19,23 @@ const InstractorDashboardStatsOverview = () => {
             <div className="glass-card p-6">
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">
-                        <FontAwesomeIcon icon={faUser} className="text-xl text-main-color"/>
+                        <FontAwesomeIcon icon={faClock} className="text-xl text-main-color"/>
                     </div>
                     <div>
-                        <div className="text-2xl font-bold">125</div>
-                        <div className="text-gray-400">Total Students</div>
+                        <div className="text-2xl font-bold">28h</div>
+                        <div className="text-gray-400">Learning Time</div>
+                    </div>
+                </div>
+            </div>
+            <div className="glass-card p-6">
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">
+                        <FontAwesomeIcon icon={faCertificate} className="text-xl text-main-color" />
+                    </div>
+                    <div>
+                        <div className="text-2xl font-bold">5</div>
+                        <div className="text-gray-400">Certificates
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,19 +45,8 @@ const InstractorDashboardStatsOverview = () => {
                         <FontAwesomeIcon icon={faStar} className="text-xl text-main-color" />
                     </div>
                     <div>
-                        <div className="text-2xl font-bold">4.8</div>
-                        <div className="text-gray-400">Avg. Rating</div>
-                    </div>
-                </div>
-            </div>
-            <div className="glass-card p-6">
-                <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">
-                        <FontAwesomeIcon icon={faDollarSign} className="text-xl text-main-color"/>
-                    </div>
-                    <div>
-                        <div className="text-2xl font-bold">$2,450</div>
-                        <div className="text-gray-400">Monthly Earnings</div>
+                        <div className="text-2xl font-bold">85%</div>
+                        <div className="text-gray-400">Avg. Score</div>
                     </div>
                 </div>
             </div>
@@ -53,4 +54,4 @@ const InstractorDashboardStatsOverview = () => {
     );
 };
 
-export default InstractorDashboardStatsOverview;
+export default StudentDashboardStatsOverview;

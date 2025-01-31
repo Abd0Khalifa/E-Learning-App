@@ -1,3 +1,6 @@
+import StudentDashboardHeader from "../../Components/StudentDashboardHeader/StudentDashboardHeader";
+import StudentDashboardStatsOverview from "../../Components/StudentDashboardStatsOverview/StudentDashboardStatsOverview";
+import StudentDashboardWelcomeSection from "../../Components/StudentDashboardWelcomeSection/StudentDashboardWelcomeSection";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
 
 const StudentDashboardPage = () => {
@@ -5,10 +8,10 @@ const StudentDashboardPage = () => {
         <div className="min-h-screen flex bg-custom-dark">
             <StudentSidebarProfile />
             <main className="flex-1 md:ml-64 p-6 text-white">
-                {/* <InstractorDashboardHeader /> */}
+                <StudentDashboardHeader />
                 <br/>
-                {/* <InstractorDashboardWelcomeSection />
-                <InstractorDashboardStatsOverview /> */}
+                <StudentDashboardWelcomeSection />
+                <StudentDashboardStatsOverview />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
                     {/* <InstractorDashboardRecentActivity />
