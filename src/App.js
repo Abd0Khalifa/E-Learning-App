@@ -6,12 +6,14 @@ import Footer from "./Components/Footer/Footer";
 import CourseDetails from "./Pages/CourseDetails/CourseDetails.js";
 import StudentSidebarProfile from "./Components/StudentSidebarProfile/StudentSidebarProfile.js";
 import StudentProfilePage from "./Pages/StudentProfilePage/StudentProfilePage.js";
-import InstractorProfilePage from "./Pages/InstractorProfilePage/InstractorProfilePage.js";
+import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
+import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
 
 function App() {
   return (
     <>
-      <InstractorProfilePage />
+      <StudentDashboardPage />
+      
     </>
   );
 }
