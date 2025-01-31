@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useFormik } from "formik";
 import TextInput from "../../Components/TextInput/TextInput";
@@ -47,10 +48,50 @@ const RegisterForm = () => {
     <form className="space-y-4" onSubmit={formik.handleSubmit} noValidate>
       <div className="grid grid-cols-2 gap-4">
         <div>        <TextInput
+
+import React, { useState } from "react";
+import TextInput from "../../Components/TextInput/TextInput";
+import PasswordInput from "../../Components/PasswordInput/PasswordInput";
+import CheckboxInput from "../../Components/CheckboxInput/CheckboxInput";
+
+const RegisterForm = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreeTerms: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    console.log("Registration Form Data:", formData);
+    // Add your registration logic here
+  };
+
+  return (
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      <div className="grid grid-cols-2 gap-4">
+        <TextInput
+
           label="First Name"
           type="text"
           placeholder="John"
           name="firstName"
+
           value={formik.values.firstName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -62,10 +103,18 @@ const RegisterForm = () => {
 
 <div>
 <TextInput
+
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
+        <TextInput
+
           label="Last Name"
           type="text"
           placeholder="Doe"
           name="lastName"
+
           value={formik.values.lastName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -75,13 +124,20 @@ const RegisterForm = () => {
         )}
       </div>
 </div>
-        
+
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
 
       <TextInput
         label="Email Address"
         type="email"
         placeholder="john.doe@example.com"
         name="email"
+
         value={formik.values.email}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -90,10 +146,17 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.email}</div>
       )}
 
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+
+
       <PasswordInput
         label="Password"
         placeholder="Create a strong password"
         name="password"
+
         value={formik.values.password}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -102,10 +165,17 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.password}</div>
       )}
 
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
+
+
       <PasswordInput
         label="Confirm Password"
         placeholder="Confirm your password"
         name="confirmPassword"
+
         value={formik.values.confirmPassword}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -114,15 +184,30 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.confirmPassword}</div>
       )}
 
+        value={formData.confirmPassword}
+        onChange={handleChange}
+        required
+      />
+
+
       <CheckboxInput
         label="I agree to the Terms of Service and Privacy Policy"
         name="agreeTerms"
+
         checked={formik.values.agreeTerms}
         onChange={formik.handleChange}
       />
       {formik.touched.agreeTerms && formik.errors.agreeTerms && (
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
+
+        checked={formData.agreeTerms}
+        onChange={handleChange}
+        required
+        linkText="Terms of Service"
+        linkHref="#"
+      />
+
 
       <button
         type="submit"
