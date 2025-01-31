@@ -9,21 +9,17 @@ import CourseDetails from "./Pages/CourseDetails/CourseDetails.js";
 import StudentSidebarProfile from "./Components/StudentSidebarProfile/StudentSidebarProfile.js";
 import StudentProfilePage from "./Pages/StudentProfilePage/StudentProfilePage.js";
 import InstractorProfilePage from "./Pages/InstractorProfilePage/InstractorProfilePage.js";
-import Login from './Pages/Login/Login.jsx';
-import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
-import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
-import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
-import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
 import Login from "./Pages/Login/Login.jsx";
+import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
+import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
 import BrowseCourses from "./Pages/BrowseCourses/BrowseCourses.js";
 import MyCourses from "./Pages/MyCourses/MyCourses.js";
 import AddCourse from "./Pages/AddCourse/AddCourse.js";
 
-
 function App() {
   return (
-    <>  
-      <AddCourse />
+    <>
+      <Login />
     </>
   );
 }
