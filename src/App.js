@@ -12,11 +12,12 @@ import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorD
 import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
 import Login from "./Pages/Login/Login.jsx";
 import BrowseCourses from "./Pages/BrowseCourses/BrowseCourses.js";
+import MyCourses from "./Pages/MyCourses/MyCourses.js";
 
 function App() {
   return (
     <>
-      <BrowseCourses />
+      <MyCourses />
     </>
   );
 }
