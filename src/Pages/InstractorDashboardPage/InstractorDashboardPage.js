@@ -7,17 +7,22 @@ import InstractorProfileAccountSettings from "../../Components/InstractorProfile
 import InsatractorProfessionalLinks from "../../Components/InsatractorProfessionalLinks/InsatractorProfessionalLinks";
 import InstractorVerificationStatus from "../../Components/InstractorVerificationStatus/InstractorVerificationStatus";
 import InstractorStatistics from "../../Components/InstractorStatistics/InstractorStatistics";
+import InstractorDashboardHeader from "../../Components/InstractorDashboardHeader/InstractorDashboardHeader";
+import InstractorDashboardWelcomeSection from "../../Components/InstractorDashboardWelcomeSection/InstractorDashboardWelcomeSection";
+import InstractorDashboardStatsOverview from "../../Components/InstractorDashboardStatsOverview/InstractorDashboardStatsOverview";
 
-const InstractorProfilePage = () => {
+const InstractorDashboardPage = () => {
     return (
         <div className="min-h-screen flex bg-custom-dark">
             <InstractorSidebarProfile />
             <main className="flex-1 md:ml-64 p-6 text-white">
+                <InstractorDashboardHeader />
                 <br/>
-
+                <InstractorDashboardWelcomeSection />
+                <InstractorDashboardStatsOverview />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
-                       
+                    
                     </div>
                     <div className="space-y-8">
                        
@@ -28,4 +33,4 @@ const InstractorProfilePage = () => {
     );
 };
 
-export default InstractorProfilePage;
+export default InstractorDashboardPage;
