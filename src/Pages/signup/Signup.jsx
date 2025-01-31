@@ -1,39 +1,42 @@
-import { useFormik } from 'formik';
-import React from 'react';
-import * as Yup from 'yup';
+import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useFormik } from "formik";
+import React from "react";
+import * as Yup from "yup";
 
 let validation = Yup.object({
   name: Yup.string()
-    .required('Name is required')
-    .min(3, 'Minimum length is 3')
-    .max(10, 'Maximum length is 10'),
+    .required("Name is required")
+    .min(3, "Minimum length is 3")
+    .max(10, "Maximum length is 10"),
   email: Yup.string()
-    .required('Email is required')
-    .email('Enter a valid email'),
+    .required("Email is required")
+    .email("Enter a valid email"),
   phone: Yup.string()
-    .required('Phone number is required')
-    .matches(/^01[1250][0-9]{8}$/, 'Phone number is not valid'),
+    .required("Phone number is required")
+    .matches(/^01[1250][0-9]{8}$/, "Phone number is not valid"),
   password: Yup.string()
-    .required('Password is required')
-    .matches(/^[A-Z][a-z0-9]{6,8}$/, 'Password not valid'),
+    .required("Password is required")
+    .matches(/^[A-Z][a-z0-9]{6,8}$/, "Password not valid"),
   rePassword: Yup.string()
-    .required('RePassword is required')
-    .oneOf([Yup.ref('password')], 'Passwords must match'),
+    .required("RePassword is required")
+    .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
 export default function Signup() {
   const handleRegister = (values, { resetForm }) => {
-    console.log('Registration', values);
+    console.log("Registration", values);
     resetForm(); // إعادة تعيين الحقول إلى حالتها الأولية
   };
 
   let formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      rePassword: '',
-      phone: '',
+      name: "",
+      email: "",
+      password: "",
+      rePassword: "",
+      phone: "",
     },
     onSubmit: handleRegister,
     validationSchema: validation,
@@ -41,26 +44,26 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 sm:px-6">
-      <div className="bg-gray-800 rounded-2xl p-8 backdrop-blur-xl w-full max-w-xl"> {/* زيادة العرض إلى max-w-xl */}
+      <div className="bg-gray-800 rounded-2xl p-8 backdrop-blur-xl w-full max-w-xl">
+        {" "}
+        {/* زيادة العرض إلى max-w-xl */}
         <h2 className="text-center text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
           EduFlow
         </h2>
         <p className="text-center text-gray-400 text-lg mb-8">
           Create your account to start learning
         </p>
-
         {/* Social Registration Buttons */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <button className="flex items-center justify-center py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 text-base">
-            <i className="fab fa-google mr-2"></i>
+          <button className="outline-button-sm">
+            <FontAwesomeIcon icon={faGoogle} />
             Google
           </button>
-          <button className="flex items-center justify-center py-3 border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 text-base">
-            <i className="fab fa-github mr-2"></i>
+          <button className="outline-button-sm">
+            <FontAwesomeIcon icon={faGithub} />
             GitHub
           </button>
         </div>
-
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-600"></div>
@@ -71,7 +74,6 @@ export default function Signup() {
             </span>
           </div>
         </div>
-
         {/* Registration Form */}
         <form className="space-y-6" onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
@@ -90,7 +92,9 @@ export default function Signup() {
                 required
               />
               {formik.touched.name && formik.errors.name && (
-                <div className="text-red-500 text-sm mt-1">{formik.errors.name}</div>
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.name}
+                </div>
               )}
             </div>
             <div>
@@ -121,7 +125,9 @@ export default function Signup() {
               required
             />
             {formik.touched.email && formik.errors.email && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.email}
+              </div>
             )}
           </div>
 
@@ -208,7 +214,9 @@ export default function Signup() {
               required
             />
             {formik.touched.phone && formik.errors.phone && (
-              <div className="text-red-500 text-sm mt-1">{formik.errors.phone}</div>
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.phone}
+              </div>
             )}
           </div>
 
@@ -220,11 +228,11 @@ export default function Signup() {
               required
             />
             <label htmlFor="terms" className="text-sm text-gray-400">
-              I agree to the{' '}
+              I agree to the{" "}
               <a href="#" className="text-purple-400 hover:underline">
                 Terms of Service
-              </a>{' '}
-              and{' '}
+              </a>{" "}
+              and{" "}
               <a href="#" className="text-purple-400 hover:underline">
                 Privacy Policy
               </a>
@@ -239,10 +247,9 @@ export default function Signup() {
             Create Account
           </button>
         </form>
-
         {/* Login Link */}
         <p className="text-center mt-6 text-gray-400 text-base">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <a href="login.html" className="text-purple-400 hover:underline">
             Sign in
           </a>
