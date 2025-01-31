@@ -4,10 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
+import NavBar from "../../Components/NavBar/NavBar";
 
 let validation = Yup.object({
   name: Yup.string()
-    .required("Name is required")
+    .required("First Name is required")
+    .min(3, "Minimum length is 3")
+    .max(10, "Maximum length is 10"),
+    lastName: Yup.string()
+    .required("Last Name is required")
     .min(3, "Minimum length is 3")
     .max(10, "Maximum length is 10"),
   email: Yup.string()
@@ -27,28 +32,42 @@ let validation = Yup.object({
 export default function Signup() {
   const handleRegister = (values, { resetForm }) => {
     console.log("Registration", values);
-    resetForm(); // إعادة تعيين الحقول إلى حالتها الأولية
+    resetForm(); 
   };
 
   let formik = useFormik({
     initialValues: {
       name: "",
+      lastName:"",
       email: "",
       password: "",
       rePassword: "",
       phone: "",
     },
-    onSubmit: handleRegister,
     validationSchema: validation,
-  });
+    onSubmit: (values, { setTouched, resetForm }) => {
+      setTouched({
+        name: true,
+        lastName: true,
+        email: true,
+        password: true,
+        rePassword: true,
+        phone: true,
+      });
 
+      if (Object.keys(formik.errors).length === 0) {
+        handleRegister(values, { resetForm });
+      } else {
+        console.log("Form contains errors, showing custom messages.");
+      }
+    },
+  });
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 sm:px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 sm:px-6 ">
       <div className="bg-gray-800 rounded-2xl p-8 backdrop-blur-xl w-full max-w-xl">
-        {" "}
-        {/* زيادة العرض إلى max-w-xl */}
         <h2 className="text-center text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-          EduFlow
+          SkillStack
         </h2>
         <p className="text-center text-gray-400 text-lg mb-8">
           Create your account to start learning
@@ -75,7 +94,7 @@ export default function Signup() {
           </div>
         </div>
         {/* Registration Form */}
-        <form className="space-y-6" onSubmit={formik.handleSubmit}>
+        <form className="space-y-6" onSubmit={formik.handleSubmit} noValidate>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-300">
@@ -107,6 +126,11 @@ export default function Signup() {
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-300 focus:outline-none focus:border-purple-400 text-base"
                 required
               />
+              {formik.touched.lastName && formik.errors.lastName && (
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.lastName}
+                </div>
+              )}
             </div>
           </div>
 
