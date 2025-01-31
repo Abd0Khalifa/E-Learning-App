@@ -898,6 +898,8 @@ body {
   );
   transform: skewX(-25deg);
   animation: shimmer 3s infinite;
+  z-index: -1;
+  -webkit-animation: shimmer 20s infinite alternate;
 }
 
 @keyframes shimmer {
