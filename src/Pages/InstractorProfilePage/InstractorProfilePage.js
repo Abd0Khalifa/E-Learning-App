@@ -3,6 +3,10 @@ import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/In
 import InstractorProfileForm from "../../Components/InstractorProfileForm/InstractorProfileForm";
 import InstractorProfileOverview from "../../Components/InstractorProfileOverview/InstractorProfileOverview";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
+import InstractorProfileAccountSettings from "../../Components/InstractorProfileAccountSettings/InstractorProfileAccountSettings";
+import InsatractorProfessionalLinks from "../../Components/InsatractorProfessionalLinks/InsatractorProfessionalLinks";
+import InstractorVerificationStatus from "../../Components/InstractorVerificationStatus/InstractorVerificationStatus";
+import InstractorStatistics from "../../Components/InstractorStatistics/InstractorStatistics";
 
 const InstractorProfilePage = () => {
     return (
@@ -16,10 +20,12 @@ const InstractorProfilePage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
                         <InstractorProfileForm />
+                        <InstractorStatistics />
                     </div>
                     <div className="space-y-8">
-                        {/* <StudentProfileAccountSettings />
-                        <StudentProfileConnectedAccounts /> */}
+                        <InstractorProfileAccountSettings />
+                        <InsatractorProfessionalLinks />
+                        <InstractorVerificationStatus />
                     </div>
                 </div>
             </main>
