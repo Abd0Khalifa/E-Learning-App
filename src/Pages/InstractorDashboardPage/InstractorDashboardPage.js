@@ -10,6 +10,10 @@ import InstractorStatistics from "../../Components/InstractorStatistics/Instract
 import InstractorDashboardHeader from "../../Components/InstractorDashboardHeader/InstractorDashboardHeader";
 import InstractorDashboardWelcomeSection from "../../Components/InstractorDashboardWelcomeSection/InstractorDashboardWelcomeSection";
 import InstractorDashboardStatsOverview from "../../Components/InstractorDashboardStatsOverview/InstractorDashboardStatsOverview";
+import InstractorDashboardRecentActivity from "../../Components/InstractorDashboardRecentActivity/InstractorDashboardRecentActivity";
+import InstractorDashboardCoursePerformance from "../../Components/InstractorDashboardCoursePerformance/InstractorDashboardCoursePerformance";
+import InstractorDashboardStudentFeedback from "../../Components/InstractorDashboardStudentFeedback/InstractorDashboardStudentFeedback";
+import InstractorDashboardMonthlyEarnings from "../../Components/InstractorDashboardMonthlyEarnings/InstractorDashboardMonthlyEarnings";
 
 const InstractorDashboardPage = () => {
     return (
@@ -22,10 +26,12 @@ const InstractorDashboardPage = () => {
                 <InstractorDashboardStatsOverview />
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2 space-y-8">
-                    
+                    <InstractorDashboardRecentActivity />
+                    <InstractorDashboardStudentFeedback />
                     </div>
                     <div className="space-y-8">
-                       
+                    <InstractorDashboardCoursePerformance />
+                    <InstractorDashboardMonthlyEarnings /> 
                     </div>
                 </div>
             </main>
