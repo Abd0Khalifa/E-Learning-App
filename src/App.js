@@ -1,5 +1,5 @@
-import './App.css';
-import Signup from './Pages/signup/Signup';
+import "./App.css";
+import Signup from "./Pages/signup/Signup";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./Pages/Home/Home";
@@ -12,11 +12,18 @@ import InstractorProfilePage from "./Pages/InstractorProfilePage/InstractorProfi
 import Login from './Pages/Login/Login.jsx';
 import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
 import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
+import InstractorDashboardPage from "./Pages/InstractorDashboardPage/InstractorDashboardPage.js";
+import StudentDashboardPage from "./Pages/StudentDashboardPage/StudentDashboardPage.js";
+import Login from "./Pages/Login/Login.jsx";
+import BrowseCourses from "./Pages/BrowseCourses/BrowseCourses.js";
+import MyCourses from "./Pages/MyCourses/MyCourses.js";
+import AddCourse from "./Pages/AddCourse/AddCourse.js";
+
 
 function App() {
   return (
-    <>
-      <Signup/>      
+    <>  
+      <AddCourse />
     </>
   );
 }
