@@ -23,7 +23,6 @@ function App() {
   return (
     <>
       <Router>
-      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -34,7 +33,7 @@ function App() {
         <Route path="/courseDetails" element={<CourseDetails />} />
         <Route path="/iDashboard" element={<InstractorDashboardPage />} />
         <Route path="/iProfile" element={<InstractorProfilePage />} />
-        <Route path="manageCourses" element={<ManageCourses />} />
+        <Route path="/manageCourses" element={<ManageCourses />} />
         <Route path="/myCourses" element={<MyCourses />} />
         <Route path="/sProfile" element={<StudentProfilePage />} />
         <Route path="/sProgress" element={<StudentProgress />} />

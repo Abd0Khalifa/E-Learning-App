@@ -1,21 +1,20 @@
 import { useState } from "react";
 
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-
-import InstractorDashboardHeader from "../../Components/InstractorDashboardHeader/InstractorDashboardHeader";
 import InstractorDashboardWelcomeSection from "../../Components/InstractorDashboardWelcomeSection/InstractorDashboardWelcomeSection";
 import InstractorDashboardStatsOverview from "../../Components/InstractorDashboardStatsOverview/InstractorDashboardStatsOverview";
 import InstractorDashboardRecentActivity from "../../Components/InstractorDashboardRecentActivity/InstractorDashboardRecentActivity";
 import InstractorDashboardCoursePerformance from "../../Components/InstractorDashboardCoursePerformance/InstractorDashboardCoursePerformance";
 import InstractorDashboardStudentFeedback from "../../Components/InstractorDashboardStudentFeedback/InstractorDashboardStudentFeedback";
 import InstractorDashboardMonthlyEarnings from "../../Components/InstractorDashboardMonthlyEarnings/InstractorDashboardMonthlyEarnings";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const InstractorDashboardPage = () => {
     return (
         <div className="min-h-screen flex bg-custom-dark">
             <InstractorSidebarProfile />
-            <main className="flex-1 md:ml-64 p-6 text-white">
-                <InstractorDashboardHeader />
+            <main className="flex-1 md:ml-64 text-white">
+            <InstractorHeader />
                 <br/>
                 <InstractorDashboardWelcomeSection />
                 <InstractorDashboardStatsOverview />

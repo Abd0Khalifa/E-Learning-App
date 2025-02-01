@@ -1,18 +1,18 @@
 import { useState } from "react";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
-import StudentHeaderProfile from "../../Components/StudentHeaderProfile/StudentHeaderProfile";
 import StudentProfileForm from "../../Components/StudentProfileForm/StudentProfileForm";
 import StudentProfileAccountSettings from "../../Components/StudentProfileAccountSettings/StudentProfileAccountSettings";
 import StudentProfileConnectedAccounts from "../../Components/StudentProfileConnectedAccounts/StudentProfileConnectedAccounts";
 import StudentProfileOverview from "../../Components/StudentProfileOverview/StudentProfileOverview";
 import StudentStatistics from "../../Components/StudentStatistics/StudentStatistics";
+import StudentHeader from "../../Components/StudentHeader/StudentHeader";
 
 const StudentProfilePage = () => {
     return (
         <div className="min-h-screen flex bg-custom-dark">
             <StudentSidebarProfile />
-            <main className="flex-1 md:ml-64 p-6 text-white">
-                <StudentHeaderProfile />
+            <main className="flex-1 md:ml-64 text-white">
+            <StudentHeader />
                 <br/>
                 <StudentProfileOverview />
 

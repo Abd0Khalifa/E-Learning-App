@@ -1,9 +1,10 @@
 import React from "react";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
+import InstractorHeaderProfile from "../../Components/InstractorHeader/InstractorHeader";
 import CourseActions from "../../Components/CourseActions/CourseActions";
 import CourseItem from "../../Components/CourseItem/CourseItem";
 import Pagination from "../../Components/Pagination/Pagination";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const ManageCourses = () => {
   const courses = [
@@ -49,7 +50,7 @@ const ManageCourses = () => {
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
-        <InstractorHeaderProfile />
+        <InstractorHeader />
         <div className="container mx-auto px-4 py-8">
           <CourseActions />
           <div className="grid gap-6">

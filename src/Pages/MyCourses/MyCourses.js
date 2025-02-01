@@ -1,8 +1,8 @@
 import React from "react";
 import "./MyCourses.css";
-import StudentDashboardHeader from "../../Components/StudentDashboardHeader/StudentDashboardHeader";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
 import CourseCard from "../../Components/CourseCard/CourseCard";
+import StudentHeader from "../../Components/StudentHeader/StudentHeader";
 
 const courses = [
   {
@@ -42,7 +42,7 @@ const MyCourses = () => {
     <div className="min-h-screen flex bg-custom-dark">
       <StudentSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
-        <StudentDashboardHeader />
+        <StudentHeader />
         <div className="container mx-auto p-4">
           <div className="glass-card p-6 mb-8">
             <div className="flex flex-wrap gap-4 items-center justify-between">

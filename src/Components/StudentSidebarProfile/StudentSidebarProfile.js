@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThLarge, faBook, faCalendar, faChartLine, faCertificate, faCommentAlt, faUser, faCog, faBars } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const StudentSidebarProfile = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,38 +28,38 @@ const StudentSidebarProfile = () => {
                 <div className="p-6">
                     <div className="text-2xl font-black gradient-text mb-8">SkillStack</div>
                     <nav className="space-y-4">
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        <Link to={"/sDashboard"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faThLarge} />
                             Dashboard
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faBook} />
                             My Courses
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCalendar} />
                             Schedule
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faChartLine} />
                             Progress
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCertificate} />
                             Certificates
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCommentAlt} />
                             Messages
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3 text-main-color">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3 text-main-color">
                             <FontAwesomeIcon icon={faUser} />
                             Profile
-                        </a>
-                        <a href="#" className="nav-link flex items-center gap-3">
+                        </Link>
+                        <Link to={"/"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCog} />
                             Settings
-                        </a>
+                        </Link>
                     </nav>
                 </div>
             </aside>

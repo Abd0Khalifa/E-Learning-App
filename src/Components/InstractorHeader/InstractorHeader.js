@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 
-const InstractorHeaderProfile = () => {
+const InstractorHeader = () => {
     return (
         <header className="bg-card-dark border-b border-main-color/10 p-4 sticky top-0 z-30">
             <div className="container mx-auto px-4 flex justify-between items-center">
-                <h1 className="text-2xl font-bold">Profile Settings</h1>
+                <h1 className="text-2xl font-bold"> </h1>
                 <div className="flex items-center gap-6">
                     <button className="relative">
                         <FontAwesomeIcon icon={faBell} className="text-main-color" />
@@ -23,4 +23,4 @@ const InstractorHeaderProfile = () => {
     );
 };
 
-export default InstractorHeaderProfile;
+export default InstractorHeader;

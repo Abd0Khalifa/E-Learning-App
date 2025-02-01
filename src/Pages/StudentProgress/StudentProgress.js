@@ -1,8 +1,9 @@
 import React from "react";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
+import InstractorHeaderProfile from "../../Components/InstractorHeader/InstractorHeader";
 import ProgressOverviewCard from "../../Components/ProgressOverviewCard/ProgressOverviewCard";
 import StudentProgressRow from "../../Components/StudentProgressRow/StudentProgressRow";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const StudentProgress = () => {
   // Sample data for progress overview
@@ -39,7 +40,7 @@ const StudentProgress = () => {
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
-        <InstractorHeaderProfile />
+        <InstractorHeader />
         <div className="container mx-auto px-4 py-8">
           {/* Student Search and Filters */}
           <div className="glass-card p-6 mb-8">
