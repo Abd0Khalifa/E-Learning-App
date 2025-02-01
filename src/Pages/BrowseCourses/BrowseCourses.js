@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./BrowseCourses.css";
 import CourseCard from "../../Components/CourseCard/CourseCard";
+import NavBar from "../../Components/NavBar/NavBar";
+import Footer from "../../Components/Footer/Footer";
 
 const coursesData = [
   {
@@ -77,6 +79,8 @@ const BrowseCourses = () => {
   });
 
   return (
+    <>
+    <NavBar/>
     <main className="pt-32 pb-16">
       <section className="mb-12">
         <div className="container mx-auto px-4 sm:px-6">
@@ -159,6 +163,9 @@ const BrowseCourses = () => {
         </div>
       </section>
     </main>
+    <Footer/>
+    </>
+    
   );
 };
 

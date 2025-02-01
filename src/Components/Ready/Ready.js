@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Ready = () => {
   return (
@@ -11,10 +12,10 @@ const Ready = () => {
             Join thousands of students already learning on SkillStack. Start your
             journey today!
           </p>
-          <button className="gradient-button mx-auto">
+          <Link to={"/browseCourses"} className="gradient-button mx-auto">
             <i className="fas fa-rocket"></i>
             Get Started Now
-          </button>
+          </Link>
         </div>
       </div>
     </section>

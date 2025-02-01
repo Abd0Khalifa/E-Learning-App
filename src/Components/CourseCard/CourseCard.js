@@ -1,5 +1,6 @@
 import React from "react";
 import "./CourseCard.css";
+import { Link } from "react-router-dom";
 
 const CourseCard = () => {
   return (
@@ -34,10 +35,10 @@ const CourseCard = () => {
               $99.99
             </span>
           </div>
-          <button className="outline-button-sm">
+          <Link to={"/courseDetails"} className="outline-button-sm">
             <i className="fas fa-shopping-cart"></i>
             Enroll Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>
