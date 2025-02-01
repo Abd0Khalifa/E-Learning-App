@@ -1,34 +1,48 @@
-import { faBook, faCode } from "@fortawesome/free-solid-svg-icons";
-import { faReact } from "@fortawesome/free-brands-svg-icons";
+import React, { useState } from "react";
 
-import CourseModule from '../CourseModule/CourseModule';
+const CourseContent = ({ onContentChange }) => {
+  const [youtubeLinks, setYoutubeLinks] = useState([""]);
 
-function CourseContent() {
-    return (
-        <div className="glass-card p-8 mb-8 animate-on-scroll">
-            <h2 className="text-2xl font-bold mb-6">Course Content</h2>
-            <div className="space-y-4">
-                <CourseModule 
-                    icon={faBook} 
-                    title="Module 1: HTML & CSS Fundamentals" 
-                    lessons="8 lessons" 
-                    time="2.5 hours" 
-                />
-                <CourseModule 
-                    icon={faCode} 
-                    title="Module 2: JavaScript Essentials" 
-                    lessons="12 lessons" 
-                    time="4 hours" 
-                />
-                <CourseModule 
-                    icon={faReact} 
-                    title="Module 3: React.js Development" 
-                    lessons="10 lessons" 
-                    time="3.5 hours" 
-                />
-            </div>
-        </div>
-    );
-}
+  const handleLinkChange = (index, value) => {
+    const newLinks = [...youtubeLinks];
+    newLinks[index] = value;
+    setYoutubeLinks(newLinks);
+    onContentChange(newLinks.filter((link) => link.trim() !== ""));
+  };
+
+  const addLinkInput = () => {
+    setYoutubeLinks([...youtubeLinks, ""]);
+  };
+
+  return (
+    <div className="glass-card p-8 mb-8 animate-on-scroll">
+      <h2 className="text-2xl font-bold mb-6">Course Content</h2>
+      <div className="space-y-4">
+        {youtubeLinks.map((link, index) => (
+          <div key={index}>
+            <label className="block text-sm font-medium mb-2">
+              YouTube Link {index + 1}
+            </label>
+            <input
+              type="text"
+              className="modern-input"
+              placeholder="Enter YouTube video URL"
+              value={link}
+              onChange={(e) => handleLinkChange(index, e.target.value)}
+            />
+          </div>
+        ))}
+        <button
+          type="button"
+          className="gradient-button w-full justify-center py-2 mt-4"
+          onClick={addLinkInput}
+        >
+          <i className="fas fa-plus"></i>
+          Add Another Video
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default CourseContent;

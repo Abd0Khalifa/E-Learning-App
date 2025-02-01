@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import CheckboxInput from "../CheckboxInput/CheckboxInput";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase.js";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/authSlice";
+import { useNavigate } from "react-router-dom"; // Enable navigation
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  // const navigate = useNavigate(); // Initialize navigation
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+          })
+        );
+      }
+    });
+
+    return () => unsubscribe();
+  }, [dispatch]);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -28,8 +48,8 @@ const LoginForm = () => {
       rememberMe: false,
     },
     validationSchema,
-    validateOnChange: true, 
-    validateOnBlur: true, 
+    validateOnChange: true,
+    validateOnBlur: true,
     onSubmit: async (values) => {
       try {
         const userCredential = await signInWithEmailAndPassword(
@@ -38,11 +58,22 @@ const LoginForm = () => {
           values.password
         );
         const user = userCredential.user;
-        console.log("User logged in:", user);
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName || "Anonymous",
+            photoURL: user.photoURL || "",
+          })
+        );
 
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: "You have been successfully logged in!",
+        });
+        // navigate("/dashboard");
       } catch (error) {
-        console.error("Error logging in:", error.message);
-
         Swal.fire({
           icon: "error",
           title: "Login Failed",
@@ -54,47 +85,37 @@ const LoginForm = () => {
 
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
-
       <TextInput
         label="Email Address"
         type="email"
         placeholder="Enter your email"
         name="email"
         value={formik.values.email}
-        onChange={(e) => {
-          formik.handleChange(e); 
-          formik.setFieldTouched("email", true, false); 
-        }}
-        onBlur={formik.handleBlur} 
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
       />
       {formik.touched.email && formik.errors.email && (
         <div className="text-red-500 text-sm">{formik.errors.email}</div>
       )}
-
-    
       <PasswordInput
         label="Password"
         placeholder="Enter your password"
         name="password"
         value={formik.values.password}
-        onChange={(e) => {
-          formik.handleChange(e);
-          formik.setFieldTouched("password", true, false); 
-        }}
-        onBlur={formik.handleBlur} 
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
       />
       {formik.touched.password && formik.errors.password && (
         <div className="text-red-500 text-sm">{formik.errors.password}</div>
       )}
 
+      {/* Remember Me Checkbox */}
       <CheckboxInput
         label="Remember me"
         name="rememberMe"
         checked={formik.values.rememberMe}
         onChange={formik.handleChange}
       />
-
-  
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"

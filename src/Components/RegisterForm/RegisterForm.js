@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../../Components/TextInput/TextInput";
 import PasswordInput from "../../Components/PasswordInput/PasswordInput";
 import CheckboxInput from "../../Components/CheckboxInput/CheckboxInput";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth, db } from "../../firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  // Listen for authentication changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName || "Anonymous",
+            photoURL: user.photoURL || "",
+          })
+        );
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup function
+  }, [dispatch]);
+
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .required("First Name is required")
@@ -57,6 +84,8 @@ const RegisterForm = () => {
           values.password
         );
         const user = userCredential.user;
+
+        // Save user to Firestore
         const userData = {
           uid: user.uid,
           firstName: values.firstName,
@@ -68,16 +97,18 @@ const RegisterForm = () => {
 
         await setDoc(doc(db, "users", user.uid), userData);
 
+        // Dispatch to Redux store
+        dispatch(setUser(userData));
+
         Swal.fire({
           icon: "success",
           title: "Registration Successful",
           text: "You have been successfully registered!",
         });
 
-        // Optionally, redirect the user to another page (e.g., login or dashboard)
+        // Redirect to dashboard
+        // navigate("/dashboard");
       } catch (error) {
-        console.error("Error registering user:", error.message);
-
         Swal.fire({
           icon: "error",
           title: "Registration Failed",
@@ -88,8 +119,8 @@ const RegisterForm = () => {
   });
 
   return (
-    <form className="space-y-4 " onSubmit={formik.handleSubmit} noValidate>
-      <div className="grid grid-cols-2 gap-4 ">
+    <form className="space-y-4" onSubmit={formik.handleSubmit} noValidate>
+      <div className="grid grid-cols-2 gap-4">
         <div>
           <TextInput
             label="First Name"
@@ -97,10 +128,7 @@ const RegisterForm = () => {
             placeholder="John"
             name="firstName"
             value={formik.values.firstName}
-            onChange={(e) => {
-              formik.handleChange(e);
-              formik.setFieldTouched("firstName", true, false);
-            }}
+            onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           {formik.touched.firstName && formik.errors.firstName && (
@@ -116,10 +144,7 @@ const RegisterForm = () => {
             placeholder="Doe"
             name="lastName"
             value={formik.values.lastName}
-            onChange={(e) => {
-              formik.handleChange(e);
-              formik.setFieldTouched("lastName", true, false);
-            }}
+            onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           {formik.touched.lastName && formik.errors.lastName && (
@@ -127,16 +152,14 @@ const RegisterForm = () => {
           )}
         </div>
       </div>
+
       <TextInput
         label="Email Address"
         type="email"
         placeholder="john.doe@example.com"
         name="email"
         value={formik.values.email}
-        onChange={(e) => {
-          formik.handleChange(e);
-          formik.setFieldTouched("email", true, false);
-        }}
+        onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
       {formik.touched.email && formik.errors.email && (
@@ -148,10 +171,7 @@ const RegisterForm = () => {
         placeholder="Create a strong password"
         name="password"
         value={formik.values.password}
-        onChange={(e) => {
-          formik.handleChange(e);
-          formik.setFieldTouched("password", true, false);
-        }}
+        onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
       {formik.touched.password && formik.errors.password && (
@@ -163,10 +183,7 @@ const RegisterForm = () => {
         placeholder="Confirm your password"
         name="confirmPassword"
         value={formik.values.confirmPassword}
-        onChange={(e) => {
-          formik.handleChange(e);
-          formik.setFieldTouched("confirmPassword", true, false);
-        }}
+        onChange={formik.handleChange}
         onBlur={formik.handleBlur}
       />
       {formik.touched.confirmPassword && formik.errors.confirmPassword && (
@@ -182,10 +199,7 @@ const RegisterForm = () => {
         <select
           name="role"
           value={formik.values.role}
-          onChange={(e) => {
-            formik.handleChange(e);
-            formik.setFieldTouched("role", true, false);
-          }}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           className="w-full p-2 border border-gray-300 rounded-md modern-input"
         >
@@ -203,12 +217,11 @@ const RegisterForm = () => {
         name="agreeTerms"
         checked={formik.values.agreeTerms}
         onChange={formik.handleChange}
-        linkText="Terms of Service"
-        linkHref="#"
       />
       {formik.touched.agreeTerms && formik.errors.agreeTerms && (
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
+
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"
