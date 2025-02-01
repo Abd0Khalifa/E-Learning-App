@@ -13,10 +13,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
+import InstractorHeaderProfile from "../../Components/InstractorHeader/InstractorHeader";
 import CourseActions from "../../Components/CourseActions/CourseActions";
 import CourseItem from "../../Components/CourseItem/CourseItem";
 import Pagination from "../../Components/Pagination/Pagination";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const ManageCourses = () => {
   const dispatch = useDispatch();
@@ -90,7 +91,7 @@ const ManageCourses = () => {
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
-        <InstractorHeaderProfile />
+        <InstractorHeader />
         <div className="container mx-auto px-4 py-8">
           <CourseActions
             onCategoryChange={setCategoryFilter}

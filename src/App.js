@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./Pages/Home/Home";
@@ -21,10 +22,25 @@ import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 function App() {
   return (
     <>
-      {/* <Login /> */}
-      {/* <Register /> */}
-      <ManageCourses />
-      {/* <AddCourse /> */}
+
+      <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/sDashboard" element={<StudentDashboardPage />} />
+        <Route path="addCourse" element={<AddCourse />} />
+        <Route path="/browseCourses" element={<BrowseCourses />} />
+        <Route path="/courseDetails" element={<CourseDetails />} />
+        <Route path="/iDashboard" element={<InstractorDashboardPage />} />
+        <Route path="/iProfile" element={<InstractorProfilePage />} />
+        <Route path="/manageCourses" element={<ManageCourses />} />
+        <Route path="/myCourses" element={<MyCourses />} />
+        <Route path="/sProfile" element={<StudentProfilePage />} />
+        <Route path="/sProgress" element={<StudentProgress />} />
+      </Routes>
+    </Router>
+
     </>
   );
 }

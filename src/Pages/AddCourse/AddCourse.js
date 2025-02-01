@@ -9,12 +9,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import Swal from "sweetalert2";
 import "./AddCourse.css";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
 import BasicInformation from "../../Components/BasicInformation/BasicInformation";
 import CourseContent from "../../Components/CourseContent/CourseContent";
 import CourseSettings from "../../Components/CourseSettings/CourseSettings";
 import Requirements from "../../Components/Requirements/Requirements";
 import ActionButtons from "../../Components/ActionButtons/ActionButtons";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const AddCourse = () => {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ const AddCourse = () => {
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
-        <InstractorHeaderProfile />
+        <InstractorHeader />
         <div className="container mx-auto px-4 py-8">
           <form onSubmit={formik.handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

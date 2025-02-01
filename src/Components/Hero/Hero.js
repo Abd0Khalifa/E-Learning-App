@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const statsRef = useRef([]);
@@ -58,10 +59,10 @@ const Hero = () => {
             instructors.
           </p>
           <div className="flex flex-col md:flex-row justify-center gap-4 items-center">
-            <button className="gradient-button w-full md:w-auto">
+            <Link to={"/browseCourses"} className="gradient-button w-full md:w-auto">
               <i className="fas fa-play"></i>
               Start Learning
-            </button>
+            </Link>
             <button className="outline-button w-full md:w-auto">
               <i className="fas fa-info-circle"></i>
               Learn More

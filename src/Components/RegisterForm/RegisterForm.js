@@ -14,6 +14,8 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -222,6 +224,14 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
 
+
+      <br />
+
+      <Link to="/login" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
+              I already have an account
+            </Link>
+
+ 
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"

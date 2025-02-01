@@ -1,8 +1,12 @@
 import React from "react";
 import RegisterForm from "../../Components/RegisterForm/RegisterForm";
+import NavBar from "../../Components/NavBar/NavBar";
+import Footer from "../../Components/Footer/Footer";
 
 const Register = () => {
   return (
+    <>
+    <NavBar/>
     <div className="container mx-auto px-4 sm:px-6 max-w-md relative z-10 mt-40">
       <div className="glass-card bg-card-dark rounded-2xl p-8 backdrop-blur-xl login-box">
         <div className="text-center mb-8 ">
@@ -12,6 +16,9 @@ const Register = () => {
         <RegisterForm />
       </div>
     </div>
+    <Footer />
+    </>
+    
   );
 };
 
