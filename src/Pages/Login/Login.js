@@ -1,8 +1,13 @@
 import React from "react";
 import LoginForm from "../../Components/LoginForm/LoginForm";
+import NavBar from "../../Components/NavBar/NavBar";
+import Footer from "../../Components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
+    <>
+    <NavBar />
     <div className="container mx-auto px-4 sm:px-6 max-w-md relative z-10 mt-40">
       <div className="glass-card bg-card-dark rounded-2xl p-8 backdrop-blur-xl">
         <div className="text-center mb-8">
@@ -12,8 +17,12 @@ const Login = () => {
           </p>
         </div>
         <LoginForm />
+        <br/>
+        
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

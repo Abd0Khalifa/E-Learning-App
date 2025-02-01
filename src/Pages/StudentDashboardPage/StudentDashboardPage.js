@@ -1,17 +1,17 @@
 import StudentDashboardAchievement from "../../Components/StudentDashboardAchievement/StudentDashboardAchievement";
 import StudentDashboardCurrentCourses from "../../Components/StudentDashboardCurrentCourses/StudentDashboardCurrentCourses";
-import StudentDashboardHeader from "../../Components/StudentDashboardHeader/StudentDashboardHeader";
 import StudentDashboardStatsOverview from "../../Components/StudentDashboardStatsOverview/StudentDashboardStatsOverview";
 import StudentDashboardUpcomingSchedule from "../../Components/StudentDashboardUpcomingSchedule/StudentDashboardUpcomingSchedule";
 import StudentDashboardWelcomeSection from "../../Components/StudentDashboardWelcomeSection/StudentDashboardWelcomeSection";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
+import StudentHeader from "../../Components/StudentHeader/StudentHeader";
 
 const StudentDashboardPage = () => {
   return (
     <div className="min-h-screen flex bg-custom-dark">
       <StudentSidebarProfile />
-      <main className="flex-1 md:ml-64 p-6 text-white">
-        <StudentDashboardHeader />
+      <main className="flex-1 md:ml-64 text-white">
+        <StudentHeader />
         <br />
         <StudentDashboardWelcomeSection />
         <StudentDashboardStatsOverview />

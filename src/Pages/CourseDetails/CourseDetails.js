@@ -1,7 +1,9 @@
 import CourseContent from "../../Components/CourseContent/CourseContent";
 import CourseDetailsHero from "../../Components/CourseDetailsHero/CourseDetailsHero";
 import CourseFeatures from "../../Components/CourseFeatures/CourseFeatures";
+import Footer from "../../Components/Footer/Footer";
 import InstructorInfo from "../../Components/InstructorInfo/InstructorInfo";
+import NavBar from "../../Components/NavBar/NavBar";
 import Requirements from "../../Components/Requirements/Requirements";
 import WhatYouLearn from "../../Components/WhatYouLearn/WhatYouLearn";
 
@@ -9,6 +11,7 @@ import WhatYouLearn from "../../Components/WhatYouLearn/WhatYouLearn";
 function CourseDetails() {
     return (
         <>
+        <NavBar/>
             <main className="flex-grow pt-32">
                 <CourseDetailsHero />
                 <section className="py-16 bg-card-dark/30">
@@ -33,6 +36,7 @@ function CourseDetails() {
                 <InstructorInfo />
 
             </main>
+            <Footer/>
         </>
     );
 }

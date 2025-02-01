@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
+import InstractorHeaderProfile from "../../Components/InstractorHeader/InstractorHeader";
 import InstractorProfileForm from "../../Components/InstractorProfileForm/InstractorProfileForm";
 import InstractorProfileOverview from "../../Components/InstractorProfileOverview/InstractorProfileOverview";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
@@ -7,13 +7,14 @@ import InstractorProfileAccountSettings from "../../Components/InstractorProfile
 import InsatractorProfessionalLinks from "../../Components/InsatractorProfessionalLinks/InsatractorProfessionalLinks";
 import InstractorVerificationStatus from "../../Components/InstractorVerificationStatus/InstractorVerificationStatus";
 import InstractorStatistics from "../../Components/InstractorStatistics/InstractorStatistics";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const InstractorProfilePage = () => {
     return (
         <div className="min-h-screen flex bg-custom-dark">
             <InstractorSidebarProfile />
-            <main className="flex-1 md:ml-64 p-6 text-white">
-                <InstractorHeaderProfile />
+            <main className="flex-1 md:ml-64 text-white">
+            <InstractorHeader />
                 <br/>
                 <InstractorProfileOverview />
 

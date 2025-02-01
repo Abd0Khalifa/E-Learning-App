@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import TextInput from "../../Components/TextInput/TextInput";
 import PasswordInput from "../../Components/PasswordInput/PasswordInput";
 import CheckboxInput from "../../Components/CheckboxInput/CheckboxInput";
+import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
   // Validation schema using Yup
@@ -139,6 +140,12 @@ const RegisterForm = () => {
       {formik.touched.agreeTerms && formik.errors.agreeTerms && (
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
+
+      <br />
+
+      <Link to="/login" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
+              I already have an account
+            </Link>
 
       {/* Submit Button */}
       <button
