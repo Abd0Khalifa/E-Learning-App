@@ -22,6 +22,7 @@ import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 function App() {
   return (
     <>
+
       <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -39,6 +40,7 @@ function App() {
         <Route path="/sProgress" element={<StudentProgress />} />
       </Routes>
     </Router>
+
     </>
   );
 }

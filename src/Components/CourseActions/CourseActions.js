@@ -1,7 +1,7 @@
 import React from "react";
 import SearchInput from "../SearchInput/SearchInput";
 
-const CourseActions = () => {
+const CourseActions = ({ onCategoryChange }) => {
   return (
     <div className="glass-card p-6 mb-8">
       <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -19,6 +19,16 @@ const CourseActions = () => {
             Sort
           </button>
         </div>
+        <select
+          className="modern-input"
+          onChange={(e) => onCategoryChange && onCategoryChange(e.target.value)}
+        >
+          <option value="">All Categories</option>
+          <option value="development">Development</option>
+          <option value="design">Design</option>
+          <option value="business">Business</option>
+          <option value="marketing">Marketing</option>
+        </select>
         <SearchInput />
       </div>
     </div>

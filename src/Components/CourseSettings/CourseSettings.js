@@ -1,6 +1,8 @@
 import React from "react";
-
-const CourseSettings = () => {
+const CourseSettings = ({ onChange, errors, touched }) => {
+  const handleChange = (value) => {
+    onChange(value);
+  };
   return (
     <div className="glass-card p-6">
       <h2 className="text-xl font-bold mb-6">Course Settings</h2>
@@ -11,19 +13,11 @@ const CourseSettings = () => {
             type="number"
             className="modern-input"
             placeholder="e.g., 49.99"
+            onChange={(e) => handleChange(parseFloat(e.target.value))}
           />
-        </div>
-        <div>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" className="modern-input" />
-            <span>Enable Course Preview</span>
-          </label>
-        </div>
-        <div>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" className="modern-input" />
-            <span>Issue Certificate</span>
-          </label>
+          {errors.price && touched.price && (
+            <div className="text-red-500 text-sm">{errors.price}</div>
+          )}
         </div>
       </div>
     </div>

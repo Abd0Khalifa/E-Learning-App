@@ -14,7 +14,7 @@ const CheckboxInput = ({
       <input
         type="checkbox"
         id={name}
-        className="mt-1.5 w-4 h-4 rounded border-gray-600 text-main-color focus:ring-main-color bg-transparent"
+        className=" w-4 h-4 rounded border-gray-600 text-main-color focus:ring-main-color bg-transparent"
         name={name}
         checked={checked}
         onChange={onChange}

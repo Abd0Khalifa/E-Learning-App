@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../../Components/TextInput/TextInput";
 import PasswordInput from "../../Components/PasswordInput/PasswordInput";
 import CheckboxInput from "../../Components/CheckboxInput/CheckboxInput";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth, db } from "../../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/authSlice";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+
 const RegisterForm = () => {
-  // Validation schema using Yup
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  // Listen for authentication changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName || "Anonymous",
+            photoURL: user.photoURL || "",
+          })
+        );
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup function
+  }, [dispatch]);
+
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .required("First Name is required")
@@ -27,13 +58,15 @@ const RegisterForm = () => {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
+    role: Yup.string()
+      .required("Role is required")
+      .oneOf(["student", "instructor"], "Invalid role selected"),
     agreeTerms: Yup.boolean().oneOf(
       [true],
       "You must agree to the terms and conditions"
     ),
   });
 
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -41,18 +74,54 @@ const RegisterForm = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      role: "",
       agreeTerms: false,
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Registration Form Data:", values);
-      // Add your registration logic here
+    onSubmit: async (values) => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const user = userCredential.user;
+
+        // Save user to Firestore
+        const userData = {
+          uid: user.uid,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          role: values.role,
+          createdAt: new Date().toISOString(),
+        };
+
+        await setDoc(doc(db, "users", user.uid), userData);
+
+        // Dispatch to Redux store
+        dispatch(setUser(userData));
+
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: "You have been successfully registered!",
+        });
+
+        // Redirect to dashboard
+        // navigate("/dashboard");
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: error.message,
+        });
+      }
     },
   });
 
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit} noValidate>
-      {/* First Name and Last Name */}
       <div className="grid grid-cols-2 gap-4">
         <div>
           <TextInput
@@ -86,7 +155,6 @@ const RegisterForm = () => {
         </div>
       </div>
 
-      {/* Email Address */}
       <TextInput
         label="Email Address"
         type="email"
@@ -100,7 +168,6 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.email}</div>
       )}
 
-      {/* Password */}
       <PasswordInput
         label="Password"
         placeholder="Create a strong password"
@@ -113,7 +180,6 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.password}</div>
       )}
 
-      {/* Confirm Password */}
       <PasswordInput
         label="Confirm Password"
         placeholder="Confirm your password"
@@ -128,18 +194,36 @@ const RegisterForm = () => {
         </div>
       )}
 
-      {/* Agree to Terms */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Role
+        </label>
+        <select
+          name="role"
+          value={formik.values.role}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className="w-full p-2 border border-gray-300 rounded-md modern-input"
+        >
+          <option value="">Select Role</option>
+          <option value="student">Student</option>
+          <option value="instructor">Instructor</option>
+        </select>
+        {formik.touched.role && formik.errors.role && (
+          <div className="text-red-500 text-sm">{formik.errors.role}</div>
+        )}
+      </div>
+
       <CheckboxInput
         label="I agree to the Terms of Service and Privacy Policy"
         name="agreeTerms"
         checked={formik.values.agreeTerms}
         onChange={formik.handleChange}
-        linkText="Terms of Service"
-        linkHref="#"
       />
       {formik.touched.agreeTerms && formik.errors.agreeTerms && (
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
+
 
       <br />
 
@@ -147,7 +231,7 @@ const RegisterForm = () => {
               I already have an account
             </Link>
 
-      {/* Submit Button */}
+ 
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"

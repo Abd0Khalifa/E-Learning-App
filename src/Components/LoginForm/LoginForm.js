@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import CheckboxInput from "../CheckboxInput/CheckboxInput";
+
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase.js";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/authSlice";
+import { useNavigate } from "react-router-dom"; // Enable navigation
+
 import { Link } from "react-router-dom";
 
+
 const LoginForm = () => {
-  // Validation schema using Yup
+  const dispatch = useDispatch();
+  // const navigate = useNavigate(); // Initialize navigation
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+          })
+        );
+      }
+    });
+
+    return () => unsubscribe();
+  }, [dispatch]);
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .required("Email is required")
@@ -19,7 +45,6 @@ const LoginForm = () => {
     rememberMe: Yup.boolean(),
   });
 
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -27,15 +52,43 @@ const LoginForm = () => {
       rememberMe: false,
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Login Form Data:", values);
-      // Add your login logic here
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: async (values) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const user = userCredential.user;
+        dispatch(
+          setUser({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName || "Anonymous",
+            photoURL: user.photoURL || "",
+          })
+        );
+
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          text: "You have been successfully logged in!",
+        });
+        // navigate("/dashboard");
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: error.message,
+        });
+      }
     },
   });
 
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
-      {/* Email Input */}
       <TextInput
         label="Email Address"
         type="email"
@@ -48,8 +101,6 @@ const LoginForm = () => {
       {formik.touched.email && formik.errors.email && (
         <div className="text-red-500 text-sm">{formik.errors.email}</div>
       )}
-
-      {/* Password Input */}
       <PasswordInput
         label="Password"
         placeholder="Enter your password"
@@ -69,14 +120,13 @@ const LoginForm = () => {
         checked={formik.values.rememberMe}
         onChange={formik.handleChange}
       />
+
       <br/>
 
       <Link to="/signup" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
         I don't have an account yet
       </Link>
 
-
-      {/* Submit Button */}
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"
