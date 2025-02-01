@@ -32,31 +32,31 @@ const StudentSidebarProfile = () => {
                             <FontAwesomeIcon icon={faThLarge} />
                             Dashboard
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3">
+                        <Link to={"/myCourses"} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faBook} />
                             My Courses
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3">
+                        <Link to={""} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCalendar} />
                             Schedule
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3">
+                        <Link to={""} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faChartLine} />
                             Progress
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3">
+                        <Link to={""} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCertificate} />
                             Certificates
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3">
+                        <Link to={""} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCommentAlt} />
                             Messages
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3 text-main-color">
+                        <Link to={"/sProfile"} className="nav-link flex items-center gap-3 text-main-color">
                             <FontAwesomeIcon icon={faUser} />
                             Profile
                         </Link>
-                        <Link to={"/"} className="nav-link flex items-center gap-3">
+                        <Link to={""} className="nav-link flex items-center gap-3">
                             <FontAwesomeIcon icon={faCog} />
                             Settings
                         </Link>
