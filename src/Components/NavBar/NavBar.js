@@ -1,6 +1,7 @@
 import { faSignInAlt, faSignOutAlt, faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,16 +42,17 @@ const NavBar = () => {
                 </div>
               ) : (
                 <>
-                  <button className="outline-button-sm hidden md:flex" onClick={() => setIsLoggedIn(true)} >
+                  <Link className="outline-button-sm hidden md:flex" to={"/login"}>
                     <FontAwesomeIcon icon={faSignInAlt} />
                     <span className="hidden md:flex">Sign In</span>
-                  </button>
-                  <button
+                  </Link>
+                  <Link
                     className="gradient-button-sm"
+                    onClick={() => setIsLoggedIn(true)}
                   >
                     <FontAwesomeIcon icon={faUserGraduate} />
                     <span className="hidden md:flex">Start Free</span>
-                  </button>
+                  </Link>
                 </>
               )}
             </div>

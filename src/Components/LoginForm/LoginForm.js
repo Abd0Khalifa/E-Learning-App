@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import CheckboxInput from "../CheckboxInput/CheckboxInput";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   // Validation schema using Yup
@@ -68,6 +69,12 @@ const LoginForm = () => {
         checked={formik.values.rememberMe}
         onChange={formik.handleChange}
       />
+      <br/>
+
+      <Link to="/signup" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
+        I don't have an account yet
+      </Link>
+
 
       {/* Submit Button */}
       <button
