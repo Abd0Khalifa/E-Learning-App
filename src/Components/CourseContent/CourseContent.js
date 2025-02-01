@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CourseContent = ({ onContentChange }) => {
+const CourseContent = ({ onContentChange, errors, touched }) => {
   const [youtubeLinks, setYoutubeLinks] = useState([""]);
 
   const handleLinkChange = (index, value) => {
@@ -30,6 +30,9 @@ const CourseContent = ({ onContentChange }) => {
               value={link}
               onChange={(e) => handleLinkChange(index, e.target.value)}
             />
+            {errors.youtubeLinks && touched.youtubeLinks && (
+              <div className="text-red-500 text-sm">{errors.youtubeLinks}</div>
+            )}
           </div>
         ))}
         <button

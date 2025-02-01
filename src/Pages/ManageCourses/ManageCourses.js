@@ -25,8 +25,6 @@ const ManageCourses = () => {
   const [loading, setLoading] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
-
-  // Ensure Redux persists auth state on refresh
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -43,15 +41,10 @@ const ManageCourses = () => {
 
     return () => unsubscribe();
   }, [dispatch]);
-
-  // Get the logged-in instructor's UID from Redux
   const instructorId = useSelector((state) => state.auth.user?.uid);
-
   const fetchCourses = async (reset = false) => {
     if (!instructorId) return;
-
     setLoading(true);
-
     try {
       let coursesQuery = query(
         collection(db, "courses"),
@@ -59,38 +52,30 @@ const ManageCourses = () => {
         orderBy("createdAt", "desc"),
         limit(5)
       );
-
       if (categoryFilter) {
         coursesQuery = query(
           coursesQuery,
           where("category", "==", categoryFilter)
         );
       }
-
       if (statusFilter) {
         coursesQuery = query(coursesQuery, where("status", "==", statusFilter));
       }
-
       if (!reset && lastDoc) {
         coursesQuery = query(coursesQuery, startAfter(lastDoc));
       }
-
       const querySnapshot = await getDocs(coursesQuery);
       const newCourses = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
       setCourses(reset ? newCourses : [...courses, ...newCourses]);
       setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1] || null);
     } catch (error) {
       console.error("Error fetching courses:", error);
     }
-
     setLoading(false);
   };
-
-  // Handle course deletion
   const handleDeleteCourse = (courseId) => {
     setCourses((prevCourses) =>
       prevCourses.filter((course) => course.id !== courseId)

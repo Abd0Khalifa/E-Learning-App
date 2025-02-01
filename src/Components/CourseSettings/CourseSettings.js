@@ -1,6 +1,6 @@
 import React from "react";
 
-const CourseSettings = ({ onChange }) => {
+const CourseSettings = ({ onChange, errors, touched }) => {
   const handleChange = (value) => {
     onChange(value);
   };
@@ -17,6 +17,9 @@ const CourseSettings = ({ onChange }) => {
             placeholder="e.g., 49.99"
             onChange={(e) => handleChange(parseFloat(e.target.value))}
           />
+          {errors.price && touched.price && (
+            <div className="text-red-500 text-sm">{errors.price}</div>
+          )}
         </div>
       </div>
     </div>

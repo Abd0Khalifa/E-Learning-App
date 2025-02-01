@@ -1,6 +1,6 @@
 import React from "react";
 
-const BasicInformation = ({ onChange }) => {
+const BasicInformation = ({ onChange, errors, touched }) => {
   const handleChange = (field, value) => {
     onChange(field, value);
   };
@@ -8,7 +8,7 @@ const BasicInformation = ({ onChange }) => {
   return (
     <div className="glass-card p-6">
       <h2 className="text-xl font-bold mb-6">Basic Information</h2>
-      <form className="space-y-6">
+      <div className="space-y-6">
         <div>
           <label className="block text-sm font-medium mb-2">Course Title</label>
           <input
@@ -17,6 +17,9 @@ const BasicInformation = ({ onChange }) => {
             placeholder="e.g., Web Development Masterclass"
             onChange={(e) => handleChange("title", e.target.value)}
           />
+          {errors.title && touched.title && (
+            <div className="text-red-500 text-sm">{errors.title}</div>
+          )}
         </div>
 
         <div>
@@ -29,6 +32,9 @@ const BasicInformation = ({ onChange }) => {
             placeholder="Describe your course content and learning outcomes"
             onChange={(e) => handleChange("description", e.target.value)}
           ></textarea>
+          {errors.description && touched.description && (
+            <div className="text-red-500 text-sm">{errors.description}</div>
+          )}
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -44,6 +50,9 @@ const BasicInformation = ({ onChange }) => {
               <option value="business">Business</option>
               <option value="marketing">Marketing</option>
             </select>
+            {errors.category && touched.category && (
+              <div className="text-red-500 text-sm">{errors.category}</div>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium mb-2">Level</label>
@@ -56,9 +65,12 @@ const BasicInformation = ({ onChange }) => {
               <option value="intermediate">Intermediate</option>
               <option value="advanced">Advanced</option>
             </select>
+            {errors.level && touched.level && (
+              <div className="text-red-500 text-sm">{errors.level}</div>
+            )}
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
