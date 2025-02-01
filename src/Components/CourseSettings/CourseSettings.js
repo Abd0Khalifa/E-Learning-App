@@ -1,10 +1,8 @@
 import React from "react";
-
 const CourseSettings = ({ onChange, errors, touched }) => {
   const handleChange = (value) => {
     onChange(value);
   };
-
   return (
     <div className="glass-card p-6">
       <h2 className="text-xl font-bold mb-6">Course Settings</h2>

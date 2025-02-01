@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-
 const CourseContent = ({ onContentChange, errors, touched }) => {
   const [youtubeLinks, setYoutubeLinks] = useState([""]);
-
   const handleLinkChange = (index, value) => {
     const newLinks = [...youtubeLinks];
     newLinks[index] = value;
     setYoutubeLinks(newLinks);
     onContentChange(newLinks.filter((link) => link.trim() !== ""));
   };
-
   const addLinkInput = () => {
     setYoutubeLinks([...youtubeLinks, ""]);
   };
-
   return (
     <div className="glass-card p-8 mb-8 animate-on-scroll">
       <h2 className="text-2xl font-bold mb-6">Course Content</h2>

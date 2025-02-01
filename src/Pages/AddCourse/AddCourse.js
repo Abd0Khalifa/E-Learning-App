@@ -38,7 +38,6 @@ const AddCourse = () => {
 
   const instructorId = useSelector((state) => state.auth.user?.uid);
 
-  // Formik setup with validation schema
   const formik = useFormik({
     initialValues: {
       title: "",
