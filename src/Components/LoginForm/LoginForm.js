@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import CheckboxInput from "../CheckboxInput/CheckboxInput";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase.js"; 
 
 const LoginForm = () => {
   // Validation schema using Yup
@@ -26,9 +28,20 @@ const LoginForm = () => {
       rememberMe: false,
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Login Form Data:", values);
-      // Add your login logic here
+    onSubmit: async (values) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const user = userCredential.user;
+        console.log("User logged in:", user);
+        // Redirect or update state as needed
+      } catch (error) {
+        console.error("Error logging in:", error.message);
+        // Handle error (e.g., display error message to the user)
+      }
     },
   });
 
