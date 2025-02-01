@@ -21,10 +21,9 @@ import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 function App() {
   return (
     <>
-      <Login />
+      <Register />
     </>
   );
 }
-
 
 export default App;

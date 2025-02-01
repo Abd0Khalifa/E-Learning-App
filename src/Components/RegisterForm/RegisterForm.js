@@ -4,9 +4,12 @@ import * as Yup from "yup";
 import TextInput from "../../Components/TextInput/TextInput";
 import PasswordInput from "../../Components/PasswordInput/PasswordInput";
 import CheckboxInput from "../../Components/CheckboxInput/CheckboxInput";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const RegisterForm = () => {
-  // Validation schema using Yup
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .required("First Name is required")
@@ -26,13 +29,15 @@ const RegisterForm = () => {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
+    role: Yup.string()
+      .required("Role is required")
+      .oneOf(["student", "instructor"], "Invalid role selected"),
     agreeTerms: Yup.boolean().oneOf(
       [true],
       "You must agree to the terms and conditions"
     ),
   });
 
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -40,19 +45,51 @@ const RegisterForm = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      role: "",
       agreeTerms: false,
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Registration Form Data:", values);
-      // Add your registration logic here
+    onSubmit: async (values) => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const user = userCredential.user;
+        const userData = {
+          uid: user.uid,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          role: values.role,
+          createdAt: new Date().toISOString(),
+        };
+
+        await setDoc(doc(db, "users", user.uid), userData);
+
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful",
+          text: "You have been successfully registered!",
+        });
+
+        // Optionally, redirect the user to another page (e.g., login or dashboard)
+      } catch (error) {
+        console.error("Error registering user:", error.message);
+
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: error.message,
+        });
+      }
     },
   });
 
   return (
-    <form className="space-y-4" onSubmit={formik.handleSubmit} noValidate>
-      {/* First Name and Last Name */}
-      <div className="grid grid-cols-2 gap-4">
+    <form className="space-y-4 " onSubmit={formik.handleSubmit} noValidate>
+      <div className="grid grid-cols-2 gap-4 ">
         <div>
           <TextInput
             label="First Name"
@@ -60,7 +97,10 @@ const RegisterForm = () => {
             placeholder="John"
             name="firstName"
             value={formik.values.firstName}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              formik.setFieldTouched("firstName", true, false);
+            }}
             onBlur={formik.handleBlur}
           />
           {formik.touched.firstName && formik.errors.firstName && (
@@ -76,7 +116,10 @@ const RegisterForm = () => {
             placeholder="Doe"
             name="lastName"
             value={formik.values.lastName}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              formik.setFieldTouched("lastName", true, false);
+            }}
             onBlur={formik.handleBlur}
           />
           {formik.touched.lastName && formik.errors.lastName && (
@@ -84,41 +127,46 @@ const RegisterForm = () => {
           )}
         </div>
       </div>
-
-      {/* Email Address */}
       <TextInput
         label="Email Address"
         type="email"
         placeholder="john.doe@example.com"
         name="email"
         value={formik.values.email}
-        onChange={formik.handleChange}
+        onChange={(e) => {
+          formik.handleChange(e);
+          formik.setFieldTouched("email", true, false);
+        }}
         onBlur={formik.handleBlur}
       />
       {formik.touched.email && formik.errors.email && (
         <div className="text-red-500 text-sm">{formik.errors.email}</div>
       )}
 
-      {/* Password */}
       <PasswordInput
         label="Password"
         placeholder="Create a strong password"
         name="password"
         value={formik.values.password}
-        onChange={formik.handleChange}
+        onChange={(e) => {
+          formik.handleChange(e);
+          formik.setFieldTouched("password", true, false);
+        }}
         onBlur={formik.handleBlur}
       />
       {formik.touched.password && formik.errors.password && (
         <div className="text-red-500 text-sm">{formik.errors.password}</div>
       )}
 
-      {/* Confirm Password */}
       <PasswordInput
         label="Confirm Password"
         placeholder="Confirm your password"
         name="confirmPassword"
         value={formik.values.confirmPassword}
-        onChange={formik.handleChange}
+        onChange={(e) => {
+          formik.handleChange(e);
+          formik.setFieldTouched("confirmPassword", true, false);
+        }}
         onBlur={formik.handleBlur}
       />
       {formik.touched.confirmPassword && formik.errors.confirmPassword && (
@@ -127,7 +175,29 @@ const RegisterForm = () => {
         </div>
       )}
 
-      {/* Agree to Terms */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Role
+        </label>
+        <select
+          name="role"
+          value={formik.values.role}
+          onChange={(e) => {
+            formik.handleChange(e);
+            formik.setFieldTouched("role", true, false);
+          }}
+          onBlur={formik.handleBlur}
+          className="w-full p-2 border border-gray-300 rounded-md modern-input"
+        >
+          <option value="">Select Role</option>
+          <option value="student">Student</option>
+          <option value="instructor">Instructor</option>
+        </select>
+        {formik.touched.role && formik.errors.role && (
+          <div className="text-red-500 text-sm">{formik.errors.role}</div>
+        )}
+      </div>
+
       <CheckboxInput
         label="I agree to the Terms of Service and Privacy Policy"
         name="agreeTerms"
@@ -139,8 +209,6 @@ const RegisterForm = () => {
       {formik.touched.agreeTerms && formik.errors.agreeTerms && (
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
-
-      {/* Submit Button */}
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"

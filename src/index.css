@@ -1557,3 +1557,7 @@ section {
 .eye-butt {
   top: 31% !important;
 }
+.login-box {
+  max-width: 600px;
+  margin: auto;
+}
