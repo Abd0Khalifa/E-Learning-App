@@ -4,7 +4,7 @@ import { db, auth } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
 import { onAuthStateChanged } from "firebase/auth";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
 import "./AddCourse.css";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
 import InstractorHeaderProfile from "../../Components/InstractorHeaderProfile/InstractorHeaderProfile";
@@ -17,7 +17,6 @@ import ActionButtons from "../../Components/ActionButtons/ActionButtons";
 const AddCourse = () => {
   const dispatch = useDispatch();
 
-  // Ensure Redux persists auth state on page refresh
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -35,7 +34,6 @@ const AddCourse = () => {
     return () => unsubscribe();
   }, [dispatch]);
 
-  // Get the logged-in instructor's UID from Redux
   const instructorId = useSelector((state) => state.auth.user?.uid);
 
   const [courseData, setCourseData] = useState({
@@ -45,7 +43,7 @@ const AddCourse = () => {
     level: "",
     price: 0,
     youtubeLinks: [],
-    imageBase64: "", // Store Base64 Image
+    imageBase64: "",
   });
 
   const handleBasicInfoChange = (field, value) => {
@@ -76,24 +74,18 @@ const AddCourse = () => {
       if (!instructorId) {
         throw new Error("No instructor logged in.");
       }
-
-      // Add course data to Firestore
       await addDoc(collection(db, "courses"), {
         ...courseData,
         instructorId,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       });
-
-      // Show SweetAlert success message
       Swal.fire({
         icon: "success",
         title: "Course Added Successfully!",
         text: "Your course has been successfully added to the platform.",
         confirmButtonText: "OK",
       });
-
-      // Reset form
       setCourseData({
         title: "",
         description: "",
@@ -105,8 +97,6 @@ const AddCourse = () => {
       });
     } catch (error) {
       console.error("Error saving course:", error);
-
-      // Show SweetAlert error message
       Swal.fire({
         icon: "error",
         title: "Failed to Add Course",
@@ -125,8 +115,6 @@ const AddCourse = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               <BasicInformation onChange={handleBasicInfoChange} />
-
-              {/* Image Upload Input */}
               <div>
                 <label className="block text-sm font-medium text-gray-300">
                   Upload Course Image

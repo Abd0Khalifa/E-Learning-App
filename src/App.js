@@ -23,7 +23,8 @@ function App() {
     <>
       {/* <Login /> */}
       {/* <Register /> */}
-      <AddCourse />
+      <ManageCourses />
+      {/* <AddCourse /> */}
     </>
   );
 }
