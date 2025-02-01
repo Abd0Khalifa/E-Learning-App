@@ -20,7 +20,11 @@ const CourseItem = ({ course, onDelete }) => {
         Swal.fire("Deleted!", "Your course has been deleted.", "success");
         onDelete(course.id);
       } catch (error) {
-        Swal.fire("Error!", `Failed to delete course: ${error.message}`, "error");
+        Swal.fire(
+          "Error!",
+          `Failed to delete course: ${error.message}`,
+          "error"
+        );
         console.error("Delete Error:", error);
       }
     }
@@ -29,7 +33,6 @@ const CourseItem = ({ course, onDelete }) => {
   return (
     <div className="glass-card p-6">
       <div className="flex flex-col md:flex-row items-start gap-6">
-        
         {/* Course Image */}
         <div className="w-full md:w-64 flex-shrink-0">
           {course.imageBase64 ? (
