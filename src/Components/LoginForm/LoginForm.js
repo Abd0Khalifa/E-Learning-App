@@ -5,10 +5,11 @@ import TextInput from "../TextInput/TextInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import CheckboxInput from "../CheckboxInput/CheckboxInput";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase.js"; 
+import { auth } from "../../firebase.js";
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
-  // Validation schema using Yup
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .required("Email is required")
@@ -20,7 +21,6 @@ const LoginForm = () => {
     rememberMe: Yup.boolean(),
   });
 
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,6 +28,8 @@ const LoginForm = () => {
       rememberMe: false,
     },
     validationSchema,
+    validateOnChange: true, 
+    validateOnBlur: true, 
     onSubmit: async (values) => {
       try {
         const userCredential = await signInWithEmailAndPassword(
@@ -37,44 +39,54 @@ const LoginForm = () => {
         );
         const user = userCredential.user;
         console.log("User logged in:", user);
-        // Redirect or update state as needed
+
       } catch (error) {
         console.error("Error logging in:", error.message);
-        // Handle error (e.g., display error message to the user)
+
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: error.message,
+        });
       }
     },
   });
 
   return (
     <form className="space-y-4" onSubmit={formik.handleSubmit}>
-      {/* Email Input */}
+
       <TextInput
         label="Email Address"
         type="email"
         placeholder="Enter your email"
         name="email"
         value={formik.values.email}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        onChange={(e) => {
+          formik.handleChange(e); 
+          formik.setFieldTouched("email", true, false); 
+        }}
+        onBlur={formik.handleBlur} 
       />
       {formik.touched.email && formik.errors.email && (
         <div className="text-red-500 text-sm">{formik.errors.email}</div>
       )}
 
-      {/* Password Input */}
+    
       <PasswordInput
         label="Password"
         placeholder="Enter your password"
         name="password"
         value={formik.values.password}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        onChange={(e) => {
+          formik.handleChange(e);
+          formik.setFieldTouched("password", true, false); 
+        }}
+        onBlur={formik.handleBlur} 
       />
       {formik.touched.password && formik.errors.password && (
         <div className="text-red-500 text-sm">{formik.errors.password}</div>
       )}
 
-      {/* Remember Me Checkbox */}
       <CheckboxInput
         label="Remember me"
         name="rememberMe"
@@ -82,7 +94,7 @@ const LoginForm = () => {
         onChange={formik.handleChange}
       />
 
-      {/* Submit Button */}
+  
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"

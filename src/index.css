@@ -1554,3 +1554,6 @@ section {
   position: relative;
   overflow: hidden;
 }
+.eye-butt {
+  top: 31% !important;
+}

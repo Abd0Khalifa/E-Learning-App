@@ -29,7 +29,7 @@ const PasswordInput = ({
         />
         <button
           type="button"
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-main-color"
+          className="eye-butt absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-main-color"
           onClick={togglePasswordVisibility}
         >
           <i className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
