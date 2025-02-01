@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./Pages/Home/Home";
@@ -21,7 +22,16 @@ import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 function App() {
   return (
     <>
-      <Home />
+      <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/sDashboard" element={<StudentDashboardPage />} />
+        
+      </Routes>
+    </Router>
     </>
   );
 }

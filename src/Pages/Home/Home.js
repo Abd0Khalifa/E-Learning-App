@@ -6,6 +6,7 @@ import Journey from "../../Components/Journey/Journey";
 import Ready from "../../Components/Ready/Ready";
 import FeaturedCourses from "../../Components/FeaturedCourses/FeaturedCourses";
 import NavBar from "../../Components/NavBar/NavBar";
+import Footer from "../../Components/Footer/Footer";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <FeaturedCourses />
       <Journey />
       <Ready />
+      <Footer/>
     </>
   );
 };
