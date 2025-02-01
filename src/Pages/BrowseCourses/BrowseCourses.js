@@ -3,6 +3,7 @@ import "./BrowseCourses.css";
 import CourseCard from "../../Components/CourseCard/CourseCard";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
+import SearchInput from "../../Components/SearchInput/SearchInput";
 
 const coursesData = [
   {
@@ -88,15 +89,8 @@ const BrowseCourses = () => {
             <div className="flex flex-col md:flex-row gap-6">
               {/* Search Bar */}
               <div className="flex-1 relative">
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  className="modern-input py-3 pl-12 pr-4 w-full"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-              </div>
+              <SearchInput />
+                </div>
               {/* Filter Options */}
               <div className="flex flex-wrap gap-4">
                 <select

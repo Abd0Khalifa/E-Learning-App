@@ -4,6 +4,7 @@ import InstractorHeaderProfile from "../../Components/InstractorHeader/Instracto
 import ProgressOverviewCard from "../../Components/ProgressOverviewCard/ProgressOverviewCard";
 import StudentProgressRow from "../../Components/StudentProgressRow/StudentProgressRow";
 import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
+import SearchInput from "../../Components/SearchInput/SearchInput";
 
 const StudentProgress = () => {
   // Sample data for progress overview
@@ -46,14 +47,7 @@ const StudentProgress = () => {
           <div className="glass-card p-6 mb-8">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search students..."
-                    className="modern-input py-2 pl-10 pr-4"
-                  />
-                  <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                </div>
+               <SearchInput />
                 <select className="modern-input py-2">
                   <option value="">All Courses</option>
                   <option value="web-dev">Web Development</option>

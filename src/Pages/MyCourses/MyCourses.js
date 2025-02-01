@@ -3,6 +3,8 @@ import "./MyCourses.css";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
 import CourseCard from "../../Components/CourseCard/CourseCard";
 import StudentHeader from "../../Components/StudentHeader/StudentHeader";
+import SearchInput from "../../Components/SearchInput/SearchInput";
+
 
 const courses = [
   {
@@ -60,14 +62,7 @@ const MyCourses = () => {
                   Completed
                 </button>
               </div>
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  className="modern-input py-2 pl-10 pr-4"
-                />
-                <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-              </div>
+            <SearchInput />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

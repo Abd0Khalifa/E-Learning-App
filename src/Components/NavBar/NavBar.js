@@ -32,7 +32,7 @@ const NavBar = () => {
                     className="w-8 h-8 rounded-full border border-gray-300"
                   />
                   </Link>
-                 
+                
                   <span className="text-white hidden md:block">Hello, {user.name}</span>
                   <button
                     className="outline-button-sm"

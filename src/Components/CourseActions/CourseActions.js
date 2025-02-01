@@ -1,4 +1,5 @@
 import React from "react";
+import SearchInput from "../SearchInput/SearchInput";
 
 const CourseActions = () => {
   return (
@@ -18,14 +19,7 @@ const CourseActions = () => {
             Sort
           </button>
         </div>
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search courses..."
-            className="modern-input py-2 pl-10 pr-4"
-          />
-          <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-        </div>
+        <SearchInput />
       </div>
     </div>
   );
