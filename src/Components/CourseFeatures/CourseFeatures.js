@@ -30,10 +30,10 @@ function CourseFeatures() {
             value="Yes"
           />
         </ul>
-        {/* <Link to={"/checkout"} className="gradient-button w-full mb-4">
+        <Link to={"/checkout"} className="gradient-button w-full mb-4">
           <FontAwesomeIcon icon={faPaypal} />
           checkout Now
-        </Link> */}
+        </Link>
        
       </div>
     </div>
