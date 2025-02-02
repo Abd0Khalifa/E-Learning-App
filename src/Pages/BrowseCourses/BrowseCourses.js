@@ -12,40 +12,36 @@ const BrowseCourses = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
 
-  // دالة البحث الفوري
   const handleSearch = async () => {
     try {
       let q = query(collection(db, "courses"));
 
-      // تصفية حسب العنوان
       if (search) {
         q = query(q, where("title", ">=", search), where("title", "<=", search + "\uf8ff"));
       }
 
-      // تصفية حسب الفئة (إذا تم اختيار فئة)
       if (category) {
         q = query(q, where("category", "==", category));
       }
 
-      // تصفية حسب السعر
       if (price) {
         if (price === "free") {
-          q = query(q, where("price", "==", 0)); // إذا كان السعر مجاني
+          q = query(q, where("price", "==", 0)); 
         } else if (price === "paid") {
-          q = query(q, where("price", ">", 0)); // إذا كان السعر مدفوع
+          q = query(q, where("price", ">", 0)); 
         }
       }
 
-      console.log("Current Category:", category); // طباعة قيمة الفئة
-      console.log("Query:", q); // طباعة الاستعلام
+      console.log("Current Category:", category); 
+      console.log("Query:", q); 
 
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
         const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        console.log("Fetched Courses:", coursesData); // طباعة البيانات التي تم جلبها
+        console.log("Fetched Courses:", coursesData); 
         setCourses(coursesData);
       } else {
-        console.log("No courses found"); // إذا لم يتم العثور على نتائج
+        console.log("No courses found"); 
         setCourses([]);
       }
     } catch (error) {
@@ -53,7 +49,6 @@ const BrowseCourses = () => {
     }
   };
 
-  // عند تغيير أي من عوامل التصفية (العنوان، الفئة، السعر)، قم بالبحث الفوري
   useEffect(() => {
     handleSearch();
   }, [search, category, price]);
@@ -67,11 +62,9 @@ const BrowseCourses = () => {
             <div className="glass-card p-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1 relative">
-                  {/* حقل البحث عن العنوان */}
                   <SearchInput value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <div className="flex flex-wrap gap-4">
-                  {/* تصفية حسب الفئة */}
                   <select
                     className="modern-input py-3"
                     value={category}
@@ -84,7 +77,6 @@ const BrowseCourses = () => {
                     <option value="ai-ml">AI & ML</option>
                   </select>
 
-                  {/* تصفية حسب السعر */}
                   <select
                     className="modern-input py-3"
                     value={price}
