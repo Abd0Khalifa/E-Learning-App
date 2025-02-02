@@ -10,14 +10,13 @@ import { auth } from "../../firebase.js";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
-import { useNavigate } from "react-router-dom"; // Enable navigation
+import { useNavigate } from "react-router-dom"; // ✅ استخدم التنقل
 
 import { Link } from "react-router-dom";
 
-
 const LoginForm = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate(); // ✅ تفعيل التنقل
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -76,7 +75,8 @@ const LoginForm = () => {
           title: "Login Successful",
           text: "You have been successfully logged in!",
         });
-        // navigate("/dashboard");
+
+        navigate("/"); 
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -88,7 +88,7 @@ const LoginForm = () => {
   });
 
   return (
-    <form className="space-y-4" onSubmit={formik.handleSubmit}>
+    <form className="space-y-4" onSubmit={formik.handleSubmit} noValidate>
       <TextInput
         label="Email Address"
         type="email"
@@ -121,7 +121,7 @@ const LoginForm = () => {
         onChange={formik.handleChange}
       />
 
-      <br/>
+      <br />
 
       <Link to="/signup" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
         I don't have an account yet

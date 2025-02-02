@@ -1,23 +1,29 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 
+const SearchInput = ({ onChange, onSearch }) => {
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSearch();
+    }
+  };
 
-const SearchInput = () => {
-    return (
-        <>
-            <div className="relative flex-1 md:flex-none">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="modern-input py-2 pl-4 pr-10 w-full"
-                />
-                <FontAwesomeIcon
-                    icon={faSearch}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                />
-            </div>
-        </>
-    );
+  return (
+    <div className="relative">
+      <input
+        type="text"
+        className="modern-input w-full"
+        placeholder="Search courses..."
+        onChange={onChange}
+        onKeyPress={handleKeyPress}
+      />
+      <button
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-main-color"
+        onClick={onSearch}
+      >
+        <i className="fas fa-search"></i>
+      </button>
+    </div>
+  );
 };
 
 export default SearchInput;
