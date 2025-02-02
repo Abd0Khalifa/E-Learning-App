@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy, limit, startAfter } from "firebase/firestore";
 import { db } from "../../firebase";
 import CourseCard from "../../Components/CourseCard/CourseCard";
 import NavBar from "../../Components/NavBar/NavBar";
@@ -11,8 +11,13 @@ const BrowseCourses = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
+  const [lastVisible, setLastVisible] = useState(null); // Track the last document for pagination
+  const [page, setPage] = useState(1); // Current page
+  const [totalPages, setTotalPages] = useState(1); // Total number of pages
+  const coursesPerPage = 4; // Number of courses per page
 
-  const handleSearch = async () => {
+  // Fetch total number of courses for pagination
+  const fetchTotalCourses = async () => {
     try {
       let q = query(collection(db, "courses"));
 
@@ -26,32 +31,71 @@ const BrowseCourses = () => {
 
       if (price) {
         if (price === "free") {
-          q = query(q, where("price", "==", 0)); 
+          q = query(q, where("price", "==", 0));
         } else if (price === "paid") {
-          q = query(q, where("price", ">", 0)); 
+          q = query(q, where("price", ">", 0));
         }
       }
 
-      console.log("Current Category:", category); 
-      console.log("Query:", q); 
-
       const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        console.log("Fetched Courses:", coursesData); 
-        setCourses(coursesData);
-      } else {
-        console.log("No courses found"); 
-        setCourses([]);
-      }
+      const totalCourses = querySnapshot.size;
+      setTotalPages(Math.ceil(totalCourses / coursesPerPage)); // Calculate total pages
     } catch (error) {
-      console.error("Error searching courses:", error);
+      console.error("Error fetching total courses:", error);
     }
   };
 
+  // Fetch courses for the current page
+  const fetchCourses = async () => {
+    try {
+      let q = query(collection(db, "courses"), orderBy("title"), limit(coursesPerPage));
+
+      if (search) {
+        q = query(q, where("title", ">=", search), where("title", "<=", search + "\uf8ff"), orderBy("title"), limit(coursesPerPage));
+      }
+
+      if (category) {
+        q = query(q, where("category", "==", category), orderBy("title"), limit(coursesPerPage));
+      }
+
+      if (price) {
+        if (price === "free") {
+          q = query(q, where("price", "==", 0), orderBy("title"), limit(coursesPerPage));
+        } else if (price === "paid") {
+          q = query(q, where("price", ">", 0), orderBy("title"), limit(coursesPerPage));
+        }
+      }
+
+      // Handle pagination
+      if (page > 1 && lastVisible) {
+        q = query(q, startAfter(lastVisible));
+      }
+
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]); // Update last visible document
+        const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setCourses(coursesData);
+      } else {
+        setCourses([]);
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
+  // Handle page change
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+    }
+  };
+
+  // Fetch courses and total pages when filters or page change
   useEffect(() => {
-    handleSearch();
-  }, [search, category, price]);
+    fetchTotalCourses();
+    fetchCourses();
+  }, [search, category, price, page]);
 
   return (
     <>
@@ -104,6 +148,27 @@ const BrowseCourses = () => {
             </div>
           </div>
         </section>
+
+        {/* Pagination */}
+        <div className="flex justify-center mt-12">
+          <button
+            className="outline-button-sm"
+            onClick={() => handlePageChange(page - 1)}
+            disabled={page === 1}
+          >
+            <i className="fas fa-chevron-left"></i> Prev
+          </button>
+          <span className="px-4 py-2">
+            Page {page} of {totalPages}
+          </span>
+          <button
+            className="outline-button-sm"
+            onClick={() => handlePageChange(page + 1)}
+            disabled={page === totalPages}
+          >
+            Next <i className="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </main>
       <Footer />
     </>
