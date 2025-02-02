@@ -18,7 +18,11 @@ function CourseDetails() {
                     <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
                         <div className="grid md:grid-cols-3 gap-12">
                             <div className="md:col-span-2">
-                                <WhatYouLearn skill1={"gjkdhks"} skill2={"jdhksjdh"} skill3={"djshfs"} skill4={"ksjdfadjfgaj"} />
+                                <WhatYouLearn 
+                                skill1={"gjkdhks"} 
+                                skill2={"jdhksjdh"} 
+                                skill3={"djshfs"} 
+                                skill4={"ksjdfadjfgaj"} />
                                 <CourseContent />
                                 <Requirements />
 
