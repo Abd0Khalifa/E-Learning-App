@@ -1,5 +1,6 @@
 import {
   faCertificate,
+  faCheck,
   faClock,
   faPuzzlePiece,
   faShoppingCart,
@@ -7,6 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CourseFeatureItem from "../CourseFeatureItem/CourseFeatureItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaypal } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 function CourseFeatures() {
   return (
@@ -27,13 +30,11 @@ function CourseFeatures() {
             value="Yes"
           />
         </ul>
-        <button className="gradient-button w-full mb-4">
-          <FontAwesomeIcon icon={faShoppingCart} />
-          Enroll Now - $49.99
-        </button>
-        <p className="text-center text-sm text-gray-400">
-          30-day money-back guarantee
-        </p>
+        {/* <Link to={"/checkout"} className="gradient-button w-full mb-4">
+          <FontAwesomeIcon icon={faPaypal} />
+          checkout Now
+        </Link> */}
+       
       </div>
     </div>
   );
