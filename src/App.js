@@ -18,6 +18,7 @@ import AddCourse from "./Pages/AddCourse/AddCourse.js";
 import Register from "./Pages/Register/Register.js";
 import ManageCourses from "./Pages/ManageCourses/ManageCourses.js";
 import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
+import Checkout from "./Pages/Checkout/Checkout.js";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/myCourses" element={<MyCourses />} />
         <Route path="/sProfile" element={<StudentProfilePage />} />
         <Route path="/sProgress" element={<StudentProgress />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
 
