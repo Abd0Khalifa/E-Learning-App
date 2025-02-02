@@ -47,6 +47,7 @@ const AddCourse = () => {
       price: 0,
       youtubeLinks: [],
       imageBase64: "",
+      Duration: "", // Added Course Duration
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Course title is required"),
@@ -58,6 +59,9 @@ const AddCourse = () => {
         .min(0, "Price cannot be negative"),
       youtubeLinks: Yup.array().of(Yup.string().url("Invalid YouTube URL")),
       imageBase64: Yup.string().required("Course image is required"),
+      Duration: Yup.string()
+        .required("Course duration is required")
+        .matches(/^\d+\s?(weeks|days|months|hours)?$/, "Invalid duration format"), 
     }),
     onSubmit: async (values) => {
       try {
@@ -119,6 +123,28 @@ const AddCourse = () => {
                   errors={formik.errors}
                   touched={formik.touched}
                 />
+
+                {/* Course Duration Input */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-300">
+                    Course Duration (e.g., "12 weeks", "3 months")
+                  </label>
+                  <input
+                    type="text"
+                    className="modern-input"
+                    value={formik.values.Duration}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    name="Duration"
+                  />
+                  {formik.errors.Duration && formik.touched.Duration && (
+                    <div className="text-red-500 text-sm">
+                      {formik.errors.Duration}
+                    </div>
+                  )}
+                </div>
+
+                {/* Upload Course Image */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300">
                     Upload Course Image
