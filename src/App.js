@@ -32,7 +32,7 @@ function App() {
         <Route path="/sDashboard" element={<StudentDashboardPage />} />
         <Route path="/addCourse" element={<AddCourse />} />
         <Route path="/browseCourses" element={<BrowseCourses />} />
-        <Route path="/courseDetails" element={<CourseDetails />} />
+        <Route path="/courseDetails/:id" element={<CourseDetails />} />
         <Route path="/iDashboard" element={<InstractorDashboardPage />} />
         <Route path="/iProfile" element={<InstractorProfilePage />} />
         <Route path="/manageCourses" element={<ManageCourses />} />

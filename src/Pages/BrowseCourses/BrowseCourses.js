@@ -96,6 +96,7 @@ const BrowseCourses = () => {
     fetchTotalCourses();
     fetchCourses();
   }, [search, category, price, page]);
+  
 
   return (
     <>
@@ -143,7 +144,10 @@ const BrowseCourses = () => {
               {courses.length > 0 ? (
                 courses.map((course) => <CourseCard key={course.id} course={course} />)
               ) : (
-                <p>No courses found</p>
+               
+                      <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
+                 
+               
               )}
             </div>
           </div>
