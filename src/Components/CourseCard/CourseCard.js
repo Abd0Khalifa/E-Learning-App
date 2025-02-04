@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./CourseCard.css";
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course,title }) => {
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }
@@ -42,7 +42,7 @@ const CourseCard = ({ course }) => {
             {course.oldPrice && <span className="text-gray-400 line-through text-sm ml-2">${course.oldPrice}</span>}
           </div>
           <Link to={`/courseDetails/${course.id}`} className="outline-button-sm">
-            <i className="fas fa-shopping-cart"></i> Show Details
+             {title}
           </Link>
         </div>
       </div>
