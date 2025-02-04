@@ -10,13 +10,13 @@ import { auth } from "../../firebase.js";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
-import { useNavigate } from "react-router-dom"; // ✅ استخدم التنقل
+import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // ✅ تفعيل التنقل
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -76,7 +76,7 @@ const LoginForm = () => {
           text: "You have been successfully logged in!",
         });
 
-        navigate("/"); 
+        navigate("/");
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -123,7 +123,10 @@ const LoginForm = () => {
 
       <br />
 
-      <Link to="/signup" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
+      <Link
+        to="/signup"
+        className="text-sm text-white-500 hover:text-blue-600 transition duration-300"
+      >
         I don't have an account yet
       </Link>
 

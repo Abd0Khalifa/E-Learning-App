@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const InstractorDashboardCoursePerformance = () => {
   return (
@@ -12,7 +12,10 @@ const InstractorDashboardCoursePerformance = () => {
             <span className="text-main-color">500 students</span>
           </div>
           <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-main-color to-purple-500 rounded-full" style={{ width: '85%' }}></div>
+            <div
+              className="h-full bg-gradient-to-r from-main-color to-purple-500 rounded-full"
+              style={{ width: "85%" }}
+            ></div>
           </div>
         </div>
         {/* Course 2 */}
@@ -22,7 +25,10 @@ const InstractorDashboardCoursePerformance = () => {
             <span className="text-main-color">350 students</span>
           </div>
           <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-main-color to-purple-500 rounded-full" style={{ width: '65%' }}></div>
+            <div
+              className="h-full bg-gradient-to-r from-main-color to-purple-500 rounded-full"
+              style={{ width: "65%" }}
+            ></div>
           </div>
         </div>
         {/* Course 3 */}
@@ -32,7 +38,10 @@ const InstractorDashboardCoursePerformance = () => {
             <span className="text-main-color">250 students</span>
           </div>
           <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-main-color to-purple-500 rounded-full" style={{ width: '45%' }}></div>
+            <div
+              className="h-full bg-gradient-to-r from-main-color to-purple-500 rounded-full"
+              style={{ width: "45%" }}
+            ></div>
           </div>
         </div>
       </div>

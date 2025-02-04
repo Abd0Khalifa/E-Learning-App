@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../firebase"; //
+import { auth, db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 const InstractorDashboardWelcomeSection = () => {
   const [userName, setUserName] = useState("");
