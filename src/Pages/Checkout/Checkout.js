@@ -1,5 +1,5 @@
 // CheckoutPage.js
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import { db } from "../../firebase";
+import { useSelector, useDispatch } from "react-redux";
 
 function Checkout() {
     const getCourseDetails = async (id) => {
@@ -27,6 +28,8 @@ function Checkout() {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
 
+    const user = useSelector((state) => state.auth.user);
+
     useEffect(() => {
         const fetchData = async () => {
             const data = await getCourseDetails(id);
@@ -44,6 +47,30 @@ function Checkout() {
         );
     }
 
+    const handlePaymentSuccess = async (details) => {
+        Swal.fire({
+            title: "✅ Payment Successful!",
+            text: `Thank you, ${details.payer.name.given_name}. Your payment was successful.`,
+            icon: "success",
+            confirmButtonText: "OK",
+        });
+
+        if (user && user.uid) {
+            try {
+                const paymentRef = doc(db, "enrollments", `${user.uid}_${id}`);
+                await setDoc(paymentRef, {
+                    uid: user.uid,
+                    courseId: id,
+                    courseTitle: course.title,
+                    price: course.price,
+                    paymentDate: new Date(),
+                });
+                console.log("Enrollment successfully saved in Firebase!");
+            } catch (error) {
+                console.error("Error saving enrollment data:", error);
+            }
+        }
+    };
 
     return (
         <>
@@ -79,14 +106,7 @@ function Checkout() {
                                     });
                                 }}
                                 onApprove={(data, actions) => {
-                                    return actions.order.capture().then((details) => {
-                                        Swal.fire({
-                                            title: "✅ Payment Successful!",
-                                            text: `Thank you, ${details.payer.name.given_name}. Your payment was successful.`,
-                                            icon: "success",
-                                            confirmButtonText: "OK",
-                                        });
-                                    });
+                                    return actions.order.capture().then(handlePaymentSuccess);
                                 }}
                                 onError={() => {
                                     Swal.fire({
