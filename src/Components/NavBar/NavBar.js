@@ -70,7 +70,7 @@ const NavBar = () => {
               {isLoggedIn ? (
                 <div className="flex items-center gap-3">
                   <Link
-                    className="flex items-center gap-2 border border-gray-300 py-1 px-3 rounded-2xl"
+                    className="hidden md:flex flex items-center gap-2 border border-gray-300 py-1 px-3 rounded-2xl"
                     to={user.role === "student" ? "/sProfile" : "/iProfile"}
                   >
                     <img
@@ -87,7 +87,8 @@ const NavBar = () => {
                     className="hidden md:block gradient-button-sm"
                     to={user.role === "student" ? "/sDashboard" : "/iDashboard"}
                   >
-                    Dashboard
+                    <i className="fa-solid fa-gauge"></i>
+                    <span className="hidden md:flex"> Dashboard</span>
                   </Link>
                   <button className="outline-button-sm" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} />
