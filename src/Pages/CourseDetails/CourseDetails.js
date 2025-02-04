@@ -1,3 +1,4 @@
+import { doc, getDoc } from "firebase/firestore";
 import CourseContent from "../../Components/CourseContent/CourseContent";
 import CourseDetailsHero from "../../Components/CourseDetailsHero/CourseDetailsHero";
 import CourseFeatures from "../../Components/CourseFeatures/CourseFeatures";
@@ -6,9 +7,41 @@ import InstructorInfo from "../../Components/InstructorInfo/InstructorInfo";
 import NavBar from "../../Components/NavBar/NavBar";
 import Requirements from "../../Components/Requirements/Requirements";
 import WhatYouLearn from "../../Components/WhatYouLearn/WhatYouLearn";
+import { db } from "../../firebase";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 
 function CourseDetails() {
+    const getCourseDetails = async (id) => {
+        try {
+          const docRef = doc(db, "courses", id);
+          const docSnap = await getDoc(docRef);
+          
+          if (docSnap.exists()) {
+            return docSnap.data();
+          } else {
+            console.log("this course does not exist");
+          }
+        } catch (error) {
+          console.error("Error fetching course details", error);
+        }
+      };
+
+      const { id } = useParams(); 
+      const [course, setCourse] = useState(null);
+    
+      useEffect(() => {
+        const fetchData = async () => {
+          const data = await getCourseDetails(id);
+          setCourse(data);
+        };
+        
+        fetchData();
+      }, [id]);
+    
+      if (!course) return <div>Loading...</div>;
+    
     return (
         <>
         <NavBar/>
@@ -19,7 +52,7 @@ function CourseDetails() {
                         <div className="grid md:grid-cols-3 gap-12">
                             <div className="md:col-span-2">
                                 <WhatYouLearn 
-                                skill1={"gjkdhks"} 
+                                skill1={course.title} 
                                 skill2={"jdhksjdh"} 
                                 skill3={"djshfs"} 
                                 skill4={"ksjdfadjfgaj"} />
