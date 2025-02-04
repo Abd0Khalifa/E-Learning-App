@@ -184,7 +184,6 @@ const AddCourse = () => {
                   errors={formik.errors}
                   touched={formik.touched}
                 />
-                <Requirements />
                 <ActionButtons onSave={formik.handleSubmit} />
               </div>
             </div>

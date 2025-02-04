@@ -1,10 +1,12 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faStar, faUsers, faShoppingCart, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faLevelUp, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faPaypal, faTypo3 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 
-const CourseDetailsHero=({ course }) =>{
+const CourseDetailsHero = ({ course }) => {
     if (!course || typeof course !== "object") {
         return <div className="text-red-500">Error: Course data is missing</div>;
     }
@@ -19,25 +21,33 @@ const CourseDetailsHero=({ course }) =>{
                                     className="px-3 py-1 rounded-full bg-main-color/10 text-main-color text-sm">Development</span>
                                 <span className="text-gray-400">• Bestseller</span>
                             </div>
+
                             <h1 className="text-4xl md:text-5xl font-bold mb-6">{course.title}</h1>
-                            <p className="text-xl text-gray-400 mb-6">Master modern web development with hands-on projects and
-                                real-world applications.</p>
+                            <div className="flex items-center gap-2">
+                                <FontAwesomeIcon icon={faTypo3} className="text-main-color" />
+                                <span className="font-bold">Category:</span>
+                                <span className="text-gray-400">{course.category}</span>
+                            </div>
+                            <br />
+                            <span className="font-bold">Description:</span>
+                            <p className="text-xl text-gray-400 mb-6">{course.description}.</p>
                             <div className="flex items-center gap-6 mb-8">
                                 <div className="flex items-center gap-2">
-                                    <FontAwesomeIcon icon={faStar} className="text-main-color" />
-                                    <span className="font-bold">4.9</span>
-                                    <span className="text-gray-400">(2.5k reviews)</span>
+                                    <FontAwesomeIcon icon={faLevelUp} className="text-main-color" />
+                                    <span className="font-bold">Course Level:</span>
+                                    <span className="text-gray-400">{course.level}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <FontAwesomeIcon icon={faUsers} className="text-main-color" />
-                                    <span className="text-gray-400">15,000+ students</span>
+                                    <FontAwesomeIcon icon={faClock} className="text-main-color" />
+                                    <span className="font-bold">Duration:</span>
+                                    <span className="text-gray-400">{course.Duration}</span>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <button className="gradient-button">
-                                    <FontAwesomeIcon icon={faShoppingCart} className="text-white" />
-                                    Enroll Now - $49.99
-                                </button>
+                                <Link to={"/checkout"} className="gradient-button w-full">
+                                    <FontAwesomeIcon icon={faPaypal} />
+                                    checkout Now ${course.price}
+                                </Link>
                                 <button className="outline-button">
                                     <FontAwesomeIcon icon={faPlay} className="text-main-color" />
                                     Preview
@@ -45,8 +55,12 @@ const CourseDetailsHero=({ course }) =>{
                             </div>
                         </div>
                         <div className="relative flex-grow">
-                            <div className="w-full h-full aspect-video bg-gradient-to-br from-main-color/20 to-purple-500/20 rounded-xl flex items-center justify-center">
-                                <FontAwesomeIcon icon={faPenToSquare} className="text-main-color text-9xl" />
+                            <div className="rounded-xl flex items-center justify-center">
+                                <img
+                                    src={course.imageBase64}
+                                    alt={course.title}
+                                    className="w-3/4 h-auto object-cover rounded-xl"
+                                />
                             </div>
                         </div>
                     </div>
