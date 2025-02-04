@@ -42,7 +42,7 @@ const CourseCard = ({ course }) => {
             {course.oldPrice && <span className="text-gray-400 line-through text-sm ml-2">${course.oldPrice}</span>}
           </div>
           <Link to={`/courseDetails/${course.id}`} className="outline-button-sm">
-            <i className="fas fa-shopping-cart"></i> Enroll Now
+            <i className="fas fa-shopping-cart"></i> Show Details
           </Link>
         </div>
       </div>
