@@ -139,7 +139,7 @@ const BrowseCourses = () => {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {getPaginatedCourses().length > 0 ? (
                     getPaginatedCourses().map((course) => (
-                      <CourseCard key={course.id} course={course} title={"Show Details"}/>
+                      <CourseCard key={course.id} path={"courseDetails"} course={course} title={"Show Details"}/>
                     ))
                   ) : (
                     <p className="text-gray-400">No courses found</p>

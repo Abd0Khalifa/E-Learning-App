@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./CourseCard.css";
 
-const CourseCard = ({ course,title }) => {
+const CourseCard = ({ course,path, title }) => {
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }
@@ -41,7 +41,7 @@ const CourseCard = ({ course,title }) => {
             <span className="text-main-color font-bold text-2xl">${course.price || "0.00"}</span>
             {course.oldPrice && <span className="text-gray-400 line-through text-sm ml-2">${course.oldPrice}</span>}
           </div>
-          <Link to={`/courseDetails/${course.id}`} className="outline-button-sm">
+          <Link to={`/${path}/${course.id}`} className="outline-button-sm">
              {title}
           </Link>
         </div>
