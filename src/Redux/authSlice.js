@@ -4,14 +4,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null, // Store the logged-in user's data
+    user: null,
   },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload; // Set the logged-in user
+      state.user = action.payload;
     },
     clearUser: (state) => {
-      state.user = null; // Clear the logged-in user
+      state.user = null;
     },
   },
 });
