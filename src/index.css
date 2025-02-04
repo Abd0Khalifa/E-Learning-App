@@ -1568,3 +1568,6 @@ section {
     align-items: center;
   }
 }
+.w-fit {
+  width: fit-content;
+}
