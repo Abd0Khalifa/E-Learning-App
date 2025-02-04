@@ -1,8 +1,13 @@
+import React from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faStar, faUsers, faShoppingCart, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 
-function CourseDetailsHero() {
+const CourseDetailsHero=({ course }) =>{
+    if (!course || typeof course !== "object") {
+        return <div className="text-red-500">Error: Course data is missing</div>;
+    }
     return (
         <>
             <section className="relative py-16">
@@ -14,7 +19,7 @@ function CourseDetailsHero() {
                                     className="px-3 py-1 rounded-full bg-main-color/10 text-main-color text-sm">Development</span>
                                 <span className="text-gray-400">• Bestseller</span>
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6">Web Development Masterclass</h1>
+                            <h1 className="text-4xl md:text-5xl font-bold mb-6">{course.title}</h1>
                             <p className="text-xl text-gray-400 mb-6">Master modern web development with hands-on projects and
                                 real-world applications.</p>
                             <div className="flex items-center gap-6 mb-8">

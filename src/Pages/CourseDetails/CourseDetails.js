@@ -46,7 +46,7 @@ function CourseDetails() {
         <>
         <NavBar/>
             <main className="flex-grow pt-32">
-                <CourseDetailsHero />
+                <CourseDetailsHero course={course}/>
                 <section className="py-16 bg-card-dark/30">
                     <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
                         <div className="grid md:grid-cols-3 gap-12">
