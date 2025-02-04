@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchInput = ({ onChange, onSearch }) => {
+const SearchInput = ({ value, onChange, onSearch }) => {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       onSearch();
@@ -13,6 +13,7 @@ const SearchInput = ({ onChange, onSearch }) => {
         type="text"
         className="modern-input w-full"
         placeholder="Search courses..."
+        value={value}
         onChange={onChange}
         onKeyPress={handleKeyPress}
       />
