@@ -16,7 +16,7 @@ const InstractorDashboardPage = () => {
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
 
-        <div className="p-g">
+        <div className="p-5">
           <InstractorDashboardWelcomeSection />
           <InstractorDashboardStatsOverview />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
