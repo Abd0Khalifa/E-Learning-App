@@ -1,5 +1,4 @@
 import React from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faLevelUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { faPaypal, faTypo3 } from "@fortawesome/free-brands-svg-icons";

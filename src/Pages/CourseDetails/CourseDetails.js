@@ -37,6 +37,7 @@ function CourseDetails() {
       }, [id]);
     
       if (!course) return <div>Loading...</div>;
+      const youtubeLinks = course.youtubeLinks || [];
     
     return (
         <>
@@ -44,8 +45,8 @@ function CourseDetails() {
             <main className="flex-grow pt-32">
                 <CourseDetailsHero course={course}/>
 
-            
-
+                
+                
                 <InstructorInfo />
 
             </main>
