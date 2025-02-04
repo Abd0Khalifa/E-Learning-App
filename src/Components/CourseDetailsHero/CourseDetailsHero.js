@@ -54,10 +54,7 @@ const handleCheckout = () => {
                                     <FontAwesomeIcon icon={faPaypal} />
                                     checkout Now ${course.price}
                                 </Link>
-                                <button className="outline-button">
-                                    <FontAwesomeIcon icon={faPlay} className="text-main-color" />
-                                    Preview
-                                </button>
+                        
                             </div>
                         </div>
                         <div className="relative flex-grow">
