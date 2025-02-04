@@ -12,6 +12,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 
 function CourseDetails() {
+    
     const getCourseDetails = async (id) => {
         try {
             const docRef = doc(db, "courses", id);
