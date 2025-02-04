@@ -17,7 +17,7 @@ const CourseDetailsHero = ({ course }) => {
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <span
-                                    className="px-3 py-1 rounded-full bg-main-color/10 text-main-color text-sm">Development</span>
+                                    className="px-3 py-1 rounded-full bg-main-color/10 text-main-color text-sm">{course.category}</span>
                                 <span className="text-gray-400">• Bestseller</span>
                             </div>
 

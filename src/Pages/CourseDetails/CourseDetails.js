@@ -1,14 +1,12 @@
 import { doc, getDoc } from "firebase/firestore";
 import CourseDetailsHero from "../../Components/CourseDetailsHero/CourseDetailsHero";
 import Footer from "../../Components/Footer/Footer";
-import InstructorInfo from "../../Components/InstructorInfo/InstructorInfo";
 import NavBar from "../../Components/NavBar/NavBar";
 import { db } from "../../firebase";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiscourse } from "@fortawesome/free-brands-svg-icons";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -78,8 +76,6 @@ function CourseDetails() {
                         ))}
                     </div>
                 </div>
-
-                <InstructorInfo />
 
             </main>
             <Footer />
