@@ -14,7 +14,7 @@ const BrowseCourses = () => {
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(8); // عدد العناصر في كل صفحة
+  const [pageSize, setPageSize] = useState(4); // عدد العناصر في كل صفحة
 
   // جلب جميع الدورات من Firestore
   const fetchCourses = async () => {
@@ -129,7 +129,7 @@ const BrowseCourses = () => {
         {/* Display Courses */}
         <section>
           <div className="container mx-auto px-4 sm:px-6">
-            <h1 className="text-2xl font-bold mb-8">Featured Courses</h1>
+            <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">All Courses</h1>
             {loading ? (
               <div className="flex justify-center items-center h-40">
                 <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
