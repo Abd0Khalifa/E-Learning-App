@@ -12,6 +12,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 
 function CourseDetails() {
+    
     const getCourseDetails = async (id) => {
         try {
             const docRef = doc(db, "courses", id);
@@ -54,29 +55,7 @@ function CourseDetails() {
             <main className="flex-grow pt-32">
                 <CourseDetailsHero course={course} />
 
-                <div className="p-8 mb-8">
-                                    
-                <h1 className="text-2xl font-bold mb-8 text-main-color text-center">
-                <FontAwesomeIcon icon={faBook} className="text-main-color" /> Course Content</h1>
-                    <h3 className="text-xl font-bold mb-4">All Videos: {youtubeLinks.length}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {youtubeLinks.map((url, index) => (
-                            <div
-                                key={index}
-                                className="transition-transform transform hover:scale-105 hover:shadow-lg p-4 rounded-lg shadow-md"
-                            >
-                                <h4 className="text-lg font-semibold mb-2 text-gray-400">Video {index + 1}</h4>
-                                <ReactPlayer
-                                    url={url}
-                                    width="100%"
-                                    height="auto"
-                                    controls={true}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
+             
             </main>
             <Footer />
         </>

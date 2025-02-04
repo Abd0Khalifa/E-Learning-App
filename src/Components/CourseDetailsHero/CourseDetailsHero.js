@@ -2,10 +2,17 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faLevelUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { faPaypal, faTypo3 } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 const CourseDetailsHero = ({ course }) => {
+    const navigate = useNavigate();
+        const { id } = useParams();
+    
+const handleCheckout = () => {
+
+    navigate(`/checkout/${id}`, { state: { courseId: id, courseName: course.name } });
+};
     if (!course || typeof course !== "object") {
         return <div className="text-red-500">Error: Course data is missing</div>;
     }
@@ -43,14 +50,11 @@ const CourseDetailsHero = ({ course }) => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <Link to={"/checkout"} className="gradient-button w-full">
+                                <Link onClick={handleCheckout()} className="gradient-button w-full">
                                     <FontAwesomeIcon icon={faPaypal} />
                                     checkout Now ${course.price}
                                 </Link>
-                                <button className="outline-button">
-                                    <FontAwesomeIcon icon={faPlay} className="text-main-color" />
-                                    Preview
-                                </button>
+                        
                             </div>
                         </div>
                         <div className="relative flex-grow">
