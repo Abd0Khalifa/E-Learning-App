@@ -62,9 +62,9 @@ const NavBar = () => {
         <div className="container mx-auto px-6">
           <nav className="flex items-center justify-between h-20">
             <div className="flex items-center gap-2">
-              <div className="text-3xl font-black gradient-text">
+              <Link to="/" className="text-3xl font-black gradient-text">
                 SkillStack
-              </div>
+              </Link>
             </div>
             <div className="flex items-center gap-4">
               {isLoggedIn ? (
