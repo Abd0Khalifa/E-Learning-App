@@ -136,8 +136,6 @@ const AddCourse = () => {
                   errors={formik.errors || {}}
                   touched={formik.touched || {}}
                 />
-
-                {/* Course Duration Input */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-300">
                     Course Duration (e.g., "12 weeks", "3 months")
@@ -156,8 +154,6 @@ const AddCourse = () => {
                     </div>
                   )}
                 </div>
-
-                {/* Upload Course Image */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300">
                     Upload Course Image
@@ -181,7 +177,6 @@ const AddCourse = () => {
                     />
                   )}
                 </div>
-
                 <CourseContent
                   onContentChange={(youtubeLinks) =>
                     formik.setFieldValue("youtubeLinks", youtubeLinks)
@@ -190,7 +185,6 @@ const AddCourse = () => {
                   touched={formik.touched}
                 />
               </div>
-
               <div className="space-y-8">
                 <CourseSettings
                   onChange={(price) => formik.setFieldValue("price", price)}
