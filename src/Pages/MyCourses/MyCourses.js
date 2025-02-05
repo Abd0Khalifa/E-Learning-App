@@ -1,25 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import CourseCard from "../../Components/CourseCard/CourseCard";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 
 const MyCourses = () => {
-  const [courses, setCourses] = useState([]); // جميع الدورات المسترجعة
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(4); // عدد العناصر في كل صفحة
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
 
-  // جلب جميع الدورات من Firestore
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUserId(firebaseUser.uid);
+        console.log("User ID:", firebaseUser.uid);
+      } else {
+        setUserId(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, "courses"));
-      if (!querySnapshot.empty) {
-        const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setCourses(coursesData);
+      if (!userId) {
+        console.log("No user logged in.");
+        return;
+      }
+
+      const enrollmentsRef = collection(db, "enrollments");
+      const q = query(enrollmentsRef, where("uid", "==", userId));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.log("No enrollments found for this user.");
+        setCourses([]);
+        return;
+      }
+
+      const courseIds = querySnapshot.docs.map((doc) => doc.data().courseId);
+      console.log("Course IDs:", courseIds);
+
+      if (courseIds.length > 0) {
+        const coursesPromises = courseIds.map(async (courseId) => {
+          const courseRef = doc(db, "courses", courseId);
+          const courseSnapshot = await getDoc(courseRef);
+          return courseSnapshot.exists() ? { id: courseSnapshot.id, ...courseSnapshot.data() } : null;
+        });
+
+        const coursesData = await Promise.all(coursesPromises);
+        const validCourses = coursesData.filter(course => course !== null);
+
+        console.log("Courses Data:", validCourses);
+        setCourses(validCourses);
       } else {
+        console.log("No courses found for this user.");
         setCourses([]);
       }
     } catch (error) {
@@ -31,28 +70,12 @@ const MyCourses = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
-
-  const getPaginatedCourses = () => {
-    const startIndex = (currentPage - 1) * pageSize;
-    return courses.slice(startIndex, startIndex + pageSize);
-  };
-
-  // جلب المزيد من الدورات عند النقر على "Next"
-  const goToNextPage = () => {
-    setCurrentPage((prev) => prev + 1);
-  };
-
-  // جلب الدورات السابقة عند النقر على "Previous"
-  const goToPreviousPage = () => {
-    setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
-  };
+  }, [userId]);
 
   return (
     <>
       <NavBar />
       <main className="pt-32 pb-16">
-        {/* Display Courses */}
         <section>
           <div className="container mx-auto px-4 sm:px-6">
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">My Courses</h1>
@@ -63,31 +86,18 @@ const MyCourses = () => {
             ) : (
               <>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {getPaginatedCourses().length > 0 ? (
-                    getPaginatedCourses().map((course) => (
-                      <CourseCard key={course.id} course={course} path={"coursesEnrollment"} title={"Show Course Videos"}/>
+                  {courses.length > 0 ? (
+                    courses.map((course) => (
+                      <CourseCard
+                        key={course.id}
+                        course={course}
+                        path={"courseDetails"} 
+                        title={"Show Details"} 
+                      />
                     ))
                   ) : (
-                    <p className="text-gray-400">No courses found</p>
+                    <p className="text-gray-400">You have not enrolled in any courses.</p>
                   )}
-                </div>
-
-                {/* Pagination Controls */}
-                <div className="flex justify-center mt-8 gap-4">
-                  <button
-                    onClick={goToPreviousPage}
-                    disabled={currentPage === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  >
-                    <span>←</span> Previous
-                  </button>
-                  <button
-                    onClick={goToNextPage}
-                    disabled={currentPage * pageSize >= courses.length}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  >
-                    Next <span>→</span>
-                  </button>
                 </div>
               </>
             )}

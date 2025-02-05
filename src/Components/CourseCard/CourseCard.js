@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./CourseCard.css";
 
-const CourseCard = ({ course,path, title }) => {
+const CourseCard = ({ course, path, title }) => {
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }

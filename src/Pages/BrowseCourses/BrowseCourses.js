@@ -26,7 +26,7 @@ const BrowseCourses = () => {
         q = query(q, where("title", ">=", search), where("title", "<=", search + "\uf8ff"));
       }
       if (category) {
-        q = query(q, where("category", "==", category)); 
+        q = query(q, where("category", "==", category));
       }
       if (price) {
         q = query(q, price === "free" ? where("price", "==", 0) : where("price", ">", 0));
@@ -35,10 +35,10 @@ const BrowseCourses = () => {
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
         const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setCourses(coursesData); 
-        setFilteredCourses(coursesData); 
+        setCourses(coursesData);
+        setFilteredCourses(coursesData);
       } else {
-        setCourses([]); 
+        setCourses([]);
         setFilteredCourses([]);
       }
     } catch (error) {
@@ -59,7 +59,7 @@ const BrowseCourses = () => {
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   // تغيير السعر
@@ -139,7 +139,7 @@ const BrowseCourses = () => {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {getPaginatedCourses().length > 0 ? (
                     getPaginatedCourses().map((course) => (
-                      <CourseCard key={course.id} path={"courseDetails"} course={course} title={"Show Details"}/>
+                      <CourseCard key={course.id} path={"courseDetails"} course={course} title={"Show Details"} />
                     ))
                   ) : (
                     <p className="text-gray-400">No courses found</p>
@@ -148,21 +148,21 @@ const BrowseCourses = () => {
 
                 {/* Pagination Controls */}
                 <div className="flex justify-center mt-8 gap-4">
-  <button
-    onClick={goToPreviousPage}
-    disabled={currentPage === 1}
-    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-  >
-    <span>←</span> Previous
-  </button>
-  <button
-    onClick={goToNextPage}
-    disabled={currentPage * pageSize >= filteredCourses.length}
-    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-  >
-    Next <span>→</span>
-  </button>
-</div>
+                  <button
+                    onClick={goToPreviousPage}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    <span>←</span> Previous
+                  </button>
+                  <button
+                    onClick={goToNextPage}
+                    disabled={currentPage * pageSize >= filteredCourses.length}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    Next <span>→</span>
+                  </button>
+                </div>
               </>
             )}
           </div>
