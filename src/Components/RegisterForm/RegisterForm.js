@@ -16,10 +16,9 @@ import { setUser } from "../../Redux/authSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Listen for authentication changes
   useEffect(() => {
@@ -109,7 +108,7 @@ const RegisterForm = () => {
         });
 
         // Redirect to dashboard
-        // navigate("/dashboard");
+        navigate("/");
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -224,14 +223,15 @@ const RegisterForm = () => {
         <div className="text-red-500 text-sm">{formik.errors.agreeTerms}</div>
       )}
 
-
       <br />
 
-      <Link to="/login" className="text-sm text-white-500 hover:text-blue-600 transition duration-300">
-              I already have an account
-            </Link>
+      <Link
+        to="/login"
+        className="text-sm text-white-500 hover:text-blue-600 transition duration-300"
+      >
+        I already have an account
+      </Link>
 
- 
       <button
         type="submit"
         className="gradient-button w-full justify-center py-3 mt-6"
