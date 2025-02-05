@@ -34,7 +34,7 @@ const RegisterForm = () => {
       }
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, [dispatch]);
 
   const validationSchema = Yup.object({
