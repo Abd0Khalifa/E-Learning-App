@@ -28,7 +28,7 @@ function Checkout() {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
 
-    const user = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user); 
 
     useEffect(() => {
         const fetchData = async () => {
