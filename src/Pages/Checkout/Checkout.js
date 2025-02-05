@@ -28,6 +28,7 @@ function Checkout() {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
 
+    // جلب الـ uid من الـ Redux
     const user = useSelector((state) => state.auth.user); // افترض أن `authSlice` يحفظ الـ user
 
     useEffect(() => {
