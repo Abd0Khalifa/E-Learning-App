@@ -14,7 +14,7 @@ const BrowseCourses = () => {
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(8); // عدد العناصر في كل صفحة
+  const [pageSize, setPageSize] = useState(4); // عدد العناصر في كل صفحة
 
   // جلب جميع الدورات من Firestore
   const fetchCourses = async () => {
@@ -26,7 +26,7 @@ const BrowseCourses = () => {
         q = query(q, where("title", ">=", search), where("title", "<=", search + "\uf8ff"));
       }
       if (category) {
-        q = query(q, where("category", "==", category)); 
+        q = query(q, where("category", "==", category));
       }
       if (price) {
         q = query(q, price === "free" ? where("price", "==", 0) : where("price", ">", 0));
@@ -35,10 +35,10 @@ const BrowseCourses = () => {
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
         const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setCourses(coursesData); 
-        setFilteredCourses(coursesData); 
+        setCourses(coursesData);
+        setFilteredCourses(coursesData);
       } else {
-        setCourses([]); 
+        setCourses([]);
         setFilteredCourses([]);
       }
     } catch (error) {
@@ -59,7 +59,7 @@ const BrowseCourses = () => {
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   // تغيير السعر
@@ -129,7 +129,7 @@ const BrowseCourses = () => {
         {/* Display Courses */}
         <section>
           <div className="container mx-auto px-4 sm:px-6">
-            <h1 className="text-2xl font-bold mb-8">Featured Courses</h1>
+            <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">All Courses</h1>
             {loading ? (
               <div className="flex justify-center items-center h-40">
                 <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
@@ -139,7 +139,7 @@ const BrowseCourses = () => {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {getPaginatedCourses().length > 0 ? (
                     getPaginatedCourses().map((course) => (
-                      <CourseCard key={course.id} course={course} />
+                      <CourseCard key={course.id} path={"courseDetails"} course={course} title={"Show Details"} />
                     ))
                   ) : (
                     <p className="text-gray-400">No courses found</p>
@@ -148,21 +148,21 @@ const BrowseCourses = () => {
 
                 {/* Pagination Controls */}
                 <div className="flex justify-center mt-8 gap-4">
-  <button
-    onClick={goToPreviousPage}
-    disabled={currentPage === 1}
-    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-  >
-    <span>←</span> Previous
-  </button>
-  <button
-    onClick={goToNextPage}
-    disabled={currentPage * pageSize >= filteredCourses.length}
-    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-  >
-    Next <span>→</span>
-  </button>
-</div>
+                  <button
+                    onClick={goToPreviousPage}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    <span>←</span> Previous
+                  </button>
+                  <button
+                    onClick={goToNextPage}
+                    disabled={currentPage * pageSize >= filteredCourses.length}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-white-700 hover:bg-gray-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    Next <span>→</span>
+                  </button>
+                </div>
               </>
             )}
           </div>

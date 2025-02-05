@@ -8,8 +8,14 @@ import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import { db } from "../../firebase";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 function Checkout() {
+    const navigate = useNavigate();
     const getCourseDetails = async (id) => {
         try {
             const docRef = doc(db, "courses", id);
@@ -28,7 +34,7 @@ function Checkout() {
     const { id } = useParams();
     const [course, setCourse] = useState(null);
 
-    const user = useSelector((state) => state.auth.user);
+    const user = useSelector((state) => state.auth.user); // افترض أن `authSlice` يحفظ الـ user
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,8 +59,11 @@ function Checkout() {
             text: `Thank you, ${details.payer.name.given_name}. Your payment was successful.`,
             icon: "success",
             confirmButtonText: "OK",
+        }).then(() => {
+            navigate("/myCourses"); // إعادة التوجيه بعد الضغط على "OK"
         });
 
+        // إرسال الـ uid و courseId إلى Firebase
         if (user && user.uid) {
             try {
                 const paymentRef = doc(db, "enrollments", `${user.uid}_${id}`);

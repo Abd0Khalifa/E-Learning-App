@@ -47,7 +47,6 @@ function CourseDetails() {
           </div>
         );
       }
-    const youtubeLinks = course.youtubeLinks || [];
 
     return (
         <>
