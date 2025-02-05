@@ -85,7 +85,7 @@ const EditCourse = () => {
           text: "Your course details have been updated.",
           confirmButtonText: "OK",
         });
-        navigate("/manageCourses"); // Correct navigation
+        navigate("/manageCourses");
       } catch (error) {
         console.error("Error updating course:", error);
         Swal.fire({
@@ -139,7 +139,7 @@ const EditCourse = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 space-y-8">
                 <BasicInformation
-                  values={formik.values} // Pass the form values
+                  values={formik.values}
                   onChange={(field, value) =>
                     formik.setFieldValue(field, value)
                   }
@@ -147,7 +147,6 @@ const EditCourse = () => {
                   touched={formik.touched}
                 />
 
-                {/* Course Duration Input */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-300">
                     Course Duration (e.g., "12 weeks", "3 months")
@@ -167,7 +166,6 @@ const EditCourse = () => {
                   )}
                 </div>
 
-                {/* Upload Course Image */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300">
                     Upload Course Image
