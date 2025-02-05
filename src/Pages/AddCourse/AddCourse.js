@@ -14,8 +14,10 @@ import CourseContent from "../../Components/CourseContent/CourseContent";
 import CourseSettings from "../../Components/CourseSettings/CourseSettings";
 import ActionButtons from "../../Components/ActionButtons/ActionButtons";
 import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
+import { useNavigate } from "react-router-dom";
 
 const AddCourse = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,6 +86,7 @@ const AddCourse = () => {
           text: "Your course has been successfully added to the platform.",
           confirmButtonText: "OK",
         });
+        navigate("/manageCourses"); 
 
         formik.resetForm();
       } catch (error) {
@@ -119,11 +122,19 @@ const AddCourse = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 space-y-8">
                 <BasicInformation
+                  values={
+                    formik.values || {
+                      title: "",
+                      description: "",
+                      category: "",
+                      level: "",
+                    }
+                  } // Default values
                   onChange={(field, value) =>
                     formik.setFieldValue(field, value)
                   }
-                  errors={formik.errors}
-                  touched={formik.touched}
+                  errors={formik.errors || {}}
+                  touched={formik.touched || {}}
                 />
 
                 {/* Course Duration Input */}

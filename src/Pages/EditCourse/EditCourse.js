@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
 import BasicInformation from "../../Components/BasicInformation/BasicInformation";
 import CourseContent from "../../Components/CourseContent/CourseContent";
@@ -16,6 +16,7 @@ import ActionButtons from "../../Components/ActionButtons/ActionButtons";
 import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 
 const EditCourse = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -84,6 +85,7 @@ const EditCourse = () => {
           text: "Your course details have been updated.",
           confirmButtonText: "OK",
         });
+        navigate("/manageCourses"); // Correct navigation
       } catch (error) {
         console.error("Error updating course:", error);
         Swal.fire({
