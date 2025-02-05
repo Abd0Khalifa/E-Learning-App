@@ -1,32 +1,31 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
-import { db, auth } from "../../firebase"; // Import Firebase Auth
+import { db, auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 function Checkout() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  const [user, setUser] = useState(null); // Hold the logged-in user
+  const [user, setUser] = useState(null);
 
-  // Fetch the logged-in user UID
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        setUser(firebaseUser); // Store user object (contains uid, email, etc.)
+        setUser(firebaseUser);
       } else {
-        setUser(null); // User is not logged in
+        setUser(null);
       }
     });
 
     return () => unsubscribe();
   }, []);
 
-  // Fetch course details from Firestore
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
@@ -60,6 +59,8 @@ function Checkout() {
       text: `Thank you, ${details.payer.name.given_name}. Your payment was successful.`,
       icon: "success",
       confirmButtonText: "OK",
+    }).then(() => {
+      navigate("/myCourses"); // Redirect after the user clicks "OK"
     });
 
     if (!user || !user.uid) {
@@ -84,7 +85,7 @@ function Checkout() {
           price: course.price || 0,
           paymentDate: new Date().toISOString(),
         },
-        { merge: true } // Ensure it doesn't overwrite existing data
+        { merge: true }
       );
 
       console.log("✅ Enrollment successfully saved in Firebase!");
