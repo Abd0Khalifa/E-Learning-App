@@ -12,6 +12,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import CourseCard from "../../Components/CourseCard/CourseCard";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
+import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
+import StudentHeader from "../../Components/StudentHeader/StudentHeader";
 
 const MyCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -83,39 +85,46 @@ const MyCourses = () => {
 
   return (
     <>
-      <NavBar />
-      <main className="pt-32 pb-16">
-        <section>
-          <div className="container mx-auto px-4 sm:px-6">
+      <div className="min-h-screen flex bg-custom-dark ">
+        <StudentSidebarProfile />
+        <main className="flex-1 md:ml-64 text-white ">
+          <StudentHeader />
+          <br />
+          <div class="p-5">
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
               My Courses
             </h1>
-            {loading ? (
-              <div className="flex justify-center items-center h-40">
-                <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
-              </div>
-            ) : (
-              <>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {courses.length > 0 ? (
-                    courses.map((course) => (
-                      <CourseCard
-                        key={course.id}
-                        course={course}
-                        path={"courseDetails"}
-                        title={"Show Details"}
-                      />
-                    ))
-                  ) : (
-                    <p className="text-gray-400">
-                      You have not enrolled in any courses.
-                    </p>
-                  )}
+            <div className="container mx-auto px-4 sm:px-6">
+              {loading ? (
+                <div className="flex justify-center items-center h-40">
+                  <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
                 </div>
-              </>
-            )}
+              ) : (
+                <>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {courses.length > 0 ? (
+                      courses.map((course) => (
+                        <CourseCard
+                          key={course.id}
+                          course={course}
+                          path={"courseDetails"}
+                          title={"Show Details"}
+                        />
+                      ))
+                    ) : (
+                      <p className="text-gray-400">
+                        You have not enrolled in any courses.
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-        </section>
+        </main>
+      </div>
+      <main className="pt-32 pb-16">
+        <section></section>
       </main>
       <Footer />
     </>
