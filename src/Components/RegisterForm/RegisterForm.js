@@ -20,7 +20,6 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Listen for authentication changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -35,7 +34,7 @@ const RegisterForm = () => {
       }
     });
 
-    return () => unsubscribe(); // Cleanup function
+    return () => unsubscribe(); 
   }, [dispatch]);
 
   const validationSchema = Yup.object({
@@ -86,7 +85,6 @@ const RegisterForm = () => {
         );
         const user = userCredential.user;
 
-        // Save user to Firestore
         const userData = {
           uid: user.uid,
           firstName: values.firstName,
@@ -98,7 +96,6 @@ const RegisterForm = () => {
 
         await setDoc(doc(db, "users", user.uid), userData);
 
-        // Dispatch to Redux store
         dispatch(setUser(userData));
 
         Swal.fire({
@@ -107,7 +104,6 @@ const RegisterForm = () => {
           text: "You have been successfully registered!",
         });
 
-        // Redirect to dashboard
         navigate("/");
       } catch (error) {
         Swal.fire({
