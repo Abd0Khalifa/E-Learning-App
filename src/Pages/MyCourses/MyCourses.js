@@ -14,17 +14,18 @@ import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
 import StudentSidebarProfile from "../../Components/StudentSidebarProfile/StudentSidebarProfile";
 import StudentHeader from "../../Components/StudentHeader/StudentHeader";
+import StudentStatistics from "../../Components/StudentStatistics/StudentStatistics"; // استيراد مكون الإحصائيات
 
 const MyCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
+  const [coursesCount, setCoursesCount] = useState(0); // حالة لتخزين عدد الكورسات
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         setUserId(firebaseUser.uid);
-        console.log("User ID:", firebaseUser.uid);
       } else {
         setUserId(null);
       }
@@ -36,23 +37,20 @@ const MyCourses = () => {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      if (!userId) {
-        console.log("No user logged in.");
-        return;
-      }
+      if (!userId) return;
 
       const enrollmentsRef = collection(db, "enrollments");
       const q = query(enrollmentsRef, where("uid", "==", userId));
       const querySnapshot = await getDocs(q);
 
+      setCoursesCount(querySnapshot.size); // تحديث عدد الكورسات
+
       if (querySnapshot.empty) {
-        console.log("No enrollments found for this user.");
         setCourses([]);
         return;
       }
 
       const courseIds = querySnapshot.docs.map((doc) => doc.data().courseId);
-      console.log("Course IDs:", courseIds);
 
       if (courseIds.length > 0) {
         const coursesPromises = courseIds.map(async (courseId) => {
@@ -64,12 +62,8 @@ const MyCourses = () => {
         });
 
         const coursesData = await Promise.all(coursesPromises);
-        const validCourses = coursesData.filter((course) => course !== null);
-
-        console.log("Courses Data:", validCourses);
-        setCourses(validCourses);
+        setCourses(coursesData.filter((course) => course !== null));
       } else {
-        console.log("No courses found for this user.");
         setCourses([]);
       }
     } catch (error) {
@@ -85,12 +79,11 @@ const MyCourses = () => {
 
   return (
     <>
-      <div className="min-h-screen flex bg-custom-dark ">
+      <div className="min-h-screen flex bg-custom-dark">
         <StudentSidebarProfile />
-        <main className="flex-1 md:ml-64 text-white ">
+        <main className="flex-1 md:ml-64 text-white">
           <StudentHeader />
-          <br />
-          <div class="p-5">
+          <div className="p-5">
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
               My Courses
             </h1>
@@ -100,32 +93,28 @@ const MyCourses = () => {
                   <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
                 </div>
               ) : (
-                <>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {courses.length > 0 ? (
-                      courses.map((course) => (
-                        <CourseCard
-                          key={course.id}
-                          course={course}
-                          path={"courseDetails"}
-                          title={"Show Details"}
-                        />
-                      ))
-                    ) : (
-                      <p className="text-gray-400">
-                        You have not enrolled in any courses.
-                      </p>
-                    )}
-                  </div>
-                </>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {courses.length > 0 ? (
+                    courses.map((course) => (
+                      <CourseCard
+                        key={course.id}
+                        course={course}
+                        path={"courseDetails"}
+                        title={"Show Details"}
+                      />
+                    ))
+                  ) : (
+                    <p className="text-gray-400">
+                      You have not enrolled in any courses.
+                    </p>
+                  )}
+                </div>
               )}
             </div>
           </div>
+          <StudentStatistics coursesCount={coursesCount} />
         </main>
       </div>
-      <main className="pt-32 pb-16">
-        <section></section>
-      </main>
       <Footer />
     </>
   );
