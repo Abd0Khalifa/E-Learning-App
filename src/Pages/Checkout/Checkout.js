@@ -60,7 +60,7 @@ function Checkout() {
       icon: "success",
       confirmButtonText: "OK",
     }).then(() => {
-      navigate("/myCourses"); // Redirect after the user clicks "OK"
+      navigate("/myCourses");
     });
 
     if (!user || !user.uid) {
