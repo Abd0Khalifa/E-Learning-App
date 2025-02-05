@@ -41,6 +41,7 @@ function App() {
           <Route path="/sProgress" element={<StudentProgress />} />
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/EditCourse/:id" element={<EditCourse />} />
+          
         </Routes>
       </Router>
     </>
