@@ -19,31 +19,30 @@ import Register from "./Pages/Register/Register.js";
 import ManageCourses from "./Pages/ManageCourses/ManageCourses.js";
 import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 import Checkout from "./Pages/Checkout/Checkout.js";
+import EditCourse from "./Pages/EditCourse/EditCourse.js";
 
 function App() {
   return (
     <>
-
       <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/sDashboard" element={<StudentDashboardPage />} />
-        <Route path="/addCourse" element={<AddCourse />} />
-        <Route path="/browseCourses" element={<BrowseCourses />} />
-        <Route path="/courseDetails/:id" element={<CourseDetails />} />
-        <Route path="/coursesEnrollment/:id" element={<coursesEnrollment />} />
-        <Route path="/iDashboard" element={<InstractorDashboardPage />} />
-        <Route path="/iProfile" element={<InstractorProfilePage />} />
-        <Route path="/manageCourses" element={<ManageCourses />} />
-        <Route path="/myCourses" element={<MyCourses />} />
-        <Route path="/sProfile" element={<StudentProfilePage />} />
-        <Route path="/sProgress" element={<StudentProgress />} />
-        <Route path="/checkout/:id" element={<Checkout />} />
-      </Routes>
-    </Router>
-
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/sDashboard" element={<StudentDashboardPage />} />
+          <Route path="/addCourse" element={<AddCourse />} />
+          <Route path="/browseCourses" element={<BrowseCourses />} />
+          <Route path="/courseDetails/:id" element={<CourseDetails />} />
+          <Route path="/iDashboard" element={<InstractorDashboardPage />} />
+          <Route path="/iProfile" element={<InstractorProfilePage />} />
+          <Route path="/manageCourses" element={<ManageCourses />} />
+          <Route path="/myCourses" element={<MyCourses />} />
+          <Route path="/sProfile" element={<StudentProfilePage />} />
+          <Route path="/sProgress" element={<StudentProgress />} />
+          <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/EditCourse/:id" element={<EditCourse />} />
+        </Routes>
+      </Router>
     </>
   );
 }

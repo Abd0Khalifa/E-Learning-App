@@ -2,6 +2,7 @@ import React from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 const CourseItem = ({ course, onDelete }) => {
   const handleDelete = async () => {
@@ -67,10 +68,17 @@ const CourseItem = ({ course, onDelete }) => {
 
             {/* Edit & Delete Buttons */}
             <div className="flex gap-2">
-              <button className="outline-button-sm">
+              {/* Edit Button */}
+              <Link
+                to={`/editCourse/${course.id}`}
+                state={{ course }}
+                className="outline-button-sm"
+              >
                 <i className="fas fa-edit"></i>
                 Edit
-              </button>
+              </Link>
+
+              {/* Delete Button */}
               <button
                 className="outline-button-sm text-red-500 border-red-500 hover:bg-red-500 hover:text-white"
                 onClick={handleDelete}

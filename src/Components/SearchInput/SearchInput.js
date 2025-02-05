@@ -8,7 +8,7 @@ const SearchInput = ({ value, onChange, onSearch }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex-1">
       <input
         type="text"
         className="modern-input w-full"
