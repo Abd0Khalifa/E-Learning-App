@@ -13,12 +13,16 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 const InstractorDashboardStatsOverview = () => {
   const [activeCourses, setActiveCourses] = useState(0);
   const [totalStudents, setTotalStudents] = useState(0);
+  const [totalEarnings, setTotalEarnings] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
+          setIsLoading(true);
+
+          // Fetch courses created by the instructor
           const coursesQuery = query(
             collection(db, "courses"),
             where("instructorId", "==", user.uid)
@@ -28,16 +32,26 @@ const InstractorDashboardStatsOverview = () => {
           setActiveCourses(coursesSnapshot.size);
 
           let totalStudentsCount = 0;
-          coursesSnapshot.forEach((courseDoc) => {
+          let totalEarningsAmount = 0;
+
+          const courseIds = coursesSnapshot.docs.map((doc) => doc.id);
+
+          if (courseIds.length > 0) {
+            // Fetch enrollments where courseId matches any of the instructor's courses
             const enrollmentsQuery = query(
               collection(db, "enrollments"),
-              where("courseId", "==", courseDoc.id)
+              where("courseId", "in", courseIds) // Filter enrollments by course IDs
             );
-            const enrollmentsSnapshot = getDocs(enrollmentsQuery);
-            totalStudentsCount += enrollmentsSnapshot.size;
-          });
+            const enrollmentsSnapshot = await getDocs(enrollmentsQuery);
+
+            totalStudentsCount = enrollmentsSnapshot.size;
+            enrollmentsSnapshot.forEach((doc) => {
+              totalEarningsAmount += doc.data().price || 0; // Sum up earnings
+            });
+          }
 
           setTotalStudents(totalStudentsCount);
+          setTotalEarnings(totalEarningsAmount);
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
@@ -47,8 +61,10 @@ const InstractorDashboardStatsOverview = () => {
         setIsLoading(false);
       }
     });
+
     return () => unsubscribe();
   }, []);
+
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
@@ -123,8 +139,8 @@ const InstractorDashboardStatsOverview = () => {
             />
           </div>
           <div>
-            <div className="text-2xl font-bold">$2,450</div>
-            <div className="text-gray-400">Monthly Earnings</div>
+            <div className="text-2xl font-bold">${totalEarnings}</div>
+            <div className="text-gray-400">Total Earnings</div>
           </div>
         </div>
       </div>
