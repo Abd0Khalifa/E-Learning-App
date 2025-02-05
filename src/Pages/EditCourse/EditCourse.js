@@ -131,7 +131,7 @@ const EditCourse = () => {
 
   return (
     <div className="min-h-screen flex bg-custom-dark">
-      {/* <InstractorSidebarProfile /> */}
+      <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
         <div className="container mx-auto px-4 py-8">
