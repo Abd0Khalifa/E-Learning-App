@@ -87,6 +87,7 @@ const MyCourses = () => {
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
               My Courses
             </h1>
+            <StudentStatistics coursesCount={coursesCount} />
             <div className="container mx-auto px-4 sm:px-6">
               {loading ? (
                 <div className="flex justify-center items-center h-40">
@@ -112,7 +113,6 @@ const MyCourses = () => {
               )}
             </div>
           </div>
-          <StudentStatistics coursesCount={coursesCount} />
         </main>
       </div>
       <Footer />
