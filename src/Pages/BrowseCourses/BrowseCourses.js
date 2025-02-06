@@ -99,7 +99,6 @@ const BrowseCourses = () => {
                     onSearch={() => setCurrentPage(1)}
                   />
                 </div>
-
                 <div className="flex flex-wrap gap-4">
                   <select
                     className="modern-input py-3"
@@ -112,7 +111,6 @@ const BrowseCourses = () => {
                     <option value="business">Business</option>
                     <option value="ai-ml">AI & ML</option>
                   </select>
-
                   <select
                     className="modern-input py-3"
                     value={price}
@@ -127,7 +125,6 @@ const BrowseCourses = () => {
             </div>
           </div>
         </section>
-
         <section>
           <div className="container mx-auto px-4 sm:px-6">
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
@@ -153,7 +150,6 @@ const BrowseCourses = () => {
                     <p className="text-gray-400">No courses found</p>
                   )}
                 </div>
-
                 <div className="flex justify-center mt-8 gap-4">
                   <button
                     onClick={goToPreviousPage}
