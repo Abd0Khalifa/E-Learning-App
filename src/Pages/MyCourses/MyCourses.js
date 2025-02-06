@@ -20,7 +20,7 @@ const MyCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
-  const [coursesCount, setCoursesCount] = useState(0); // حالة لتخزين عدد الكورسات
+  const [coursesCount, setCoursesCount] = useState(0);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -38,13 +38,10 @@ const MyCourses = () => {
     setLoading(true);
     try {
       if (!userId) return;
-
       const enrollmentsRef = collection(db, "enrollments");
       const q = query(enrollmentsRef, where("uid", "==", userId));
       const querySnapshot = await getDocs(q);
-
-      setCoursesCount(querySnapshot.size); 
-
+      setCoursesCount(querySnapshot.size);
       if (querySnapshot.empty) {
         setCourses([]);
         return;
