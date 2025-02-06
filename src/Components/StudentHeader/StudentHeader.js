@@ -45,7 +45,6 @@ const StudentHeader = () => {
       console.error("Error logging out:", error);
     }
   };
-
   return (
     <header id="">
       <div className="bg-card-dark/80 backdrop-blur-xl border-b border-main-color/10">

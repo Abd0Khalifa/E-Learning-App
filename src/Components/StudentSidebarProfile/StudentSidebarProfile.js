@@ -3,35 +3,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faThLarge,
   faBook,
-  faCalendar,
-  faChartLine,
-  faCertificate,
-  faCommentAlt,
   faUser,
   faCog,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
 const StudentSidebarProfile = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  // Toggle the sidebar open/close
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
   return (
     <>
-      {/* Button to toggle the sidebar on mobile */}
       <button
         onClick={toggleSidebar}
         className="md:hidden absolute top-12 left-6 z-50 text-white"
       >
         <FontAwesomeIcon icon={faBars} size="lg" />
       </button>
-
-      {/* Sidebar */}
       <aside
         className={`transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
