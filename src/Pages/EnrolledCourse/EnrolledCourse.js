@@ -1,21 +1,26 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import CourseDetailsHero from "../../Components/CourseDetailsHero/CourseDetailsHero";
 import Footer from "../../Components/Footer/Footer";
 import NavBar from "../../Components/NavBar/NavBar";
-import { db } from "../../firebase";
-import { Link, useParams } from "react-router-dom";
+import { db, auth } from "../../firebase";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
-import { faPlay, faLevelUp, faClock } from "@fortawesome/free-solid-svg-icons";
-import { faPaypal, faTypo3 } from "@fortawesome/free-brands-svg-icons";
+import {
+  faPlayCircle,
+  faLevelUp,
+  faClock,
+} from "@fortawesome/free-solid-svg-icons";
+import { faTypo3 } from "@fortawesome/free-brands-svg-icons";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 function CourseDetails() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0); // Track the currently playing video
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const navigate = useNavigate(); // For redirecting after unenrollment
 
   const getCourseDetails = async (id) => {
     try {
@@ -43,6 +48,57 @@ function CourseDetails() {
 
     fetchData();
   }, [id]);
+
+  const handleUnenroll = async () => {
+    const user = auth.currentUser;
+    if (!user) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "You must be logged in to unenroll.",
+        confirmButtonColor: "#FF0000",
+      });
+      return;
+    }
+
+    // Show confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be unenrolled from this course.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, unenroll!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Delete the enrollment record from Firestore
+          const enrollmentRef = doc(db, "enrollments", `${user.uid}_${id}`);
+          await deleteDoc(enrollmentRef);
+
+          // Show success message
+          Swal.fire({
+            icon: "success",
+            title: "Unenrolled!",
+            text: "You have been unenrolled from the course.",
+            confirmButtonColor: "#4CAF50",
+          });
+
+          // Redirect to the dashboard or another page
+          navigate("/sDashboard");
+        } catch (error) {
+          console.error("Error unenrolling:", error);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Failed to unenroll. Please try again.",
+            confirmButtonColor: "#FF0000",
+          });
+        }
+      }
+    });
+  };
 
   if (loading) {
     return (
@@ -108,6 +164,14 @@ function CourseDetails() {
                     <span className="text-gray-400">{course.Duration}</span>
                   </div>
                 </div>
+
+                {/* Unenroll Button */}
+                <button
+                  onClick={handleUnenroll}
+                  className="gradient-button-sm bg-red-500 hover:bg-red-600 my-5 w-fit"
+                >
+                  Unenroll
+                </button>
               </div>
               <div className="relative flex-grow">
                 <div className="rounded-xl flex items-center justify-center">
