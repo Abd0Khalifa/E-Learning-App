@@ -21,6 +21,7 @@ import StudentProgress from "./Pages/StudentProgress/StudentProgress.js";
 import Checkout from "./Pages/Checkout/Checkout.js";
 import EditCourse from "./Pages/EditCourse/EditCourse.js";
 import EnrolledCourse from "./Pages/EnrolledCourse/EnrolledCourse.js";
+import NotFoundPage from "./Pages/NotFound/NotFound.js";
 
 function App() {
   return (
@@ -41,9 +42,9 @@ function App() {
           <Route path="/sProfile" element={<StudentProfilePage />} />
           <Route path="/sProgress" element={<StudentProgress />} />
           <Route path="/checkout/:id" element={<Checkout />} />
-          
           <Route path="/EditCourse/:id" element={<EditCourse />} />
           <Route path="/EnrolledCourse/:id" element={<EnrolledCourse />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </>
