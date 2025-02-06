@@ -14,10 +14,10 @@ const StudentSidebarProfile = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   return (
-    <>
+    <div className="sidebar">
       <button
         onClick={toggleSidebar}
-        className="md:hidden absolute top-12 left-6 z-50 text-white"
+        className="md:hidden  top-8 left-6 z-50 text-white fixed"
       >
         <FontAwesomeIcon icon={faBars} size="lg" />
       </button>
@@ -27,7 +27,10 @@ const StudentSidebarProfile = () => {
         } md:translate-x-0 w-64 bg-card-dark border-r border-main-color/10 fixed h-full transition-transform duration-300 z-40`}
       >
         <div className="p-6">
-          <Link to="/" className="text-2xl font-black gradient-text mb-8 block">
+          <Link
+            to="/"
+            className="text-2xl font-black gradient-text mb-8 block custLogo"
+          >
             SkillStack
           </Link>
           <nav className="space-y-4">
@@ -66,7 +69,7 @@ const StudentSidebarProfile = () => {
           </nav>
         </div>
       </aside>
-    </>
+    </div>
   );
 };
 

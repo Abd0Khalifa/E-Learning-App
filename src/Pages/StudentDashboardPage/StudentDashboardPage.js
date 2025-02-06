@@ -13,7 +13,7 @@ const StudentDashboardPage = () => {
       <main className="flex-1 md:ml-64 text-white ">
         <StudentHeader />
         <br />
-        <div class="p-5">
+        <div class="p-5 mt-20">
           <StudentDashboardWelcomeSection />
           <StudentDashboardStatsOverview />
           <StudentDashboardCurrentCourses />

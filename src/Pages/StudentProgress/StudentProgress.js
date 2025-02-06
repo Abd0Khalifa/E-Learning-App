@@ -36,14 +36,12 @@ const StudentProgress = () => {
       performance: "Good",
     },
   ];
-
   return (
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
         <div className="container mx-auto px-4 py-8 mt-20">
-
           <div className="glass-card p-6 mb-8">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">

@@ -31,7 +31,7 @@ const StudentProfilePage = () => {
       <main className="flex-1 md:ml-64 text-white">
         <StudentHeader />
         <br />
-        <div className="p-5">
+        <div className="p-5 mt-20">
           {isEditing ? (
             <StudentProfileForm userData={userData} onSave={handleSave} />
           ) : (
