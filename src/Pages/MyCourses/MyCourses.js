@@ -43,7 +43,7 @@ const MyCourses = () => {
       const q = query(enrollmentsRef, where("uid", "==", userId));
       const querySnapshot = await getDocs(q);
 
-      setCoursesCount(querySnapshot.size); // تحديث عدد الكورسات
+      setCoursesCount(querySnapshot.size); 
 
       if (querySnapshot.empty) {
         setCourses([]);
@@ -116,7 +116,6 @@ const MyCourses = () => {
           </div>
         </main>
       </div>
-      <Footer />
     </>
   );
 };
