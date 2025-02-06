@@ -19,7 +19,6 @@ const CourseActions = ({ onCategoryChange }) => {
         <option value="business">Business</option>
         <option value="marketing">Marketing</option>
       </select>
-      <SearchInput />
     </div>
   );
 };
