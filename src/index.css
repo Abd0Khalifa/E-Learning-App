@@ -1749,3 +1749,20 @@ section {
 .course-illustration circle {
   animation: pulse 3s infinite;
 }
+.custLogo {
+  top: 4px;
+  position: relative;
+  left: 28px;
+  z-index: 51;
+}
+#custHeader {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 50;
+  background-color: #151521;
+}
+.sidebar {
+  z-index: 51;
+  position: relative;
+}
