@@ -79,22 +79,28 @@ const StudentProgress = () => {
     { icon: "fa-star", value: "92%", label: "Satisfaction Rate" },
   ];
 
+
   return (
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
-        <div className="container mx-auto px-4 py-8">
-          {/* بحث وتصفية الطلبة */}
+
+        <div className="container mx-auto px-4 py-8 mt-20">
+
           <div className="glass-card p-6 mb-8">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">
                 <SearchInput />
+
+
+
                 <select
                   className="modern-input py-2"
                   value={selectedCourse}
                   onChange={(e) => setSelectedCourse(e.target.value)}
                 >
+
                   <option value="">All Courses</option>
                   {courses.map((course) => (
                     <option key={course.id} value={course.id}>

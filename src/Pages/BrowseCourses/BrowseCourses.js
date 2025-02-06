@@ -7,14 +7,14 @@ import Footer from "../../Components/Footer/Footer";
 import SearchInput from "../../Components/SearchInput/SearchInput";
 
 const BrowseCourses = () => {
-  const [courses, setCourses] = useState([]); // جميع الدورات المسترجعة
-  const [filteredCourses, setFilteredCourses] = useState([]); // الدورات المصفاة
+  const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(4); // عدد العناصر في كل صفحة
+  const [pageSize, setPageSize] = useState(4);
 
   // جلب جميع الدورات من Firestore
   const fetchCourses = async () => {
@@ -23,18 +23,28 @@ const BrowseCourses = () => {
       let q = collection(db, "courses");
 
       if (search) {
-        q = query(q, where("title", ">=", search), where("title", "<=", search + "\uf8ff"));
+        q = query(
+          q,
+          where("title", ">=", search),
+          where("title", "<=", search + "\uf8ff")
+        );
       }
       if (category) {
         q = query(q, where("category", "==", category));
       }
       if (price) {
-        q = query(q, price === "free" ? where("price", "==", 0) : where("price", ">", 0));
+        q = query(
+          q,
+          price === "free" ? where("price", "==", 0) : where("price", ">", 0)
+        );
       }
 
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
-        const coursesData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const coursesData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
         setCourses(coursesData);
         setFilteredCourses(coursesData);
       } else {
@@ -62,18 +72,15 @@ const BrowseCourses = () => {
     setCurrentPage(1);
   };
 
-  // تغيير السعر
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
-    setCurrentPage(1); // العودة إلى الصفحة الأولى عند تغيير السعر
+    setCurrentPage(1);
   };
 
-  // جلب المزيد من الدورات عند النقر على "Next"
   const goToNextPage = () => {
     setCurrentPage((prev) => prev + 1);
   };
 
-  // جلب الدورات السابقة عند النقر على "Previous"
   const goToPreviousPage = () => {
     setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1));
   };
@@ -86,18 +93,15 @@ const BrowseCourses = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="glass-card p-6">
               <div className="flex flex-col md:flex-row gap-6">
-                {/* Search Input */}
                 <div className="flex-1 relative">
                   <SearchInput
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    onSearch={() => setCurrentPage(1)} // العودة إلى الصفحة الأولى عند البحث
+                    onSearch={() => setCurrentPage(1)}
                   />
                 </div>
 
-                {/* Filters (Category and Price) */}
                 <div className="flex flex-wrap gap-4">
-                  {/* Category Dropdown */}
                   <select
                     className="modern-input py-3"
                     value={category}
@@ -110,7 +114,6 @@ const BrowseCourses = () => {
                     <option value="ai-ml">AI & ML</option>
                   </select>
 
-                  {/* Price Dropdown */}
                   <select
                     className="modern-input py-3"
                     value={price}
@@ -126,10 +129,11 @@ const BrowseCourses = () => {
           </div>
         </section>
 
-        {/* Display Courses */}
         <section>
           <div className="container mx-auto px-4 sm:px-6">
-            <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">All Courses</h1>
+            <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
+              All Courses
+            </h1>
             {loading ? (
               <div className="flex justify-center items-center h-40">
                 <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
@@ -139,14 +143,18 @@ const BrowseCourses = () => {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {getPaginatedCourses().length > 0 ? (
                     getPaginatedCourses().map((course) => (
-                      <CourseCard key={course.id} path={"courseDetails"} course={course} title={"Show Details"} />
+                      <CourseCard
+                        key={course.id}
+                        path={"courseDetails"}
+                        course={course}
+                        title={"Show Details"}
+                      />
                     ))
                   ) : (
                     <p className="text-gray-400">No courses found</p>
                   )}
                 </div>
 
-                {/* Pagination Controls */}
                 <div className="flex justify-center mt-8 gap-4">
                   <button
                     onClick={goToPreviousPage}

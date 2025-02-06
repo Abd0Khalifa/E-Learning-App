@@ -45,11 +45,10 @@ const StudentHeader = () => {
       console.error("Error logging out:", error);
     }
   };
-
   return (
-    <header id="">
+    <header id="custHeader">
       <div className="bg-card-dark/80 backdrop-blur-xl border-b border-main-color/10">
-        <div className="container mx-auto px-6">
+        <div className=" mx-auto px-6">
           <nav className="flex items-center justify-between h-20">
             <div className="flex items-center gap-2"></div>
             <div className="flex items-center gap-4">

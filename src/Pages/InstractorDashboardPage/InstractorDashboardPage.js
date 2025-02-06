@@ -13,10 +13,10 @@ const InstractorDashboardPage = () => {
   return (
     <div className="min-h-screen flex bg-custom-dark">
       <InstractorSidebarProfile />
-      <main className="flex-1 md:ml-64 text-white">
+      <main className="flex-1 md:ml-64 text-white ">
         <InstractorHeader />
 
-        <div className="p-5">
+        <div className="p-5 mt-20">
           <InstractorDashboardWelcomeSection />
           <InstractorDashboardStatsOverview />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

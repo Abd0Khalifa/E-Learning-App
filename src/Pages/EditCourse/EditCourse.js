@@ -134,7 +134,7 @@ const EditCourse = () => {
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 mt-20">
           <form onSubmit={formik.handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 space-y-8">
