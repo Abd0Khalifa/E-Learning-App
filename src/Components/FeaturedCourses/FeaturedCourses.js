@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase"; // Make sure this import is correct
+import { db } from "../../firebase";
 import CourseCard from "../CourseCard/CourseCard";
 import "./FeaturedCourses.css";
 

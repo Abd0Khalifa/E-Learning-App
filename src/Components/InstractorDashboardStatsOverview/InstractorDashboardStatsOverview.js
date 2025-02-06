@@ -22,7 +22,6 @@ const InstractorDashboardStatsOverview = () => {
         try {
           setIsLoading(true);
 
-          // Fetch courses created by the instructor
           const coursesQuery = query(
             collection(db, "courses"),
             where("instructorId", "==", user.uid)
@@ -37,16 +36,16 @@ const InstractorDashboardStatsOverview = () => {
           const courseIds = coursesSnapshot.docs.map((doc) => doc.id);
 
           if (courseIds.length > 0) {
-            // Fetch enrollments where courseId matches any of the instructor's courses
+
             const enrollmentsQuery = query(
               collection(db, "enrollments"),
-              where("courseId", "in", courseIds) // Filter enrollments by course IDs
+              where("courseId", "in", courseIds) 
             );
             const enrollmentsSnapshot = await getDocs(enrollmentsQuery);
 
             totalStudentsCount = enrollmentsSnapshot.size;
             enrollmentsSnapshot.forEach((doc) => {
-              totalEarningsAmount += doc.data().price || 0; // Sum up earnings
+              totalEarningsAmount += doc.data().price || 0; 
             });
           }
 

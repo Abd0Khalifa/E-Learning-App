@@ -3,17 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { auth, db } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2"; 
 
 const StudentProfileForm = ({ userData, onSave }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     bio: "",
-    role: "", // Add role field
+    role: "", 
   });
 
-  // Define roles for the select list
   const roles = ["student", "instructor"];
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const StudentProfileForm = ({ userData, onSave }) => {
         fullName: userData.name || "",
         email: userData.email || "",
         bio: userData.bio || "",
-        role: userData.role || "", // Load role from userData
+        role: userData.role || "", 
       });
     }
   }, [userData]);
@@ -44,12 +43,11 @@ const StudentProfileForm = ({ userData, onSave }) => {
           lastName: formData.fullName.split(" ")[1] || "",
           email: formData.email,
           bio: formData.bio,
-          role: formData.role, // Update role in Firebase
+          role: formData.role, 
         });
 
-        onSave(formData); // Update UI after save
+        onSave(formData);
 
-        // Show success message with SweetAlert
         Swal.fire({
           icon: "success",
           title: "Profile Updated!",
@@ -59,7 +57,6 @@ const StudentProfileForm = ({ userData, onSave }) => {
       } catch (error) {
         console.error("Error updating profile:", error);
 
-        // Show error message with SweetAlert
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -74,7 +71,6 @@ const StudentProfileForm = ({ userData, onSave }) => {
     <div className="glass-card p-6 md:p-8 mb-8">
       <h2 className="text-2xl font-bold mb-6">Personal Information</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Full Name */}
         <div className="space-y-2">
           <label htmlFor="full-name" className="text-sm font-medium">
             Full Name
@@ -90,7 +86,6 @@ const StudentProfileForm = ({ userData, onSave }) => {
           />
         </div>
 
-        {/* Email */}
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium">
             Email Address
@@ -106,7 +101,6 @@ const StudentProfileForm = ({ userData, onSave }) => {
           />
         </div>
 
-        {/* Bio */}
         <div className="space-y-2">
           <label htmlFor="bio" className="text-sm font-medium">
             Bio
@@ -122,7 +116,6 @@ const StudentProfileForm = ({ userData, onSave }) => {
           ></textarea>
         </div>
 
-        {/* Role (Dropdown Select List) */}
         <div className="space-y-2">
           <label htmlFor="role" className="text-sm font-medium">
             Role
@@ -144,8 +137,6 @@ const StudentProfileForm = ({ userData, onSave }) => {
             ))}
           </select>
         </div>
-
-        {/* Save Button */}
         <div className="space-y-4">
           <button
             type="submit"

@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { db, auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2"; 
 
 const CourseDetailsHero = ({ course }) => {
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ const CourseDetailsHero = ({ course }) => {
         icon: "warning",
         confirmButtonText: "Go to Login",
       }).then(() => {
-        navigate("/login"); // Navigate to login page if not logged in
+        navigate("/login"); 
       });
     } else {
       navigate(`/checkout/${id}`, {

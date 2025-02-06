@@ -15,7 +15,7 @@ const BasicInformation = ({ values, onChange, errors, touched }) => {
             type="text"
             className="modern-input"
             placeholder="e.g., Web Development Masterclass"
-            value={values.title} // Set value from props
+            value={values.title} 
             onChange={(e) => handleChange("title", e.target.value)}
           />
           {errors.title && touched.title && (
@@ -31,7 +31,7 @@ const BasicInformation = ({ values, onChange, errors, touched }) => {
             className="modern-input"
             rows="4"
             placeholder="Describe your course content and learning outcomes"
-            value={values.description} // Set value from props
+            value={values.description} 
             onChange={(e) => handleChange("description", e.target.value)}
           ></textarea>
           {errors.description && touched.description && (
@@ -44,7 +44,7 @@ const BasicInformation = ({ values, onChange, errors, touched }) => {
             <label className="block text-sm font-medium mb-2">Category</label>
             <select
               className="modern-input"
-              value={values.category} // Set value from props
+              value={values.category} 
               onChange={(e) => handleChange("category", e.target.value)}
             >
               <option value="">Select Category</option>
@@ -61,7 +61,7 @@ const BasicInformation = ({ values, onChange, errors, touched }) => {
             <label className="block text-sm font-medium mb-2">Level</label>
             <select
               className="modern-input"
-              value={values.level} // Set value from props
+              value={values.level} 
               onChange={(e) => handleChange("level", e.target.value)}
             >
               <option value="">Select Level</option>

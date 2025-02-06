@@ -14,7 +14,6 @@ const StudentProgress = () => {
   const [students, setStudents] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
 
-  // الحصول على بيانات المستخدم (الانستراكتور) من Firebase Authentication
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
@@ -26,13 +25,15 @@ const StudentProgress = () => {
     return () => unsubscribe();
   }, []);
 
-  // جلب الكورسات الخاصة بالانستراكتور بناءً على user.uid
   useEffect(() => {
     if (!user) return;
     const fetchCourses = async () => {
       try {
         const coursesRef = collection(db, "courses");
-        const q = query(coursesRef, where("course", "array-contains", user.uid));        
+        const q = query(
+          coursesRef,
+          where("course", "array-contains", user.uid)
+        );
         const querySnapshot = await getDocs(q);
         const coursesData = [];
         querySnapshot.forEach((doc) => {
@@ -47,7 +48,6 @@ const StudentProgress = () => {
     fetchCourses();
   }, [user]);
 
-  // جلب الطلبة (التسجيلات) الذين اشتروا الكورس المحدد من Firestore
   useEffect(() => {
     const fetchStudents = async () => {
       if (!selectedCourse) {
@@ -56,7 +56,10 @@ const StudentProgress = () => {
       }
       try {
         const enrollmentsRef = collection(db, "enrollments");
-        const q = query(enrollmentsRef, where("courseId", "==", selectedCourse));
+        const q = query(
+          enrollmentsRef,
+          where("courseId", "==", selectedCourse)
+        );
         const querySnapshot = await getDocs(q);
         const studentsData = [];
         querySnapshot.forEach((doc) => {
@@ -71,14 +74,12 @@ const StudentProgress = () => {
     fetchStudents();
   }, [selectedCourse]);
 
-  // بيانات نظرة عامة على التقدم (يمكن تعديلها حسب الحاجة)
   const progressOverview = [
     { icon: "fa-users", value: "1,248", label: "Total Students" },
     { icon: "fa-graduation-cap", value: "85%", label: "Completion Rate" },
     { icon: "fa-clock", value: "4.2h", label: "Avg. Study Time" },
     { icon: "fa-star", value: "92%", label: "Satisfaction Rate" },
   ];
-
 
   return (
     <div className="min-h-screen flex bg-custom-dark">
@@ -87,20 +88,16 @@ const StudentProgress = () => {
         <InstractorHeader />
 
         <div className="container mx-auto px-4 py-8 mt-20">
-
           <div className="glass-card p-6 mb-8">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">
                 <SearchInput />
-
-
 
                 <select
                   className="modern-input py-2"
                   value={selectedCourse}
                   onChange={(e) => setSelectedCourse(e.target.value)}
                 >
-
                   <option value="">All Courses</option>
                   {courses.map((course) => (
                     <option key={course.id} value={course.id}>
@@ -120,7 +117,6 @@ const StudentProgress = () => {
             </div>
           </div>
 
-          {/* نظرة عامة على التقدم */}
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             {progressOverview.map((item, index) => (
               <ProgressOverviewCard
@@ -132,7 +128,6 @@ const StudentProgress = () => {
             ))}
           </div>
 
-          {/* قائمة الطلبة */}
           <div className="glass-card p-6 mb-8">
             <h2 className="text-xl font-bold mb-6">Student Progress</h2>
             <div className="overflow-x-auto">
@@ -149,7 +144,7 @@ const StudentProgress = () => {
                 </thead>
                 <tbody className="divide-y divide-main-color/10">
                   {students.map((student) => (
-                    <StudentProgressRow/>
+                    <StudentProgressRow />
                   ))}
                 </tbody>
               </table>

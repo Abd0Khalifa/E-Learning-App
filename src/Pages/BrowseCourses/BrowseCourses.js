@@ -16,7 +16,6 @@ const BrowseCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
 
-  // جلب جميع الدورات من Firestore
   const fetchCourses = async () => {
     setLoading(true);
     try {
