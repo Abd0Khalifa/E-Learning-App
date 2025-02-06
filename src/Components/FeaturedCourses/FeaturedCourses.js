@@ -1,8 +1,56 @@
-import React from "react";
-import "./FeaturedCourses.css";
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase"; // Make sure this import is correct
 import CourseCard from "../CourseCard/CourseCard";
+import "./FeaturedCourses.css";
 
 const FeaturedCourses = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setLoading(true);
+      try {
+        // Fetch all courses from the Firestore
+        const coursesRef = collection(db, "courses");
+        const querySnapshot = await getDocs(coursesRef);
+
+        if (!querySnapshot.empty) {
+          // Extract course data
+          const coursesData = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          // Randomly select 3 courses
+          const randomCourses = getRandomCourses(coursesData, 3);
+          setCourses(randomCourses);
+        }
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  // Function to get n random courses from the list
+  const getRandomCourses = (courseList, n) => {
+    const shuffled = [...courseList].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, n);
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-40">
+        <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
   return (
     <section id="courses" className="py-24">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
@@ -19,9 +67,14 @@ const FeaturedCourses = () => {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
+          {courses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              path={"courseDetails"}
+              title="Show Details"
+            />
+          ))}
         </div>
       </div>
     </section>
