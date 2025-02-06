@@ -1,40 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { auth, db } from "../../firebase"; // ملف تهيئة Firebase
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorHeaderProfile from "../../Components/InstractorHeader/InstractorHeader";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 import ProgressOverviewCard from "../../Components/ProgressOverviewCard/ProgressOverviewCard";
 import StudentProgressRow from "../../Components/StudentProgressRow/StudentProgressRow";
-import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 import SearchInput from "../../Components/SearchInput/SearchInput";
 
 const StudentProgress = () => {
-  // Sample data for progress overview
+  const [user, setUser] = useState(null);
+  const [courses, setCourses] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState("");
+
+  // الحصول على بيانات المستخدم (الانستراكتور) من Firebase Authentication
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // جلب الكورسات الخاصة بالانستراكتور بناءً على user.uid
+  useEffect(() => {
+    if (!user) return;
+    const fetchCourses = async () => {
+      try {
+        const coursesRef = collection(db, "courses");
+        const q = query(coursesRef, where("course", "array-contains", user.uid));        
+        const querySnapshot = await getDocs(q);
+        const coursesData = [];
+        querySnapshot.forEach((doc) => {
+          coursesData.push({ id: doc.id, ...doc.data() });
+        });
+        console.log("Fetched Courses:", coursesData);
+        setCourses(coursesData);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+    fetchCourses();
+  }, [user]);
+
+  // جلب الطلبة (التسجيلات) الذين اشتروا الكورس المحدد من Firestore
+  useEffect(() => {
+    const fetchStudents = async () => {
+      if (!selectedCourse) {
+        setStudents([]);
+        return;
+      }
+      try {
+        const enrollmentsRef = collection(db, "enrollments");
+        const q = query(enrollmentsRef, where("courseId", "==", selectedCourse));
+        const querySnapshot = await getDocs(q);
+        const studentsData = [];
+        querySnapshot.forEach((doc) => {
+          studentsData.push({ id: doc.id, ...doc.data() });
+        });
+        console.log("Fetched Students:", studentsData);
+        setStudents(studentsData);
+      } catch (error) {
+        console.error("Error fetching students:", error);
+      }
+    };
+    fetchStudents();
+  }, [selectedCourse]);
+
+  // بيانات نظرة عامة على التقدم (يمكن تعديلها حسب الحاجة)
   const progressOverview = [
     { icon: "fa-users", value: "1,248", label: "Total Students" },
     { icon: "fa-graduation-cap", value: "85%", label: "Completion Rate" },
     { icon: "fa-clock", value: "4.2h", label: "Avg. Study Time" },
     { icon: "fa-star", value: "92%", label: "Satisfaction Rate" },
-  ];
-
-  // Sample data for student progress
-  const students = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      course: "Web Development",
-      progress: 75,
-      lastActive: "2 hours ago",
-      performance: "Excellent",
-    },
-    {
-      id: 2,
-      name: "Sarah Chen",
-      email: "sarah@example.com",
-      course: "AI & Machine Learning",
-      progress: 45,
-      lastActive: "1 day ago",
-      performance: "Good",
-    },
   ];
 
   return (
@@ -43,32 +85,36 @@ const StudentProgress = () => {
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
         <div className="container mx-auto px-4 py-8">
-          {/* Student Search and Filters */}
+          {/* بحث وتصفية الطلبة */}
           <div className="glass-card p-6 mb-8">
             <div className="flex flex-wrap gap-4 items-center justify-between">
               <div className="flex items-center gap-4 flex-wrap">
-               <SearchInput />
-                <select className="modern-input py-2">
+                <SearchInput />
+                <select
+                  className="modern-input py-2"
+                  value={selectedCourse}
+                  onChange={(e) => setSelectedCourse(e.target.value)}
+                >
                   <option value="">All Courses</option>
-                  <option value="web-dev">Web Development</option>
-                  <option value="ai-ml">AI & Machine Learning</option>
-                  <option value="design">Digital Art & Design</option>
+                  {courses.map((course) => (
+                    <option key={course.id} value={course.id}>
+                      {course.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="flex gap-4">
                 <button className="outline-button-sm">
-                  <i className="fas fa-filter"></i>
-                  Filter
+                  <i className="fas fa-filter"></i> Filter
                 </button>
                 <button className="outline-button-sm">
-                  <i className="fas fa-download"></i>
-                  Export Report
+                  <i className="fas fa-download"></i> Export Report
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Progress Overview */}
+          {/* نظرة عامة على التقدم */}
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             {progressOverview.map((item, index) => (
               <ProgressOverviewCard
@@ -80,7 +126,7 @@ const StudentProgress = () => {
             ))}
           </div>
 
-          {/* Student List */}
+          {/* قائمة الطلبة */}
           <div className="glass-card p-6 mb-8">
             <h2 className="text-xl font-bold mb-6">Student Progress</h2>
             <div className="overflow-x-auto">
@@ -97,7 +143,7 @@ const StudentProgress = () => {
                 </thead>
                 <tbody className="divide-y divide-main-color/10">
                   {students.map((student) => (
-                    <StudentProgressRow key={student.id} student={student} />
+                    <StudentProgressRow/>
                   ))}
                 </tbody>
               </table>

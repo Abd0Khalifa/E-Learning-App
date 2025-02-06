@@ -1,6 +1,12 @@
 import React from "react";
+import { getAuth } from "firebase/auth";
 
 const StudentProgressRow = ({ student }) => {
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  // نقارن بين uid للمستخدم الحالي وuid الموجود في بيانات التسجيل
+  const isCurrentUserEnrollment = currentUser && student.uid === currentUser.uid;
+
   return (
     <tr className="hover:bg-main-color/5">
       <td className="py-4">
@@ -9,7 +15,12 @@ const StudentProgressRow = ({ student }) => {
             <i className="fas fa-user text-main-color"></i>
           </div>
           <div>
-            <div className="font-medium">{student.name}</div>
+            <div className="font-medium">
+              {student.name}
+              {isCurrentUserEnrollment && (
+                <span className="ml-2 text-sm text-green-500">(You)</span>
+              )}
+            </div>
             <div className="text-sm text-gray-400">{student.email}</div>
           </div>
         </div>
@@ -39,7 +50,9 @@ const StudentProgressRow = ({ student }) => {
         </span>
       </td>
       <td className="py-4">
+      
         <button className="outline-button-sm">View Details</button>
+      
       </td>
     </tr>
   );
