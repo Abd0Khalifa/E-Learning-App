@@ -78,7 +78,6 @@ const StudentHeader = () => {
                   <button className="outline-button-sm" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} />
                     <span className="hidden md:flex">Logout</span>
-                    
                   </button>
                 </div>
               )}
