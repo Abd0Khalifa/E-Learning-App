@@ -7,7 +7,7 @@ const InstractorProfileForm = () => {
             <h2 className="text-2xl font-bold mb-6">Personal Information
             </h2>
             <form action="#" method="POST" className="space-y-6">
-                {/* Full Name */}
+    
                 <div className="space-y-2">
                     <label htmlFor="full-name" className="text-sm font-medium">Full Name</label>
                     <input
@@ -19,7 +19,6 @@ const InstractorProfileForm = () => {
                     />
                 </div>
 
-                {/* Email */}
                 <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">Email Address</label>
                     <input
@@ -43,7 +42,6 @@ const InstractorProfileForm = () => {
                 </div>
 
 
-                {/* Bio */}
                 <div className="space-y-2">
                     <label htmlFor="bio" className="text-sm font-medium">Bio</label>
                     <textarea
@@ -56,7 +54,6 @@ const InstractorProfileForm = () => {
                 </div>
 
                
-                {/* Submit Button */}
                 <div className="space-y-4">
                     <button
                         type="submit"

@@ -13,19 +13,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../Redux/authSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import InstractorSidebarProfile from "../../Components/InstractorSidebarProfile/InstractorSidebarProfile";
-import InstractorHeaderProfile from "../../Components/InstractorHeader/InstractorHeader";
+import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
 import CourseActions from "../../Components/CourseActions/CourseActions";
 import CourseItem from "../../Components/CourseItem/CourseItem";
-import Pagination from "../../Components/Pagination/Pagination";
-import InstractorHeader from "../../Components/InstractorHeader/InstractorHeader";
+import SearchInput from "../../Components/SearchInput/SearchInput";
+
+const PAGE_SIZE = 3;
 
 const ManageCourses = () => {
   const dispatch = useDispatch();
   const [courses, setCourses] = useState([]);
-  const [lastDoc, setLastDoc] = useState(null);
   const [loading, setLoading] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [lastDoc, setLastDoc] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -42,17 +46,21 @@ const ManageCourses = () => {
 
     return () => unsubscribe();
   }, [dispatch]);
+
   const instructorId = useSelector((state) => state.auth.user?.uid);
+
   const fetchCourses = async (reset = false) => {
     if (!instructorId) return;
     setLoading(true);
+
     try {
       let coursesQuery = query(
         collection(db, "courses"),
         where("instructorId", "==", instructorId),
         orderBy("createdAt", "desc"),
-        limit(5)
+        limit(PAGE_SIZE)
       );
+
       if (categoryFilter) {
         coursesQuery = query(
           coursesQuery,
@@ -62,30 +70,37 @@ const ManageCourses = () => {
       if (statusFilter) {
         coursesQuery = query(coursesQuery, where("status", "==", statusFilter));
       }
+      if (searchTerm) {
+        coursesQuery = query(
+          coursesQuery,
+          where("title", ">=", searchTerm),
+          where("title", "<=", searchTerm + "\uf8ff")
+        );
+      }
+
       if (!reset && lastDoc) {
         coursesQuery = query(coursesQuery, startAfter(lastDoc));
       }
+
       const querySnapshot = await getDocs(coursesQuery);
       const newCourses = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+
       setCourses(reset ? newCourses : [...courses, ...newCourses]);
-      setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1] || null);
+      setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
+      setHasMore(querySnapshot.docs.length === PAGE_SIZE);
     } catch (error) {
       console.error("Error fetching courses:", error);
     }
+
     setLoading(false);
-  };
-  const handleDeleteCourse = (courseId) => {
-    setCourses((prevCourses) =>
-      prevCourses.filter((course) => course.id !== courseId)
-    );
   };
 
   useEffect(() => {
     fetchCourses(true);
-  }, [instructorId, categoryFilter, statusFilter]);
+  }, [instructorId, categoryFilter, statusFilter, searchTerm]);
 
   return (
     <div className="min-h-screen flex bg-custom-dark">
@@ -98,24 +113,39 @@ const ManageCourses = () => {
             onStatusChange={setStatusFilter}
             onRefresh={() => fetchCourses(true)}
           />
-          {loading ? (
+          <div className="glass-card p-6 mb-8 flex gap-3">
+            {" "}
+            <SearchInput
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onSearch={() => fetchCourses(true)}
+            />
+          </div>
+
+          {loading && (
             <p className="text-center text-gray-400">Loading courses...</p>
-          ) : (
-            <div className="grid gap-6 ">
-              {courses.length > 0 ? (
-                courses.map((course) => (
-                  <CourseItem
-                    key={course.id}
-                    course={course}
-                    onDelete={handleDeleteCourse}
-                  />
+          )}
+
+          <div className="grid gap-6">
+            {courses.length > 0
+              ? courses.map((course) => (
+                  <CourseItem key={course.id} course={course} />
                 ))
-              ) : (
-                <p className="text-center text-gray-400">No courses found.</p>
-              )}
+              : !loading && (
+                  <p className="text-center text-gray-400">No courses found.</p>
+                )}
+          </div>
+
+          {hasMore && !loading && (
+            <div className="text-center mt-6">
+              <button
+                onClick={() => fetchCourses()}
+                className="gradient-button"
+              >
+                Load More
+              </button>
             </div>
           )}
-          <Pagination onNext={() => fetchCourses()} hasMore={!!lastDoc} />
         </div>
       </main>
     </div>

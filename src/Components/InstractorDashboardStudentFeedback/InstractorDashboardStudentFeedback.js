@@ -7,7 +7,7 @@ const InstractorDashboardStudentFeedback = () => {
     <div className="glass-card p-6">
       <h2 className="text-xl font-bold mb-6">Recent Student Feedback</h2>
       <div className="space-y-6">
-        {/* Feedback 1 */}
+ 
         <div className="p-4 bg-card-dark rounded-lg">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
@@ -29,7 +29,7 @@ const InstractorDashboardStudentFeedback = () => {
           </div>
           <p className="text-gray-400">"Great course! The content is well-structured and the examples are very practical."</p>
         </div>
-        {/* Feedback 2 */}
+
         <div className="p-4 bg-card-dark rounded-lg">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">

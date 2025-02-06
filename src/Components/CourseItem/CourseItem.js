@@ -2,7 +2,7 @@ import React from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom"; 
 
 const CourseItem = ({ course, onDelete }) => {
   const handleDelete = async () => {
@@ -34,7 +34,6 @@ const CourseItem = ({ course, onDelete }) => {
   return (
     <div className="glass-card p-6">
       <div className="flex flex-col md:flex-row items-start gap-6">
-        {/* Course Image */}
         <div className="w-full md:w-64 flex-shrink-0">
           {course.imageBase64 ? (
             <img
@@ -49,7 +48,6 @@ const CourseItem = ({ course, onDelete }) => {
           )}
         </div>
 
-        {/* Course Details */}
         <div className="flex-grow">
           <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
             <div>
@@ -66,9 +64,8 @@ const CourseItem = ({ course, onDelete }) => {
               <p className="text-gray-400 text-sm">{course.description}</p>
             </div>
 
-            {/* Edit & Delete Buttons */}
             <div className="flex gap-2">
-              {/* Edit Button */}
+
               <Link
                 to={`/editCourse/${course.id}`}
                 state={{ course }}
@@ -78,7 +75,6 @@ const CourseItem = ({ course, onDelete }) => {
                 Edit
               </Link>
 
-              {/* Delete Button */}
               <button
                 className="outline-button-sm text-red-500 border-red-500 hover:bg-red-500 hover:text-white"
                 onClick={handleDelete}

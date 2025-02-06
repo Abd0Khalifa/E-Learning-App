@@ -1,5 +1,4 @@
 import React from "react";
-import SearchInput from "../SearchInput/SearchInput";
 import { Link } from "react-router-dom";
 
 const CourseActions = ({ onCategoryChange }) => {
@@ -19,7 +18,6 @@ const CourseActions = ({ onCategoryChange }) => {
         <option value="business">Business</option>
         <option value="marketing">Marketing</option>
       </select>
-      <SearchInput />
     </div>
   );
 };

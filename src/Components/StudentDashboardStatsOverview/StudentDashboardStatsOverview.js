@@ -38,7 +38,6 @@ const StudentDashboardStatsOverview = () => {
         return;
       }
 
-      // Fetch enrollments for the logged-in student
       const enrollmentsRef = collection(db, "enrollments");
       const enrollmentsQuery = query(
         enrollmentsRef,
@@ -48,7 +47,6 @@ const StudentDashboardStatsOverview = () => {
 
       setActiveCourses(enrollmentsSnapshot.size);
 
-      // Fetch certificates for the logged-in student
       const certificatesRef = collection(db, "certificates");
       const certificatesQuery = query(
         certificatesRef,
@@ -58,7 +56,6 @@ const StudentDashboardStatsOverview = () => {
 
       setCertificates(certificatesSnapshot.size);
 
-      // Placeholder logic for learning time and average score
       setLearningTime("28h");
       setAvgScore("85%");
     } catch (error) {
@@ -92,7 +89,7 @@ const StudentDashboardStatsOverview = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
-      {/* Active Courses */}
+ 
       <div className="glass-card p-6">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">
@@ -108,7 +105,6 @@ const StudentDashboardStatsOverview = () => {
         </div>
       </div>
 
-      {/* Learning Time */}
       <div className="glass-card p-6">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">
@@ -124,7 +120,6 @@ const StudentDashboardStatsOverview = () => {
         </div>
       </div>
 
-      {/* Certificates */}
       <div className="glass-card p-6">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">
@@ -140,7 +135,6 @@ const StudentDashboardStatsOverview = () => {
         </div>
       </div>
 
-      {/* Average Score */}
       <div className="glass-card p-6">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center">

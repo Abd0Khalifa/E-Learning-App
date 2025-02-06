@@ -33,7 +33,6 @@ const InstractorSidebarProfile = () => {
         <FontAwesomeIcon icon={faBars} size="lg" />
       </button>
 
-      {/* Sidebar */}
       <aside
         className={`transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"

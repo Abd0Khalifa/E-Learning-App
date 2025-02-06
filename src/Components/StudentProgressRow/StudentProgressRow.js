@@ -4,8 +4,9 @@ import { getAuth } from "firebase/auth";
 const StudentProgressRow = ({ student }) => {
   const auth = getAuth();
   const currentUser = auth.currentUser;
-  // نقارن بين uid للمستخدم الحالي وuid الموجود في بيانات التسجيل
-  const isCurrentUserEnrollment = currentUser && student.uid === currentUser.uid;
+
+  const isCurrentUserEnrollment =
+    currentUser && student.uid === currentUser.uid;
 
   return (
     <tr className="hover:bg-main-color/5">
@@ -50,9 +51,7 @@ const StudentProgressRow = ({ student }) => {
         </span>
       </td>
       <td className="py-4">
-      
         <button className="outline-button-sm">View Details</button>
-      
       </td>
     </tr>
   );

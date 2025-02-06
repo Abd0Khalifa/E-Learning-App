@@ -8,7 +8,7 @@ const StudentDashboardUpcomingSchedule = () => {
       <div className="lg:col-span-2">
         <h2 className="text-2xl font-bold mb-6">Upcoming Schedule</h2>
         <div className="glass-card divide-y divide-main-color/10">
-          {/* Live Coding Session */}
+ 
           <div className="p-4 md:p-6">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center flex-shrink-0">
@@ -31,7 +31,6 @@ const StudentDashboardUpcomingSchedule = () => {
             </div>
           </div>
           
-          {/* Assignment Due */}
           <div className="p-4 md:p-6">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-lg bg-main-color/20 flex items-center justify-center flex-shrink-0">
