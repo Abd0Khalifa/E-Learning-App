@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const StudentDashboardCurrentCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -153,10 +154,12 @@ const StudentDashboardCurrentCourses = () => {
                   <span className="text-gray-400">{course.timeLeft} left</span>
                 </div>
               </div>
-              <button className="gradient-button w-full">
-                <FontAwesomeIcon icon={faPlay} className="mr-2" />
-                Continue Learning
-              </button>
+              <Link
+                to={`/EnrolledCourse/${course.id}`}
+                className="outline-button-sm"
+              >
+                Continue Watch
+              </Link>
             </div>
           ))
         ) : (
