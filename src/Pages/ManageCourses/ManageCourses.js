@@ -92,7 +92,7 @@ const ManageCourses = () => {
       <InstractorSidebarProfile />
       <main className="flex-1 md:ml-64 text-white">
         <InstractorHeader />
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 mt-20">
           <CourseActions
             onCategoryChange={setCategoryFilter}
             onStatusChange={setStatusFilter}
@@ -101,7 +101,7 @@ const ManageCourses = () => {
           {loading ? (
             <p className="text-center text-gray-400">Loading courses...</p>
           ) : (
-            <div className="grid gap-6">
+            <div className="grid gap-6 ">
               {courses.length > 0 ? (
                 courses.map((course) => (
                   <CourseItem
