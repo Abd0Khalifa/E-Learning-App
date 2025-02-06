@@ -100,8 +100,9 @@ const MyCourses = () => {
                       <CourseCard
                         key={course.id}
                         course={course}
-                        path={"courseDetails"}
-                        title={"Show Details"}
+                        path={"EnrolledCourse"}
+                        title={"Show Course"}
+                        enrolled={true}
                       />
                     ))
                   ) : (
