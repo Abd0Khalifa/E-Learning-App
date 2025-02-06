@@ -27,7 +27,6 @@ const StudentProgress = () => {
     return () => unsubscribe();
   }, []);
 
-  // جلب عدد الطلاب من Firestore
   useEffect(() => {
     const fetchTotalStudents = async () => {
       try {
@@ -43,7 +42,6 @@ const StudentProgress = () => {
     fetchTotalStudents();
   }, []);
 
-  // جلب الطلاب
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -62,7 +60,6 @@ const StudentProgress = () => {
     fetchStudents();
   }, []);
 
-  // جلب الكورسات الخاصة بالانستراكتور
   useEffect(() => {
     const fetchCourses = async () => {
       if (user) {
@@ -84,7 +81,6 @@ const StudentProgress = () => {
     fetchCourses();
   }, [user]);
 
-  // جلب التسجيلات
   useEffect(() => {
     const fetchEnrollments = async () => {
       try {
@@ -103,7 +99,6 @@ const StudentProgress = () => {
     fetchEnrollments();
   }, []);
 
-  // حساب عدد الصفوف في الجدول
   useEffect(() => {
     const filteredEnrollments = enrollments.filter((enrollment) =>
       courses.some(
@@ -111,7 +106,7 @@ const StudentProgress = () => {
           course.id === enrollment.courseId && course.instructorId === user?.uid
       )
     );
-    setTableRowCount(filteredEnrollments.length); // تحديث عدد الصفوف
+    setTableRowCount(filteredEnrollments.length);
   }, [enrollments, courses, user]);
 
   const getStudentName = (studentId) => {
@@ -139,7 +134,6 @@ const StudentProgress = () => {
     return course ? course.Duration : "N/A";
   };
 
-  // تحديث قيمة Total Students بناءً على عدد الصفوف في الجدول
   const progressOverview = [
     {
       icon: "fa-users",
@@ -186,7 +180,6 @@ const StudentProgress = () => {
             </div>
           </div>
 
-          {/* نظرة عامة على التقدم */}
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             {progressOverview.map((item, index) => (
               <ProgressOverviewCard
@@ -198,7 +191,6 @@ const StudentProgress = () => {
             ))}
           </div>
 
-          {/* قائمة الطلبة */}
           <div className="glass-card p-6 mb-8">
             <h2 className="text-xl font-bold mb-6">Student Progress</h2>
             <div className="overflow-x-auto">
