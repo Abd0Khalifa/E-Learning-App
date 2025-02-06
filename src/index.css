@@ -1571,3 +1571,6 @@ section {
 .w-fit {
   width: fit-content;
 }
+.custPadding {
+  height: fit-content;
+}
