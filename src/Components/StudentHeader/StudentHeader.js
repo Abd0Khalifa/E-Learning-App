@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser,
   faSignOutAlt,
   faTachometerAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -79,6 +78,7 @@ const StudentHeader = () => {
                   <button className="outline-button-sm" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} />
                     <span className="hidden md:flex">Logout</span>
+                    
                   </button>
                 </div>
               )}
