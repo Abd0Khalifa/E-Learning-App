@@ -1,21 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faLevelUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { faPaypal, faTypo3 } from "@fortawesome/free-brands-svg-icons";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { db, auth } from "../../firebase"; // Ensure this import is correct
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const CourseDetailsHero = ({ course }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); // Course ID from URL
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+        checkEnrollment(firebaseUser.uid); // Ensure UID is passed correctly
+      } else {
+        setUser(null);
+        setIsEnrolled(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const checkEnrollment = async (userId) => {
+    try {
+      // Query Firestore to check if the user is enrolled in this course
+      const enrollmentRef = collection(db, "enrollments"); // Ensure "enrollments" is your collection name
+      const q = query(
+        enrollmentRef,
+        where("uid", "==", userId),
+        where("courseId", "==", id)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      // If there are results, user is enrolled
+      if (!querySnapshot.empty) {
+        setIsEnrolled(true);
+      } else {
+        setIsEnrolled(false);
+      }
+    } catch (error) {
+      console.error("Error checking enrollment:", error);
+    }
+  };
 
   const handleCheckout = () => {
     navigate(`/checkout/${id}`, {
       state: { courseId: id, courseName: course.name },
     });
   };
+
+  const handleShowCourse = () => {
+    navigate(`/EnrolledCourse/${id}`);
+  };
+
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }
+
   return (
     <>
       <section className="relative py-16">
@@ -26,7 +74,6 @@ const CourseDetailsHero = ({ course }) => {
                 <span className="px-3 py-1 rounded-full bg-main-color/10 text-main-color text-sm">
                   {course.category}
                 </span>
-                <span className="text-gray-400">• Bestseller</span>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -42,6 +89,7 @@ const CourseDetailsHero = ({ course }) => {
               <p className="text-xl text-gray-400 mb-6">
                 {course.description}.
               </p>
+
               <div className="flex items-center gap-6 mb-8">
                 <div className="flex items-center gap-2">
                   <FontAwesomeIcon
@@ -57,16 +105,28 @@ const CourseDetailsHero = ({ course }) => {
                   <span className="text-gray-400">{course.Duration}</span>
                 </div>
               </div>
+
               <div className="flex items-center gap-4">
-                <Link
-                  onClick={handleCheckout()}
-                  className="gradient-button w-full"
-                >
-                  <FontAwesomeIcon icon={faPaypal} />
-                  checkout Now ${course.price}
-                </Link>
+                {isEnrolled ? (
+                  <button
+                    onClick={handleShowCourse}
+                    className="gradient-button w-full"
+                  >
+                    <FontAwesomeIcon icon={faPlay} />
+                    Continue Watching
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleCheckout}
+                    className="gradient-button w-full"
+                  >
+                    <FontAwesomeIcon icon={faPaypal} />
+                    Checkout Now ${course.price}
+                  </button>
+                )}
               </div>
             </div>
+
             <div className="relative flex-grow">
               <div className="rounded-xl flex items-center justify-center">
                 <img
