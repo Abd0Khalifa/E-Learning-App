@@ -3,7 +3,7 @@ import React from "react";
 const SearchInput = ({ value, onChange, onSearch }) => {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      onSearch();
+      onSearch(); // البحث عند الضغط على "Enter"
     }
   };
 
