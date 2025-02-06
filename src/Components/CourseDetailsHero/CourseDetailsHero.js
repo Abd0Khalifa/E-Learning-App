@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faLevelUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { faPaypal, faTypo3 } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { db, auth } from "../../firebase"; // Ensure this import is correct
+import { db, auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Swal from "sweetalert2"; // Import SweetAlert
 
 const CourseDetailsHero = ({ course }) => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Course ID from URL
+  const { id } = useParams();
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -17,7 +18,7 @@ const CourseDetailsHero = ({ course }) => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
-        checkEnrollment(firebaseUser.uid); // Ensure UID is passed correctly
+        checkEnrollment(firebaseUser.uid);
       } else {
         setUser(null);
         setIsEnrolled(false);
@@ -29,8 +30,7 @@ const CourseDetailsHero = ({ course }) => {
 
   const checkEnrollment = async (userId) => {
     try {
-      // Query Firestore to check if the user is enrolled in this course
-      const enrollmentRef = collection(db, "enrollments"); // Ensure "enrollments" is your collection name
+      const enrollmentRef = collection(db, "enrollments");
       const q = query(
         enrollmentRef,
         where("uid", "==", userId),
@@ -39,7 +39,6 @@ const CourseDetailsHero = ({ course }) => {
 
       const querySnapshot = await getDocs(q);
 
-      // If there are results, user is enrolled
       if (!querySnapshot.empty) {
         setIsEnrolled(true);
       } else {
@@ -51,9 +50,20 @@ const CourseDetailsHero = ({ course }) => {
   };
 
   const handleCheckout = () => {
-    navigate(`/checkout/${id}`, {
-      state: { courseId: id, courseName: course.name },
-    });
+    if (!user) {
+      Swal.fire({
+        title: "Please log in",
+        text: "You need to log in to proceed with checkout.",
+        icon: "warning",
+        confirmButtonText: "Go to Login",
+      }).then(() => {
+        navigate("/login"); // Navigate to login page if not logged in
+      });
+    } else {
+      navigate(`/checkout/${id}`, {
+        state: { courseId: id, courseName: course.name },
+      });
+    }
   };
 
   const handleShowCourse = () => {
