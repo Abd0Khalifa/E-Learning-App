@@ -12,18 +12,15 @@ const FeaturedCourses = () => {
     const fetchCourses = async () => {
       setLoading(true);
       try {
-        // Fetch all courses from the Firestore
         const coursesRef = collection(db, "courses");
         const querySnapshot = await getDocs(coursesRef);
 
         if (!querySnapshot.empty) {
-          // Extract course data
           const coursesData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }));
 
-          // Randomly select 3 courses
           const randomCourses = getRandomCourses(coursesData, 3);
           setCourses(randomCourses);
         }
@@ -37,7 +34,6 @@ const FeaturedCourses = () => {
     fetchCourses();
   }, []);
 
-  // Function to get n random courses from the list
   const getRandomCourses = (courseList, n) => {
     const shuffled = [...courseList].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, n);
