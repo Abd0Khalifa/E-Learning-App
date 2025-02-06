@@ -61,7 +61,6 @@ function CourseDetails() {
       return;
     }
 
-    // Show confirmation dialog
     Swal.fire({
       title: "Are you sure?",
       text: "You will be unenrolled from this course.",
@@ -73,11 +72,9 @@ function CourseDetails() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // Delete the enrollment record from Firestore
           const enrollmentRef = doc(db, "enrollments", `${user.uid}_${id}`);
           await deleteDoc(enrollmentRef);
 
-          // Show success message
           Swal.fire({
             icon: "success",
             title: "Unenrolled!",
@@ -85,7 +82,6 @@ function CourseDetails() {
             confirmButtonColor: "#4CAF50",
           });
 
-          // Redirect to the dashboard or another page
           navigate("/sDashboard");
         } catch (error) {
           console.error("Error unenrolling:", error);
@@ -140,12 +136,20 @@ function CourseDetails() {
                   <span className="text-gray-400">{course.category}</span>
                 </div>
                 <br />
-                <Link
-                  to={`/CourseDetails/${id}`}
-                  className="gradient-button-sm my-5 w-fit"
-                >
-                  ShowDetails
-                </Link>
+                <div className="flex gap-3 my-5">
+                  <Link
+                    to={`/CourseDetails/${id}`}
+                    className="gradient-button-sm  w-fit"
+                  >
+                    ShowDetails
+                  </Link>
+                  <button
+                    onClick={handleUnenroll}
+                    className="outline-button-sm custPadding"
+                  >
+                    Unenroll
+                  </button>
+                </div>
                 <div className="flex items-center gap-6 mb-8">
                   <div className="flex items-center gap-2">
                     <FontAwesomeIcon
@@ -164,14 +168,6 @@ function CourseDetails() {
                     <span className="text-gray-400">{course.Duration}</span>
                   </div>
                 </div>
-
-                {/* Unenroll Button */}
-                <button
-                  onClick={handleUnenroll}
-                  className="gradient-button-sm bg-red-500 hover:bg-red-600 my-5 w-fit"
-                >
-                  Unenroll
-                </button>
               </div>
               <div className="relative flex-grow">
                 <div className="rounded-xl flex items-center justify-center">
@@ -186,13 +182,10 @@ function CourseDetails() {
           </div>
         </section>
 
-        {/* Course Content Section */}
         <div className="container mx-auto px-4 sm:px-6 py-8">
           <h2 className="text-2xl font-bold mb-6">Course Content</h2>
 
-          {/* Main Video Player and Side List */}
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Main Video Player */}
             <div className="lg:w-3/4">
               <div className="glass-card p-6">
                 <ReactPlayer
