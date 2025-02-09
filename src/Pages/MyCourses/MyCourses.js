@@ -80,6 +80,7 @@ const MyCourses = () => {
         <StudentSidebarProfile />
         <main className="flex-1 md:ml-64 text-white">
           <StudentHeader />
+          <br/><br/><br/><br/>
           <div className="p-5">
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
               My Courses

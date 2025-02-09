@@ -1,8 +1,26 @@
+// src/Components/CourseCard/CourseCard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CourseCard.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../../Redux/authSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const CourseCard = ({ course, path, title }) => {
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.auth.favorites);
+
+  const isFavorite = favorites.includes(course.id);
+
+  const handleFavoriteToggle = () => {
+    if (isFavorite) {
+      dispatch(removeFavorite(course.id));
+    } else {
+      dispatch(addFavorite(course.id));
+    }
+  };
+
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }
@@ -79,6 +97,13 @@ const CourseCard = ({ course, path, title }) => {
           <Link to={`/${path}/${course.id}`} className="outline-button-sm">
             {title}
           </Link>
+          <button
+            className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors duration-300 ${isFavorite ? "bg-red-500 text-white" : "border border-red-500 text-red-500"
+              }`}
+            onClick={handleFavoriteToggle}
+          >
+            <FontAwesomeIcon icon={faHeart} />
+          </button>
         </div>
       </div>
     </div>
