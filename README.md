@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# SkillStack - E-Learning App Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Logo
+(Add your logo here)
 
-## Available Scripts
+## Key Achievements
+- Successfully met all project requirements.
+- Implemented key functionalities for an optimal user experience.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### **General Features**
+- **Pagination in lists** for better content organization.
+- **Confirmation prompts** for delete and unenroll actions.
+- **Form validation** using Formik and Yup.
+- **Localization** implemented on the home page.
+- **Course Access Control:**
+  - Users must be **logged in** to enroll in courses.
+  - Non-logged-in users can browse courses and view course details.
+- **Course Details Page:**
+  - Displays images, descriptions, and prices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **User Dashboard**
+- **List of Enrolled Courses**
+- **Unenroll Option:**
+  - Users can unenroll from courses.
+  - **Confirmation message** before unenrollment.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **Wishlist & Favorites** (Using Redux)
+- Users can create and manage wishlists.
+- Favorite courses can be saved for later.
 
-### `npm test`
+### **Search & Filtering**
+- **Search courses** by name.
+- **Filter courses** by price and category.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **Responsive Design**
+- Optimized for different devices and screen sizes (small, medium, large).
 
-### `npm run build`
+## **Backend Service**
+- **Firebase Authentication & Firestore** used for backend operations.
+- **CRUD Operations for Instructors:**
+  - PUT, POST, DELETE, GET.
+- **Course Management** with full database interaction.
+- **Payment Integration:**
+  - **PayPal Sandbox** used for course purchases.
+  - **Test Buyer Account:**
+    - Email: `sb-jtxju35643814@personal.example.com`
+    - Password: `>UKz3-^x`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## **Modern Design Features**
+- **TailwindCSS** for styling.
+- **Lordicons** for elegant animations and interactive icons.
+- **SweetAlert** for visually appealing notifications.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## **Form Validation**
+- Implemented using **Formik** and **Yup**.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Accessibility**
+- Selected a **pre-picked color palette** to ensure readability.
 
-### `npm run eject`
+## **Branding**
+- Designed a **custom logo**.
+- Added a **unique favicon**.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## **Technologies & Libraries Used**
+- **Frontend:**
+  - TailwindCSS
+  - React Router
+  - Redux & Redux Toolkit
+  - Redux DevTools Extension
+  - FontAwesome
+  - React Player
+- **Backend:**
+  - Firebase & Firestore
+  - Firebase Authentication
+- **Validation & UI Enhancements:**
+  - Formik & Yup
+  - SweetAlert
+  - Lordicons
+- **Payment Integration:**
+  - PayPal
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This document serves as a high-level overview of the **SkillStack** E-Learning App. Let me know if you'd like to expand on any section or add more details!
