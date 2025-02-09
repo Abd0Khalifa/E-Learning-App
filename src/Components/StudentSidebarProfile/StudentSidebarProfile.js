@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from "../../images/logo.png";
 import {
   faThLarge,
   faBook,
@@ -32,7 +33,9 @@ const StudentSidebarProfile = () => {
             to="/"
             className="text-2xl font-black gradient-text mb-8 block custLogo"
           >
-            SkillStack
+            <Link to="/" className="text-3xl font-black gradient-text">
+              <img src={logo} alt="logo" className=" h-16 " />
+            </Link>
           </Link>
           <nav className="space-y-4">
             <Link

@@ -10,6 +10,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import avatar from "../../images/avatar.png";
+import logo from "../../images/logo.png";
 import { toggleLang } from "../../Redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import en from "./locales/en.json";
@@ -74,7 +75,7 @@ const NavBar = () => {
           <nav className="flex items-center justify-between h-20">
             <div className="flex items-center gap-2">
               <Link to="/" className="text-3xl font-black gradient-text">
-                SkillStack
+                <img src={logo} alt="logo" className=" h-16 " />
               </Link>
             </div>
             <div className="flex items-center gap-4">
