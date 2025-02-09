@@ -16,7 +16,10 @@ const Home = () => {
     <div
       style={{
         direction: currentLang === "ar" ? "rtl" : "ltr",
-        fontFamily: currentLang === "ar" ? '"Cairo", sans-serif' : '""',
+        fontFamily:
+          currentLang === "ar"
+            ? '"Cairo", sans-serif'
+            : ' font-family: "Inter", sans-serif;',
       }}
     >
       <NavBar />
