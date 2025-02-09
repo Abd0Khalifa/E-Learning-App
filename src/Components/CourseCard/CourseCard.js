@@ -59,18 +59,22 @@ const CourseCard = ({ course, path, title }) => {
           </span>
         </div>
         <h3
-          className="text-white mt-2"
-          style={{
-            wordWrap: "break-word",
-            overflowWrap: "break-word",
-            whiteSpace: "normal",
-            lineHeight: "1.5",
-            fontSize: "1.25rem",
-            fontWeight: "600",
-          }}
-        >
-          {course.title || "No Title"}
-        </h3>
+  className="text-white mt-2"
+  style={{
+    wordWrap: "break-word",
+    overflowWrap: "break-word",
+    whiteSpace: "normal",
+    lineHeight: "1.5",
+    fontSize: "1.25rem",
+    fontWeight: "600",
+  }}
+>
+  {course.title
+    ? course.title.length > 17
+      ? course.title.slice(0, 17) + "..."
+      : course.title
+    : "No Title"}
+</h3>
         <p
   className="text-gray-400 text-sm"
   style={{
@@ -81,7 +85,8 @@ const CourseCard = ({ course, path, title }) => {
   }}
 >
   {course.description
-    ? course.description.split(" ").slice(0, 20).join(" ") + (course.description.split(" ").length > 10 ? "..." : "")
+    ? course.description.slice(0, 160) + 
+    (course.description.split(" ").length > 10 ? "..." : "")
     : "No Description Available"}
 </p>
 
