@@ -1,23 +1,35 @@
+// src/Components/CourseCard/CourseCard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CourseCard.css";
 import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../../Redux/authSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const CourseCard = ({ course, path, title }) => {
+  // يجب استدعاء الـ Hooks في أعلى المكون دائمًا
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.auth.favorites);
+
+  // التحقق مما إذا كان معرف الكورس موجود في المفضلات
+  const isFavorite = favorites.includes(course.id);
+
+  // دالة لتبديل حالة المفضلة عند الضغط على الزر
+  const handleFavoriteToggle = () => {
+    if (isFavorite) {
+      console.log("Removing favorite", course.id);
+      dispatch(removeFavorite(course.id));
+    } else {
+      console.log("Adding favorite", course.id);
+      dispatch(addFavorite(course.id));
+    }
+  };
+
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }
-  // const dispatch = useDispatch();
-  // const favorites = useSelector((state) => state.courses);
-  // const isFavorite = favorites.some((course) => course.id === id);
 
-  // const handleFavoriteToggle = () => {
-  //     if (isFavorite) {
-  //         dispatch(removeFavorite(id));
-  //     } else {
-  //         dispatch(addFavorite({ courses }));
-  //     }
-  // };
   return (
     <div className="course-card group">
       <div className="relative overflow-hidden rounded-xl">
@@ -90,12 +102,14 @@ const CourseCard = ({ course, path, title }) => {
           <Link to={`/${path}/${course.id}`} className="outline-button-sm">
             {title}
           </Link>
-          {/* <button
-                        className={`btn ${isFavorite ? "btn-danger" : "btn-outline-success"} w-50`}
-                        onClick={handleFavoriteToggle}
-                    >
-                        {isFavorite ? <i className="bi bi-balloon-heart-fill"></i> : <i className="bi bi-balloon-heart"></i>}
-                    </button> */}
+          <button
+            className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors duration-300 ${isFavorite ? "bg-red-500 text-white" : "border border-red-500 text-red-500"
+              }`}
+            onClick={handleFavoriteToggle}
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          >
+            <FontAwesomeIcon icon={faHeart} />
+          </button>
         </div>
       </div>
     </div>

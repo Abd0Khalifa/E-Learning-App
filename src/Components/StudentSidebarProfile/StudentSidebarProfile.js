@@ -6,6 +6,7 @@ import {
   faUser,
   faCog,
   faBars,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const StudentSidebarProfile = () => {
@@ -47,6 +48,13 @@ const StudentSidebarProfile = () => {
             >
               <FontAwesomeIcon icon={faBook} />
               My Courses
+            </Link>
+            <Link
+              to={"/FavCourses"}
+              className="nav-link flex items-center gap-3"
+            >
+              <FontAwesomeIcon icon={faHeart} />
+              My Favorite Courses
             </Link>
             <Link
               to={"/sProfile"}
