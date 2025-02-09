@@ -8,20 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const CourseCard = ({ course, path, title }) => {
-  // يجب استدعاء الـ Hooks في أعلى المكون دائمًا
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.auth.favorites);
 
-  // التحقق مما إذا كان معرف الكورس موجود في المفضلات
   const isFavorite = favorites.includes(course.id);
 
-  // دالة لتبديل حالة المفضلة عند الضغط على الزر
   const handleFavoriteToggle = () => {
     if (isFavorite) {
-      console.log("Removing favorite", course.id);
       dispatch(removeFavorite(course.id));
     } else {
-      console.log("Adding favorite", course.id);
       dispatch(addFavorite(course.id));
     }
   };
@@ -106,7 +101,6 @@ const CourseCard = ({ course, path, title }) => {
             className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors duration-300 ${isFavorite ? "bg-red-500 text-white" : "border border-red-500 text-red-500"
               }`}
             onClick={handleFavoriteToggle}
-            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
             <FontAwesomeIcon icon={faHeart} />
           </button>

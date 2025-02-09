@@ -8,37 +8,29 @@ import StudentSidebarProfile from "../../Components/StudentSidebarProfile/Studen
 import StudentHeader from "../../Components/StudentHeader/StudentHeader";
 
 const FavCourses = () => {
-  // الحصول على مصفوفة المفضلات من Redux (تحتوي على معرفات الكورسات)
   const favorites = useSelector((state) => state.auth.favorites);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // دالة لجلب بيانات الكورسات المفضلة من مجموعة "courses" في Firebase
   const fetchFavoriteCourses = async () => {
     setLoading(true);
     try {
-      console.log("Favorites from Redux:", favorites);
       if (!favorites || favorites.length === 0) {
         setCourses([]);
         return;
       }
       const coursesPromises = favorites.map(async (courseId) => {
-        console.log("Fetching course with ID:", courseId);
         const courseRef = doc(db, "courses", courseId);
         const courseSnapshot = await getDoc(courseRef);
         if (courseSnapshot.exists()) {
-          console.log("Course found:", courseSnapshot.data());
           return { id: courseSnapshot.id, ...courseSnapshot.data() };
         } else {
-          console.warn("Course not found for ID:", courseId);
           return null;
         }
       });
       const coursesData = await Promise.all(coursesPromises);
-      console.log("Fetched courses data:", coursesData);
       setCourses(coursesData.filter((course) => course !== null));
     } catch (error) {
-      console.error("Error fetching favorite courses:", error);
     } finally {
       setLoading(false);
     }
@@ -63,13 +55,13 @@ const FavCourses = () => {
                 <div className="border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
               </div>
             ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3">
                 {courses.length > 0 ? (
                   courses.map((course) => (
                     <CourseCard
                       key={course.id}
                       course={course}
-                      path={"EnrolledCourse"}
+                      path={"courseDetails"}
                       title={"Show Course"}
                     />
                   ))
