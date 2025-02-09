@@ -1,0 +1,21 @@
+{
+  "learning_path": "Learning Path",
+  "journey_title": "Your Learning Journey",
+  "journey_description": "Follow our structured learning path to achieve your goals step by step",
+  "step1": {
+    "title": "1. Choose Your Path",
+    "description": "Browse our extensive catalog of courses and select the perfect learning path that aligns with your career goals and interests. Our expert-curated paths ensure comprehensive skill development."
+  },
+  "step2": {
+    "title": "2. Learn & Practice",
+    "description": "Access high-quality video content, complete interactive exercises, and work on real-world projects. Get hands-on experience with practical assignments and peer feedback."
+  },
+  "step3": {
+    "title": "3. Join Community",
+    "description": "Connect with fellow learners, participate in discussion forums, and attend live Q&A sessions with instructors. Learn together and grow your professional network."
+  },
+  "step4": {
+    "title": "4. Get Certified",
+    "description": "Complete your courses and earn industry-recognized certificates. Showcase your achievements on LinkedIn and boost your career prospects with verified credentials."
+  }
+}

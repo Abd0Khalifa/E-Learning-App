@@ -1,0 +1,22 @@
+{
+  "why_choose_us": "Why Choose Us",
+  "learning_made_simple": "Learning Made Simple",
+  "why_description": "Discover why thousands of students choose SkillStack for their learning journey",
+  "features": [
+    {
+      "icon": "https://cdn.lordicon.com/qhviklyi.json",
+      "title": "Learn at Your Pace",
+      "description": "Access course content anytime, anywhere. Learn at your own comfortable pace with lifetime access."
+    },
+    {
+      "icon": "https://cdn.lordicon.com/soseozvi.json",
+      "title": "Expert Instructors",
+      "description": "Learn from industry professionals with years of real-world experience and proven expertise."
+    },
+    {
+      "icon": "https://cdn.lordicon.com/xhbsnkyp.json",
+      "title": "Certification",
+      "description": "Earn industry-recognized certificates upon completion to boost your career prospects."
+    }
+  ]
+}

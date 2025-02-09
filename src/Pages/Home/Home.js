@@ -7,18 +7,26 @@ import Ready from "../../Components/Ready/Ready";
 import FeaturedCourses from "../../Components/FeaturedCourses/FeaturedCourses";
 import NavBar from "../../Components/NavBar/NavBar";
 import Footer from "../../Components/Footer/Footer";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const currentLang = useSelector((state) => state.auth.lang);
+
   return (
-    <>
-    <NavBar />
+    <div
+      style={{
+        direction: currentLang === "ar" ? "rtl" : "ltr",
+        fontFamily: currentLang === "ar" ? '"Cairo", sans-serif' : '""',
+      }}
+    >
+      <NavBar />
       <Hero />
       <Whyus />
       <FeaturedCourses />
       <Journey />
       <Ready />
-      <Footer/>
-    </>
+      <Footer />
+    </div>
   );
 };
 

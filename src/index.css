@@ -10,7 +10,6 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
   background-color: #151521;
   color: var(--text-color);
@@ -782,7 +781,6 @@ section {
 }
 
 body {
-  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
   background-color: #151521;
   color: var(--text-color);
@@ -1765,4 +1763,18 @@ section {
 .sidebar {
   z-index: 51;
   position: relative;
+}
+.fav-yes {
+  background-color: var(--main-color);
+  color: white;
+}
+.fav {
+  position: fixed;
+  top: 10px;
+  right: 6px;
+}
+@media (max-width: 767px) {
+  .lang-button {
+    padding: 3px 15px;
+  }
 }
