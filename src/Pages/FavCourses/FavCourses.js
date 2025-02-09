@@ -16,7 +16,7 @@ import StudentSidebarProfile from "../../Components/StudentSidebarProfile/Studen
 import StudentHeader from "../../Components/StudentHeader/StudentHeader";
 import StudentStatistics from "../../Components/StudentStatistics/StudentStatistics"; // استيراد مكون الإحصائيات
 
-const MyCourses = () => {
+const FavCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
@@ -83,9 +83,9 @@ const MyCourses = () => {
           <br/><br/><br/><br/>
           <div className="p-5">
             <h1 className="text-3xl font-bold mb-8 text-main-color text-center p-5">
-              My Courses
+              My Favorite Courses
             </h1>
-            <StudentStatistics coursesCount={coursesCount} />
+            
             <div className="container mx-auto px-4 sm:px-6">
               {loading ? (
                 <div className="flex justify-center items-center h-40">
@@ -118,4 +118,4 @@ const MyCourses = () => {
   );
 };
 
-export default MyCourses;
+export default FavCourses;

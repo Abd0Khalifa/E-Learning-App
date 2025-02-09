@@ -1,12 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CourseCard.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const CourseCard = ({ course, path, title }) => {
   if (!course || typeof course !== "object") {
     return <div className="text-red-500">Error: Course data is missing</div>;
   }
+  // const dispatch = useDispatch();
+  // const favorites = useSelector((state) => state.courses);
+  // const isFavorite = favorites.some((course) => course.id === id);
 
+  // const handleFavoriteToggle = () => {
+  //     if (isFavorite) {
+  //         dispatch(removeFavorite(id));
+  //     } else {
+  //         dispatch(addFavorite({ courses }));
+  //     }
+  // };
   return (
     <div className="course-card group">
       <div className="relative overflow-hidden rounded-xl">
@@ -79,6 +90,12 @@ const CourseCard = ({ course, path, title }) => {
           <Link to={`/${path}/${course.id}`} className="outline-button-sm">
             {title}
           </Link>
+          {/* <button
+                        className={`btn ${isFavorite ? "btn-danger" : "btn-outline-success"} w-50`}
+                        onClick={handleFavoriteToggle}
+                    >
+                        {isFavorite ? <i className="bi bi-balloon-heart-fill"></i> : <i className="bi bi-balloon-heart"></i>}
+                    </button> */}
         </div>
       </div>
     </div>

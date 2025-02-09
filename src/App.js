@@ -22,6 +22,7 @@ import Checkout from "./Pages/Checkout/Checkout.js";
 import EditCourse from "./Pages/EditCourse/EditCourse.js";
 import EnrolledCourse from "./Pages/EnrolledCourse/EnrolledCourse.js";
 import NotFoundPage from "./Pages/NotFound/NotFound.js";
+import FavCourses from "./Pages/FavCourses/FavCourses.js";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/EditCourse/:id" element={<EditCourse />} />
           <Route path="/EnrolledCourse/:id" element={<EnrolledCourse />} />
+          <Route path="/FavCourses" element={<FavCourses/>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
