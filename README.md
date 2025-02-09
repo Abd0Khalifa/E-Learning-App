@@ -1,7 +1,7 @@
 # SkillStack - E-Learning App Documentation
 
 ## Logo
-![Custom Logo](https://hermans-ent.com/Navy%20and%20Pink%20Modern%20Online%20Store%20Logo%20(2).png)
+![Custom Logo](https://hermans-ent.com/wfefwef.png)
 
 ## Features
 
