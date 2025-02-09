@@ -81,7 +81,7 @@ const CourseCard = ({ course, path, title }) => {
   }}
 >
   {course.description
-    ? course.description.split(" ").slice(0, 10).join(" ") + (course.description.split(" ").length > 10 ? "..." : "")
+    ? course.description.split(" ").slice(0, 20).join(" ") + (course.description.split(" ").length > 10 ? "..." : "")
     : "No Description Available"}
 </p>
 
