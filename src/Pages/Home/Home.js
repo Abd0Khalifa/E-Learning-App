@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Hero from "../../Components/Hero/Hero";
 import Whyus from "../../Components/Why-us/Whyus";
@@ -11,15 +11,21 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const currentLang = useSelector((state) => state.auth.lang);
+  const [fontFamily, setFontFamily] = useState(
+    currentLang === "ar" ? '"Cairo", sans-serif' : '"Inter", sans-serif'
+  );
+
+  useEffect(() => {
+    setFontFamily(
+      currentLang === "ar" ? '"Cairo", sans-serif' : '"Inter", sans-serif'
+    );
+  }, [currentLang]);
 
   return (
     <div
       style={{
         direction: currentLang === "ar" ? "rtl" : "ltr",
-        fontFamily:
-          currentLang === "ar"
-            ? '"Cairo", sans-serif'
-            : ' font-family: "Inter", sans-serif;',
+        fontFamily: fontFamily,
       }}
     >
       <NavBar />
