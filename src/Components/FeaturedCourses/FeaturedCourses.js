@@ -53,7 +53,7 @@ const FeaturedCourses = () => {
   }
 
   return (
-    <section id="courses" className="py-24">
+    <section id="courses" className="py-24" dir="ltr">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="px-4 py-2 rounded-full bg-main-color/10 text-main-color text-sm font-medium inline-block mb-4">

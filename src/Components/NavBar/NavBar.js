@@ -12,6 +12,8 @@ import { doc, getDoc } from "firebase/firestore";
 import avatar from "../../images/avatar.png";
 import { toggleLang } from "../../Redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import en from "./locales/en.json";
+import ar from "./locales/ar.json";
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +26,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const currentLang = useSelector((state) => state.auth.lang);
   const navigate = useNavigate();
+
+  const translations = currentLang === "ar" ? ar : en;
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -52,6 +57,7 @@ const NavBar = () => {
     });
     return () => unsubscribe();
   }, []);
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -60,6 +66,7 @@ const NavBar = () => {
       console.error("Error logging out:", error);
     }
   };
+
   return (
     <header id="mainHeader">
       <div className="bg-card-dark/80 backdrop-blur-xl border-b border-main-color/10">
@@ -94,18 +101,22 @@ const NavBar = () => {
                     }
                   >
                     <i className="fa-solid fa-gauge"></i>
-                    <span className="hidden md:flex"> Dashboard</span>
+                    <span className="hidden md:flex">
+                      {translations.dashboard}
+                    </span>
                   </Link>
                   <button className="outline-button-sm" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} />
-                    <span className="hidden md:flex">Logout</span>
+                    <span className="hidden md:flex">
+                      {translations.logout}
+                    </span>
                   </button>
                   <div>
                     <button
                       onClick={() => dispatch(toggleLang())}
                       className="outline-button-sm lang-button"
                     >
-                      {currentLang}
+                      {currentLang === "ar" ? "EN" : "AR"}
                     </button>
                   </div>
                 </div>
@@ -116,11 +127,15 @@ const NavBar = () => {
                     to={"/login"}
                   >
                     <FontAwesomeIcon icon={faSignInAlt} />
-                    <span className="hidden md:flex">Sign In</span>
+                    <span className="hidden md:flex">
+                      {translations.sign_in}
+                    </span>
                   </Link>
                   <Link className="gradient-button-sm" to={"/signup"}>
                     <FontAwesomeIcon icon={faUserGraduate} />
-                    <span className="hidden md:flex">Start Free</span>
+                    <span className="hidden md:flex">
+                      {translations.start_free}
+                    </span>
                   </Link>
                   <button
                     onClick={() => dispatch(toggleLang())}
