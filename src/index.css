@@ -10,6 +10,7 @@
 }
 
 body {
+  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
   background-color: #151521;
   color: var(--text-color);
@@ -781,6 +782,7 @@ section {
 }
 
 body {
+  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
   background-color: #151521;
   color: var(--text-color);
