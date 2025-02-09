@@ -97,14 +97,15 @@ const CourseCard = ({ course, path, title }) => {
           <Link to={`/${path}/${course.id}`} className="outline-button-sm">
             {title}
           </Link>
-          <button
-            className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors duration-300 ${isFavorite ? "bg-red-500 text-white" : "border border-red-500 text-red-500"
-              }`}
-            onClick={handleFavoriteToggle}
-          >
-            <FontAwesomeIcon icon={faHeart} />
-          </button>
         </div>
+        <button
+          className={`outline-button-sm fav ${
+            isFavorite ? "fav-yes" : "fav-no"
+          }`}
+          onClick={handleFavoriteToggle}
+        >
+          <FontAwesomeIcon icon={faHeart} />
+        </button>
       </div>
     </div>
   );

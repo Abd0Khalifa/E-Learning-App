@@ -1766,3 +1766,12 @@ section {
   z-index: 51;
   position: relative;
 }
+.fav-yes {
+  background-color: var(--main-color);
+  color: white;
+}
+.fav {
+  position: fixed;
+  top: 10px;
+  right: 6px;
+}
