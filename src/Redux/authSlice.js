@@ -4,7 +4,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: null,
-    favorites: [] 
+    favorites: [],
+    lang: "en",
   },
   reducers: {
     setUser: (state, action) => {
@@ -12,7 +13,7 @@ const authSlice = createSlice({
     },
     clearUser: (state) => {
       state.user = null;
-      state.favorites = []; 
+      state.favorites = [];
     },
     addFavorite: (state, action) => {
       if (!state.favorites.includes(action.payload)) {
@@ -20,10 +21,16 @@ const authSlice = createSlice({
       }
     },
     removeFavorite: (state, action) => {
-      state.favorites = state.favorites.filter(item => item !== action.payload);
+      state.favorites = state.favorites.filter(
+        (item) => item !== action.payload
+      );
+    },
+    toggleLang: (state) => {
+      state.lang = state.lang === "en" ? "ar" : "en";
     },
   },
 });
 
-export const { setUser, clearUser, addFavorite, removeFavorite } = authSlice.actions;
+export const { setUser, clearUser, addFavorite, removeFavorite, toggleLang } =
+  authSlice.actions;
 export default authSlice.reducer;

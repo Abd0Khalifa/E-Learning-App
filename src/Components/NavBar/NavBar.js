@@ -10,6 +10,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import avatar from "../../images/avatar.png";
+import { toggleLang } from "../../Redux/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,6 +21,8 @@ const NavBar = () => {
     avatar: avatar,
     role: "",
   });
+  const dispatch = useDispatch();
+  const currentLang = useSelector((state) => state.auth.lang);
   const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -96,6 +100,14 @@ const NavBar = () => {
                     <FontAwesomeIcon icon={faSignOutAlt} />
                     <span className="hidden md:flex">Logout</span>
                   </button>
+                  <div>
+                    <button
+                      onClick={() => dispatch(toggleLang())}
+                      className="outline-button-sm lang-button"
+                    >
+                      {currentLang}
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <>
@@ -110,6 +122,12 @@ const NavBar = () => {
                     <FontAwesomeIcon icon={faUserGraduate} />
                     <span className="hidden md:flex">Start Free</span>
                   </Link>
+                  <button
+                    onClick={() => dispatch(toggleLang())}
+                    className="outline-button-sm lang-button"
+                  >
+                    {currentLang}
+                  </button>
                 </>
               )}
             </div>

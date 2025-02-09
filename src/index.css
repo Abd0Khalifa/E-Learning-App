@@ -1775,3 +1775,8 @@ section {
   top: 10px;
   right: 6px;
 }
+@media (max-width: 767px) {
+  .lang-button {
+    padding: 3px 15px;
+  }
+}

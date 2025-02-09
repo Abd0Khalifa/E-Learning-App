@@ -1,57 +1,63 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import en from "./locales/en.json";
+import ar from "./locales/ar.json";
+import { motion } from "framer-motion";
+
 const Journey = () => {
+  const lang = useSelector((state) => state.auth.lang);
+  const translations = lang === "ar" ? ar : en;
+
+  const journeySteps = [
+    {
+      icon: "fa-compass",
+      title: translations.step1.title,
+      description: translations.step1.description,
+    },
+    {
+      icon: "fa-book-reader",
+      title: translations.step2.title,
+      description: translations.step2.description,
+    },
+    {
+      icon: "fa-users",
+      title: translations.step3.title,
+      description: translations.step3.description,
+    },
+    {
+      icon: "fa-certificate",
+      title: translations.step4.title,
+      description: translations.step4.description,
+    },
+  ];
+
   return (
     <section className="py-32 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="px-4 py-2 rounded-full bg-main-color/10 text-main-color text-sm font-medium inline-block mb-4">
             <i className="fas fa-map-signs mr-2"></i>
-            Learning Path
+            {translations.learning_path}
           </span>
           <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">Your Learning Journey</span>
+            <span className="gradient-text">{translations.journey_title}</span>
           </h2>
-          <p className="text-gray-400">
-            Follow our structured learning path to achieve your goals step by
-            step
-          </p>
+          <p className="text-gray-400">{translations.journey_description}</p>
         </div>
 
         <div className="timeline-container">
-          {[
-            {
-              icon: "fa-compass",
-              title: "1. Choose Your Path",
-              description:
-                "Browse our extensive catalog of courses and select the perfect learning path that aligns with your career goals and interests. Our expert-curated paths ensure comprehensive skill development.",
-            },
-            {
-              icon: "fa-book-reader",
-              title: "2. Learn & Practice",
-              description:
-                "Access high-quality video content, complete interactive exercises, and work on real-world projects. Get hands-on experience with practical assignments and peer feedback.",
-            },
-            {
-              icon: "fa-users",
-              title: "3. Join Community",
-              description:
-                "Connect with fellow learners, participate in discussion forums, and attend live Q&A sessions with instructors. Learn together and grow your professional network.",
-            },
-            {
-              icon: "fa-certificate",
-              title: "4. Get Certified",
-              description:
-                "Complete your courses and earn industry-recognized certificates. Showcase your achievements on LinkedIn and boost your career prospects with verified credentials.",
-            },
-          ].map((step, index) => (
-            <div
+          {journeySteps.map((step, index) => (
+            <motion.div
               key={index}
               className="timeline-item"
-              style={{ animationDelay: `${index * 0.2}s` }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
             >
               <i className={`fas ${step.icon} timeline-icon`}></i>
-              <h3>{step.title}</h3>
+              <h3 className="text-xl font-bold">{step.title}</h3>
               <p className="text-gray-400">{step.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

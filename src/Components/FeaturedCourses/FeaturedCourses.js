@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
+import { useSelector } from "react-redux";
 import { db } from "../../firebase";
+import en from "./locales/en.json";
+import ar from "./locales/ar.json";
 import CourseCard from "../CourseCard/CourseCard";
-import "./FeaturedCourses.css";
 
 const FeaturedCourses = () => {
+  const lang = useSelector((state) => state.auth.lang);
+  const translations = lang === "ar" ? ar : en;
+
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -53,14 +58,14 @@ const FeaturedCourses = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="px-4 py-2 rounded-full bg-main-color/10 text-main-color text-sm font-medium inline-block mb-4">
             <i className="fas fa-sparkles mr-2"></i>
-            Top-Rated Courses
+            {translations.top_rated}
           </span>
           <h2 className="text-4xl font-bold mb-4">
-            <span className="gradient-text">Featured Courses</span>
+            <span className="gradient-text">
+              {translations.featured_courses}
+            </span>
           </h2>
-          <p className="text-gray-400">
-            Explore our most popular courses curated by industry experts
-          </p>
+          <p className="text-gray-400">{translations.description}</p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {courses.map((course) => (
@@ -68,7 +73,7 @@ const FeaturedCourses = () => {
               key={course.id}
               course={course}
               path={"courseDetails"}
-              title="Show Details"
+              title={translations.show_details}
             />
           ))}
         </div>

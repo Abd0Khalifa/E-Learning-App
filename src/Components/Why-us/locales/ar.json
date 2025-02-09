@@ -1,0 +1,22 @@
+{
+  "why_choose_us": "لماذا تختارنا",
+  "learning_made_simple": "التعلم أصبح بسيطًا",
+  "why_description": "اكتشف لماذا يختار آلاف الطلاب SkillStack في رحلتهم التعليمية",
+  "features": [
+    {
+      "icon": "https://cdn.lordicon.com/qhviklyi.json",
+      "title": "تعلم بالسرعة التي تناسبك",
+      "description": "يمكنك الوصول إلى محتوى الدورة في أي وقت وأي مكان. تعلم بالسرعة التي تناسبك مع الوصول مدى الحياة."
+    },
+    {
+      "icon": "https://cdn.lordicon.com/soseozvi.json",
+      "title": "مدربون خبراء",
+      "description": "تعلم من محترفي الصناعة الذين لديهم سنوات من الخبرة الواقعية والخبرة المثبتة."
+    },
+    {
+      "icon": "https://cdn.lordicon.com/xhbsnkyp.json",
+      "title": "شهادة",
+      "description": "احصل على شهادات معترف بها في الصناعة عند الانتهاء لتعزيز فرصك المهنية."
+    }
+  ]
+}
