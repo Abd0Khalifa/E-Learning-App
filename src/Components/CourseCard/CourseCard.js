@@ -72,16 +72,19 @@ const CourseCard = ({ course, path, title }) => {
           {course.title || "No Title"}
         </h3>
         <p
-          className="text-gray-400 text-sm"
-          style={{
-            wordWrap: "break-word",
-            overflowWrap: "break-word",
-            whiteSpace: "normal",
-            lineHeight: "1.5",
-          }}
-        >
-          {course.description || "No Description Available"}
-        </p>
+  className="text-gray-400 text-sm"
+  style={{
+    wordWrap: "break-word",
+    overflowWrap: "break-word",
+    whiteSpace: "normal",
+    lineHeight: "1.5",
+  }}
+>
+  {course.description
+    ? course.description.split(" ").slice(0, 10).join(" ") + (course.description.split(" ").length > 10 ? "..." : "")
+    : "No Description Available"}
+</p>
+
 
         <div className="flex items-center justify-between">
           <div>
