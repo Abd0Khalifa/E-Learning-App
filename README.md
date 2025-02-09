@@ -3,10 +3,6 @@
 ## Logo
 (Add your logo here)
 
-## Key Achievements
-- Successfully met all project requirements.
-- Implemented key functionalities for an optimal user experience.
-
 ## Features
 
 ### **General Features**
@@ -82,5 +78,3 @@
   - PayPal
 
 ---
-
-This document serves as a high-level overview of the **SkillStack** E-Learning App. Let me know if you'd like to expand on any section or add more details!
