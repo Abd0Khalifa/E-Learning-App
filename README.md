@@ -76,5 +76,8 @@
   - Lordicons
 - **Payment Integration:**
   - PayPal
-
+ 
+    
+## **Deployment**
+  - https://musical-youtiao-78d18d.netlify.app/
 ---
